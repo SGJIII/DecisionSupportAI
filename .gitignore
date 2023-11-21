@@ -58,3 +58,6 @@ target/
 
 # Venv
 venv/
+
+# Env Variables
+.env

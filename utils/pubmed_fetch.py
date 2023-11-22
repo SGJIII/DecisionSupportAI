@@ -9,9 +9,25 @@ from utils.data_processing import load_emr_data
 load_dotenv()
 api_key = os.getenv('PUBMED_API_KEY')
 
-def fetch_pubmed_data(query, max_results=10):
+def fetch_pubmed_data(diagnosis, gender=None, symptoms=None, medical_history=None, test_results=None, medications=None, max_results=1):
     base_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
-    encoded_query = requests.utils.quote(query)
+    
+    # Constructing a detailed query
+    query_parts = [diagnosis]
+    if gender:
+        query_parts.append(gender)
+    if symptoms:
+        query_parts.append(symptoms)
+    if medical_history:
+        query_parts.append(medical_history)
+    if test_results:
+        query_parts.append(test_results)
+    if medications:
+        query_parts.append(medications)
+
+    detailed_query = " AND ".join(query_parts)
+    encoded_query = requests.utils.quote(detailed_query)
+
     search_url = f"{base_url}esearch.fcgi?db=pubmed&term={encoded_query}&retmax={max_results}&apikey={api_key}"
     
     try:

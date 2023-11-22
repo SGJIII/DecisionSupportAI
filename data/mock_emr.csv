@@ -1,6 +1,7 @@
 patient_id,age,gender,symptoms,medical_history,test_results,diagnosis,medications,notes
-1,45,Female,Shortness of breath,Hypertension,Elevated blood pressure,Hypertension,Lisinopril,Follow-up in 3 months
-2,58,Male,Chest pain,Type 2 Diabetes,Normal ECG,Type 2 Diabetes,Metformin,Referred to cardiologist
-3,30,Female,Frequent headaches,None,Normal MRI,Migraine,None,Advised lifestyle changes
-4,65,Male,"Joint pain, stiffness",Osteoarthritis,X-ray shows joint wear,Osteoarthritis,Ibuprofen,Physical therapy recommended
-5,50,Female,"Fatigue, weight gain",Hypothyroidism,High TSH levels,Hypothyroidism,Levothyroxine,Monitor thyroid function
+1,71,Female,"fatigue, blood loss",unknown,unkown,unkown,unkown,Having bi-weekly blood transfusions
+2,45,Female,Shortness of breath,Hypertension,Elevated blood pressure,Hypertension,Lisinopril,Follow-up in 3 months
+3,58,Male,Chest pain,Type 2 Diabetes,Normal ECG,Type 2 Diabetes,Metformin,Referred to cardiologist
+4,30,Female,Frequent headaches,None,Normal MRI,Migraine,None,Advised lifestyle changes
+5,65,Male,"Joint pain, stiffness",Osteoarthritis,X-ray shows joint wear,Osteoarthritis,Ibuprofen,Physical therapy recommended
+6,50,Female,"Fatigue, weight gain",Hypothyroidism,High TSH levels,Hypothyroidism,Levothyroxine,Monitor thyroid function

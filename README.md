@@ -58,3 +58,7 @@ This will fetch articles related to diabetes and output the extracted data to th
 
 - Work with dr. to understand what info from health record should be used for automatically creating a query to pubmed
 - Work with dr. to understand what data points to extract from each PubMed articl
+
+## TODO
+
+- Move Hugging Face API key to env variable

@@ -4,6 +4,7 @@ import time
 import sys  # Import sys to handle command-line arguments
 from dotenv import load_dotenv
 import os
+from utils.data_processing import load_emr_data
 
 load_dotenv()
 api_key = os.getenv('PUBMED_API_KEY')
@@ -73,16 +74,15 @@ def fetch_article_details(article_ids):
     return None
 
 if __name__ == "__main__":
-    # Check if a query is provided as a command-line argument
-    if len(sys.argv) > 1:
-        query = sys.argv[1]  # Use the provided query
-    else:
-        query = "diabetes"  # Default query if none is provided
-
-    article_ids = fetch_pubmed_data(query)
-    if article_ids:
-        articles = fetch_article_details(article_ids)
-        for article in articles:
-            print("Title:", article['title'])
-            print("Abstract:", article['abstract'])
-            print("-----")
+    emr_data = load_emr_data('../data/mock_emr.csv')
+    if emr_data is not None:
+        for index, row in emr_data.iterrows():
+            # Assuming there's a column 'query' in your CSV
+            query = row['query']
+            article_ids = fetch_pubmed_data(query)
+            if article_ids:
+                articles = fetch_article_details(article_ids)
+                for article in articles:
+                    print("Title:", article['title'])
+                    print("Abstract:", article['abstract'])
+                    print("-----")

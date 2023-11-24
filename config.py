@@ -16,3 +16,9 @@ MIN_DIR = APP_DIR + '/build'
 PORT = 1555
 
 HOST = '127.0.0.1'
+
+EPIC_CLIENT_ID = 'your_epic_client_id'
+EPIC_CLIENT_SECRET = 'your_epic_client_secret'
+EPIC_TOKEN_URL = 'https://example.epic.com/token'
+EPIC_FHIR_URL = 'https://example.epic.com/fhir'
+# Add other configuration variables as needed

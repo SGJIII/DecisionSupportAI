@@ -13,6 +13,8 @@ def query_llama(text):
         print("Error response from LLaMa:", response.text)  # Print error response
         raise Exception(f"Error in LLaMa API call: {response.status_code}")
 
+# Retry sending prompt upon error
+"""
 def query_llama_with_retry(text):
     if not isinstance(text, str):
         raise ValueError("Text must be a string")
@@ -33,6 +35,28 @@ def query_llama_with_retry(text):
             print(f"Attempt {attempt + 1}/5 failed: {str(e)}")
             time.sleep(1)
     raise Exception("Failed to get a valid response from LLaMa after 5 attempts")
+"""
+
+def query_llama_with_retry(text):
+    if not isinstance(text, str):
+        raise ValueError("Text must be a string")
+
+    try:
+        response = requests.post(
+            'https://api-inference.huggingface.co/models/meta-llama/Llama-2-70b-chat-hf',
+            headers={'Authorization': f'Bearer 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'},
+            json={'inputs': text}
+        )
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Error response from LLaMa: {response.text}")
+            print("Error in LLaMa API call:", response.status_code)
+    except Exception as e:
+        print("Failed to get a valid response from LLaMa:", str(e))
+
+    raise Exception("Failed to get a valid response from LLaMa")
+
 
 
 

@@ -58,21 +58,21 @@ This will fetch articles related to diabetes and output the extracted data to th
 
 ## Next Steps
 
-Implement and Test fhir.fhir_client: Complete the implementation of the FHIR API client and test its functionality.
-Integrate and Test New Functions: Ensure that all new functions are properly integrated and tested within the application.
-Run and Test Flask Application: Test the OAuth flow and the overall functionality of the Flask application.
-Perform End-to-End Testing: Simulate the complete workflow from OAuth authentication to data processing and output.
-Enhance Error Handling and Logging: Implement robust error handling and add logging for better monitoring.
-Ensure Security and Compliance: Review security aspects and ensure compliance with healthcare regulations.
-Optimize and Refactor Code: Look for opportunities to optimize and refactor the code.
-Document and Prepare for Deployment: Update documentation and prepare the application for deployment.
-Gather Feedback and Iterate: Collect feedback and iterate on the application based on user input.
+1. Implement and Test fhir.fhir_client: Complete the implementation of the FHIR API client and test its functionality.
+2. Integrate and Test New Functions: Ensure that all new functions are properly integrated and tested within the application.
+3. Run and Test Flask Application: Test the OAuth flow and the overall functionality of the Flask application.
+4. Perform End-to-End Testing: Simulate the complete workflow from OAuth authentication to data processing and output.
+5. Enhance Error Handling and Logging: Implement robust error handling and add logging for better monitoring.
+6. Ensure Security and Compliance: Review security aspects and ensure compliance with healthcare regulations.
+7. Optimize and Refactor Code: Look for opportunities to optimize and refactor the code.
+8. Document and Prepare for Deployment: Update documentation and prepare the application for deployment.
+9. Gather Feedback and Iterate: Collect feedback and iterate on the application based on user input.
 
 ## TODO
 
-Implement fhir.fhir_client module for fetching patient data.
-Define and test fetch_articles_for_record and generate_unique_state functions.
-Enhance error handling and security measures.
-Document the OAuth flow and FHIR API integration.
-Prepare for deployment and conduct thorough testing.
-This updated README reflects the current state of your project and outlines the next steps to take your application towards completion and deployment.
+- Implement fhir.fhir_client module for fetching patient data.
+- Define and test fetch_articles_for_record and generate_unique_state functions.
+- Enhance error handling and security measures.
+- Document the OAuth flow and FHIR API integration.
+- Prepare for deployment and conduct thorough testing.
+- This updated README reflects the current state of your project and outlines the next steps to take your application towards completion and deployment.

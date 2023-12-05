@@ -21,5 +21,7 @@ EPIC_CLIENT_ID_PROD = 'c147f9ee-2e8a-41fc-acbf-c57e0a228172'
 EPIC_CLIENT_ID_DEV = '79360b8f-615c-40d4-b6b2-23b7174af456'
 EPIC_AUTH_ENDPOINT = "https://fhir.epic.com/interconnect-fhir-oauth/oauth2/authorize"
 EPIC_TOKEN_ENDPOINT = "https://fhir.epic.com/interconnect-fhir-oauth/oauth2/token"
-REDIRECT_URI = "your_redirect_uri"
-# Add other configuration variables as needed
+REDIRECT_URI = "http://127.0.0.1:5000/callback"  # Update with your actual redirect URI
+
+# Add the Epic FHIR API base URL
+EPIC_FHIR_BASE_URL = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4/"  # Replace with the actual base URL

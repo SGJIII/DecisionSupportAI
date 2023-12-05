@@ -1,13 +1,24 @@
 import csv
 import uuid
-from flask import Flask, request, redirect
+import os
+from flask import Flask, request, redirect, render_template, jsonify, url_for
 from models.llama_chat import query_llama_with_retry
 from utils.pubmed_fetch import fetch_pubmed_data, fetch_article_details
 from auth.oauth_handler import get_auth_url, exchange_code_for_token
-from fhir.fhir_client import FhirClient  # Assuming this module is properly implemented
+from fhir.fhir_client import FhirClient
 from config import EPIC_CLIENT_ID_PROD
+import config
 
-app = Flask(__name__)
+# Define the base directory of your application
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+# Initialize Flask app with the new template folder path
+app = Flask(__name__, 
+            template_folder=os.path.join(basedir, 'app/static/templates'),
+            static_folder=os.path.join(basedir, 'app/static'))
+
+# Load configuration from config.py
+app.config.from_object('config')
 
 def create_llama_prompt(patient_record, articles):
     prompt = (
@@ -43,6 +54,10 @@ def fetch_articles_for_record(record):
 def generate_unique_state():
     return str(uuid.uuid4())
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 @app.route('/start_auth')
 def start_auth():
     state = generate_unique_state()
@@ -55,12 +70,16 @@ def callback():
     state = request.args.get('state')
     # Add state validation logic here if necessary
     token_info = exchange_code_for_token(code)
-    process_patient_data(token_info['access_token'])
-    return "Authentication successful"
+    # Store the access token in a session or a secure place
+    # Redirect to the patient ID entry page
+    return redirect(url_for('index'))
 
-def process_patient_data(access_token):
-    # Example patient ID, replace with actual logic to retrieve patient ID from the frontend
-    patient_id = 'example_patient_id'
+@app.route('/handle-patient-id', methods=['POST'])
+def handle_patient_id():
+    data = request.get_json()
+    patient_id = data['patientId']
+    # Assuming you have a way to retrieve the access token stored earlier
+    access_token = 'your_access_token'  # Replace with actual token retrieval logic
     fhir_client = FhirClient()
     fhir_client.token = access_token
     patient_data = fhir_client.get_patient_data(patient_id)
@@ -70,9 +89,8 @@ def process_patient_data(access_token):
         writer = csv.DictWriter(file, fieldnames=['patient_id', 'llama_response'])
         writer.writeheader()
         writer.writerows(results)
-
-def main():
-    app.run(debug=True)
+    
+    return jsonify({'message': 'Patient data processed successfully'})
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)

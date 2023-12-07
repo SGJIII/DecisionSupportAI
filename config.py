@@ -17,11 +17,13 @@ PORT = 1555
 
 HOST = '127.0.0.1'
 
-EPIC_CLIENT_ID_PROD = 'c147f9ee-2e8a-41fc-acbf-c57e0a228172'
-EPIC_CLIENT_ID_DEV = '79360b8f-615c-40d4-b6b2-23b7174af456'
+EPIC_CLIENT_ID_PROD = 'e4a1fcac-86fc-40b4-b1ab-a8e34f5d626e'
+EPIC_CLIENT_ID_DEV = 'dac06186-2fc7-46f6-9d52-c700e0555077'
 EPIC_AUTH_ENDPOINT = "https://fhir.epic.com/interconnect-fhir-oauth/oauth2/authorize"
 EPIC_TOKEN_ENDPOINT = "https://fhir.epic.com/interconnect-fhir-oauth/oauth2/token"
-REDIRECT_URI = "http://127.0.0.1:5000/callback"  # Update with your actual redirect URI
+REDIRECT_URI_DEV = "https://e0bd-98-38-147-13.ngrok-free.app/callback"  # Update with your actual redirect URI
+REDIRECT_URI_PROD = "https://cds.curnexa.org/callback"
+
 
 # Add the Epic FHIR API base URL
 EPIC_FHIR_BASE_URL = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4/"  # Replace with the actual base URL

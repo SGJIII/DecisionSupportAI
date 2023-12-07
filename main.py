@@ -1,12 +1,11 @@
 import csv
 import uuid
 import os
-from flask import Flask, request, redirect, render_template, jsonify, url_for
+from flask import Flask, request, redirect, render_template, jsonify, url_for, session
 from models.llama_chat import query_llama_with_retry
 from utils.pubmed_fetch import fetch_pubmed_data, fetch_article_details
 from auth.oauth_handler import get_auth_url, exchange_code_for_token
 from fhir.fhir_client import FhirClient
-from config import EPIC_CLIENT_ID_PROD
 import config
 
 # Define the base directory of your application
@@ -19,6 +18,9 @@ app = Flask(__name__,
 
 # Load configuration from config.py
 app.config.from_object('config')
+
+# Set secret key for session
+app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 
 def create_llama_prompt(patient_record, articles):
     prompt = (
@@ -61,6 +63,7 @@ def index():
 @app.route('/start_auth')
 def start_auth():
     state = generate_unique_state()
+    session['oauth_state'] = state  # Store state in session
     auth_url = get_auth_url(state)
     return redirect(auth_url)
 
@@ -68,18 +71,20 @@ def start_auth():
 def callback():
     code = request.args.get('code')
     state = request.args.get('state')
-    # Add state validation logic here if necessary
+    # Compare the state in the callback with the one stored in the session
+    if state != session.get('oauth_state'):
+        return 'State mismatch error', 400
     token_info = exchange_code_for_token(code)
-    # Store the access token in a session or a secure place
-    # Redirect to the patient ID entry page
+    session['access_token'] = token_info['access_token']  # Store access token in session
     return redirect(url_for('index'))
 
 @app.route('/handle-patient-id', methods=['POST'])
 def handle_patient_id():
     data = request.get_json()
     patient_id = data['patientId']
-    # Assuming you have a way to retrieve the access token stored earlier
-    access_token = 'your_access_token'  # Replace with actual token retrieval logic
+    access_token = session.get('access_token')  # Retrieve access token from session
+    if not access_token:
+        return jsonify({'error': 'Access token is missing'}), 401
     fhir_client = FhirClient()
     fhir_client.token = access_token
     patient_data = fhir_client.get_patient_data(patient_id)

@@ -29,7 +29,7 @@ def exchange_code_for_token(code):
         "code": code,
         "redirect_uri": current_app.config['REDIRECT_URI_DEV'],  # Use the sandbox redirect URI
         "client_id": current_app.config['EPIC_CLIENT_ID_DEV'],  # Use sandbox client ID
-        "client_secret": current_app.config['EPIC_CLIENT_SECRET']  # Use the client secret from config
+        "client_secret": os.environ.get('EPIC_CLIENT_SECRET')  # Use the client secret from config
     }
     response = requests.post(current_app.config['EPIC_TOKEN_ENDPOINT'], data=data)
     if response.status_code == 200:

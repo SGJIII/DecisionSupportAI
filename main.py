@@ -7,6 +7,9 @@ from utils.pubmed_fetch import fetch_pubmed_data, fetch_article_details
 from auth.oauth_handler import get_auth_url, exchange_code_for_token
 from fhir.fhir_client import FhirClient
 import config
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Define the base directory of your application
 basedir = os.path.abspath(os.path.dirname(__file__))

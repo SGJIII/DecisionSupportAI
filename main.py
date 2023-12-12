@@ -8,6 +8,7 @@ from auth.oauth_handler import get_auth_url, exchange_code_for_token
 from fhir.fhir_client import FhirClient
 import config
 from dotenv import load_dotenv
+from flask import current_app
 
 load_dotenv()
 
@@ -81,24 +82,33 @@ def callback():
     session['access_token'] = token_info['access_token']  # Store access token in session
     return redirect(url_for('index'))
 
-@app.route('/handle-patient-id', methods=['POST'])
-def handle_patient_id():
+@app.route('/handle-mrn', methods=['POST'])
+def handle_mrn():
     data = request.get_json()
-    patient_id = data['patientId']
-    access_token = session.get('access_token')  # Retrieve access token from session
+    mrn = data.get('mrn')
+    if not mrn:
+        return jsonify({'error': 'MRN is missing'}), 400
+
+    access_token = session.get('access_token')
     if not access_token:
         return jsonify({'error': 'Access token is missing'}), 401
+
     fhir_client = FhirClient()
     fhir_client.token = access_token
-    patient_data = fhir_client.get_patient_data(patient_id)
-    results = [process_patient_record(patient_data)]
 
-    with open('data/llama_responses.csv', 'w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=['patient_id', 'llama_response'])
-        writer.writeheader()
-        writer.writerows(results)
-    
-    return jsonify({'message': 'Patient data processed successfully'})
+    try:
+        patient_data = fhir_client.get_patient_data_by_mrn(mrn)
+        results = [process_patient_record(patient_data)]
+        with open('data/llama_responses.csv', 'w', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=['patient_id', 'llama_response'])
+            writer.writeheader()
+            writer.writerows(results)
+        return jsonify({'message': 'Patient data processed successfully'})
+    except Exception as e:
+        # Log the exception for debugging
+        current_app.logger.error(f"Error in handle_mrn: {e}")
+        return jsonify({'error': str(e)}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)

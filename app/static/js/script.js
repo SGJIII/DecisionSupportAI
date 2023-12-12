@@ -4,23 +4,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   patientForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    const patientId = document.getElementById("patient-id").value;
+    const mrn = document.getElementById("mrn").value;
 
-    // Example: Sending patient ID to the server using Fetch API
-    fetch("/handle-patient-id", {
+    fetch("/handle-mrn", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ patientId: patientId }),
+      body: JSON.stringify({ mrn: mrn }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log("Success:", data);
-        // Handle response here (e.g., redirecting to another page or displaying a message)
+        // Handle the response data here
+        // For example, display the results on the page
       })
       .catch((error) => {
         console.error("Error:", error);
+        // Handle any errors here
       });
   });
 });

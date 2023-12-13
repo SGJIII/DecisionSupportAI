@@ -103,7 +103,8 @@ def handle_fhir_id():
             writer = csv.DictWriter(file, fieldnames=['patient_data', 'llama_response'])
             writer.writeheader()
             writer.writerow(result)
-        return jsonify({'message': 'Patient data processed successfully'})
+        result = process_patient_record(patient_data)
+        return jsonify(result)  # Return the result as JSON
     except Exception as e:
         current_app.logger.error(f"Error in handle_fhir_id: {e}")
         return jsonify({'error': str(e)}), 500

@@ -1,6 +1,7 @@
 // app/static/js/script.js
 document.addEventListener("DOMContentLoaded", function () {
   const patientForm = document.getElementById("patient-form");
+  const resultsContainer = document.getElementById("results"); // Add an element to display results
 
   patientForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -21,12 +22,16 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((data) => {
         console.log("Success:", data);
-        // Handle the response data here
-        // For example, display the results on the page
+        // Display the LLaMa results
+        if (data.llama_response) {
+          resultsContainer.innerHTML = `<h3>Decision Support:</h3><p>${data.llama_response}</p>`;
+        } else {
+          resultsContainer.innerHTML = "<p>No results available.</p>";
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
-        // Handle any errors here
+        resultsContainer.innerHTML = `<p>Error: ${error.message}</p>`;
       });
   });
 });

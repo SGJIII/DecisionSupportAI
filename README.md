@@ -53,17 +53,10 @@ CurnexaHealthAI utilizes Meta's LLaMa 2 for advanced NLP processing. It generate
 
 ## Usage
 
-### Fetching Patient Data
-
-Doctors can enter a patient ID to fetch data such as age, gender, symptoms, medical history, test results, diagnosis, and medications from the Epic FHIR API.
-
-### PubMed Literature Search
-
-Based on the fetched patient data, the system queries the PubMed API to retrieve relevant articles, focusing on the title and abstract.
-
-### Clinical Decision Support
-
-The combined patient data and PubMed article information are sent to LLaMa 2, which generates clinical decision support insights. These insights are then provided back to the doctor.
+1. Start the Flask server.
+2. Authenticate using the OAuth 2.0 flow.
+3. Enter a patient's FHIR ID to fetch their data.
+4. View the generated clinical recommendations based on the
 
 ## Testing with FHIR Sandbox Data
 
@@ -77,13 +70,17 @@ To test the application with FHIR sandbox data:
 
 ## Next Steps
 
-1. **Finalize `fhir.fhir_client` Implementation**: Ensure comprehensive patient data retrieval aligns with the FHIR API's response format.
-2. **Optimize PubMed API Queries**: Refine queries to fetch the most relevant articles based on patient data.
-3. **Enhance LLaMa 2 Integration**: Ensure the integration effectively utilizes patient data and PubMed articles for decision support.
-4. **Conduct End-to-End Testing**: Test the entire workflow from patient ID entry to receiving clinical decision support.
-5. **Document Workflow and Integration**: Update documentation to detail the workflow and integrations with Epic FHIR, PubMed, and LLaMa 2.
-6. **Prepare for Deployment**: Finalize the application for deployment, ensuring all components work seamlessly.
-7. **Gather Feedback and Iterate**: Collect feedback from potential users, especially healthcare professionals, and iterate on the application.
+##### Returning LLaMa Query Results to Frontend:
+
+- Enhance the application to display the results of the LLaMa query on the frontend, providing a seamless user experience.
+
+##### Coherent Frontend Flow:
+
+- Implement a user flow that includes authentication, entering the patient's FHIR ID, and displaying the LLaMa query results.
+
+##### Expanding Data Extracted from FHIR:
+
+- Extend the application's capability to extract and utilize more patient data fields from the FHIR API for a more comprehensive PubMed search and LLaMa query.
 
 ## TODO
 

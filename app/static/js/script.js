@@ -4,14 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   patientForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    const mrn = document.getElementById("mrn").value;
+    const fhirId = document.getElementById("FHIR").value;
 
-    fetch("/handle-mrn", {
+    fetch("/handle-fhir-id", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ mrn: mrn }),
+      body: JSON.stringify({ fhirId: fhirId }),
     })
       .then((response) => {
         if (!response.ok) {

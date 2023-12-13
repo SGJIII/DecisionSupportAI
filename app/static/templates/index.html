@@ -15,8 +15,8 @@
     <div class="container">
       <h1>CurnexaHealthAI - Patient Data Query</h1>
       <form id="patient-form">
-        <label for="mrn">Enter Patient MRN:</label>
-        <input type="text" id="mrn" name="mrn" required />
+        <label for="FHIR">Enter Patient FHIR ID:</label>
+        <input type="text" id="FHIR" name="FHIR" required />
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -25,4 +25,3 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>
 </html>
-

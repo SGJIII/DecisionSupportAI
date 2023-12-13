@@ -26,10 +26,26 @@ app.config.from_object('config')
 # Set secret key for session
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 
-def create_llama_prompt(patient_record, articles):
+def process_patient_record(patient_data):
+    # Construct a query string based on the patient data
+    query_parts = [patient_data.get('gender', ''), patient_data.get('birth_date', '')]
+    query = " AND ".join(filter(None, query_parts))
+
+    # Fetch articles from PubMed
+    article_ids = fetch_pubmed_data(query)
+    articles = fetch_article_details(article_ids) if article_ids else []
+
+    # Create prompt for LLaMa
+    prompt = create_llama_prompt(patient_data, articles)
+    llama_response = query_llama_with_retry(prompt)
+    generated_text = llama_response[0]['generated_text']
+
+    return {'patient_data': patient_data, 'llama_response': generated_text}
+
+def create_llama_prompt(patient_data, articles):
     prompt = (
-        f"Given a {patient_record['age']}-year-old {patient_record['gender']} with {patient_record['symptoms']} "
-        f"and diagnosed with {patient_record['diagnosis']}, what would be your recommendation?\n\n"
+        f"Given a patient with gender {patient_data['gender']} and birth date {patient_data['birth_date']}, "
+        f"what would be your recommendation?\n\n"
     )
 
     if articles:
@@ -38,24 +54,6 @@ def create_llama_prompt(patient_record, articles):
             prompt += f"Title: {article['title']}\nAbstract: {article['abstract']}\n\n"
 
     return prompt
-
-def process_patient_record(record):
-    articles = fetch_articles_for_record(record)
-    prompt = create_llama_prompt(record, articles)
-    llama_response = query_llama_with_retry(prompt)
-    generated_text = llama_response[0]['generated_text']
-
-    return {'patient_id': record['patient_id'], 'llama_response': generated_text}
-
-def fetch_articles_for_record(record):
-    article_ids = fetch_pubmed_data(
-        diagnosis=record['diagnosis'],
-        gender=record['gender'],
-        symptoms=record['symptoms'],
-        medical_history=record['medical_history'],
-        test_results=record['test_results'],
-        medications=record['medications'])
-    return fetch_article_details(article_ids) if article_ids else []
 
 def generate_unique_state():
     return str(uuid.uuid4())
@@ -82,12 +80,12 @@ def callback():
     session['access_token'] = token_info['access_token']  # Store access token in session
     return redirect(url_for('index'))
 
-@app.route('/handle-mrn', methods=['POST'])
-def handle_mrn():
+@app.route('/handle-fhir-id', methods=['POST'])
+def handle_fhir_id():
     data = request.get_json()
-    mrn = data.get('mrn')
-    if not mrn:
-        return jsonify({'error': 'MRN is missing'}), 400
+    fhir_id = data.get('fhirId')
+    if not fhir_id:
+        return jsonify({'error': 'FHIR ID is missing'}), 400
 
     access_token = session.get('access_token')
     if not access_token:
@@ -97,17 +95,19 @@ def handle_mrn():
     fhir_client.token = access_token
 
     try:
-        patient_data = fhir_client.get_patient_data_by_mrn(mrn)
-        results = [process_patient_record(patient_data)]
+        patient_data = fhir_client.get_patient_data_by_fhir_id(fhir_id)
+        result = process_patient_record(patient_data)
+        # Save or handle the result as needed
+        # For example, writing to a file
         with open('data/llama_responses.csv', 'w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=['patient_id', 'llama_response'])
+            writer = csv.DictWriter(file, fieldnames=['patient_data', 'llama_response'])
             writer.writeheader()
-            writer.writerows(results)
+            writer.writerow(result)
         return jsonify({'message': 'Patient data processed successfully'})
     except Exception as e:
-        # Log the exception for debugging
-        current_app.logger.error(f"Error in handle_mrn: {e}")
+        current_app.logger.error(f"Error in handle_fhir_id: {e}")
         return jsonify({'error': str(e)}), 500
+
 
 
 if __name__ == "__main__":

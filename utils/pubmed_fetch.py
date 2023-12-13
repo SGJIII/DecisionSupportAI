@@ -9,24 +9,12 @@ from utils.data_processing import load_emr_data
 load_dotenv()
 api_key = os.getenv('PUBMED_API_KEY')
 
-def fetch_pubmed_data(diagnosis, gender=None, symptoms=None, medical_history=None, test_results=None, medications=None, max_results=1):
+def fetch_pubmed_data(query, max_results=1):
     base_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
-    
-    # Constructing a detailed query
-    query_parts = [diagnosis]
-    if gender:
-        query_parts.append(gender)
-    if symptoms:
-        query_parts.append(symptoms)
-    if medical_history:
-        query_parts.append(medical_history)
-    if test_results:
-        query_parts.append(test_results)
-    if medications:
-        query_parts.append(medications)
+    api_key = os.getenv('PUBMED_API_KEY')
 
-    detailed_query = " AND ".join(query_parts)
-    encoded_query = requests.utils.quote(detailed_query)
+    # Encode the query for URL
+    encoded_query = requests.utils.quote(query)
 
     search_url = f"{base_url}esearch.fcgi?db=pubmed&term={encoded_query}&retmax={max_results}&apikey={api_key}"
     
@@ -36,15 +24,9 @@ def fetch_pubmed_data(diagnosis, gender=None, symptoms=None, medical_history=Non
         response.raise_for_status()
 
         if response.status_code == 200:
-            try:
-                # Parse the XML response
-                root = ET.fromstring(response.content)
-                # Extract article IDs
-                article_ids = [id_elem.text for id_elem in root.findall('.//IdList/Id')]
-                return article_ids
-            except ET.ParseError as e:
-                print("Error parsing XML:", e)
-                return None
+            root = ET.fromstring(response.content)
+            article_ids = [id_elem.text for id_elem in root.findall('.//IdList/Id')]
+            return article_ids
         else:
             print(f"Error: {response.status_code}")
             return None

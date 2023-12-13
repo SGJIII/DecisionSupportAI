@@ -70,17 +70,22 @@ To test the application with FHIR sandbox data:
 
 ## Next Steps
 
-##### Returning LLaMa Query Results to Frontend:
-
-- Enhance the application to display the results of the LLaMa query on the frontend, providing a seamless user experience.
-
-##### Coherent Frontend Flow:
-
-- Implement a user flow that includes authentication, entering the patient's FHIR ID, and displaying the LLaMa query results.
-
 ##### Expanding Data Extracted from FHIR:
 
 - Extend the application's capability to extract and utilize more patient data fields from the FHIR API for a more comprehensive PubMed search and LLaMa query.
+
+APIs
+
+- MedicationRequest.Search (Orders) (R4)
+- AllergyIntolerance.Search (R4)
+- Condition.Search (Medical History) (R4)
+- Observation.Search (Social History) (R4)
+
+##### Deploy to production
+
+##### Edit base URL depending on the hospital the user is associated
+
+##### Update onboarding flow so user can choose their hospital, then click authenticate, then start using app.
 
 ## TODO
 

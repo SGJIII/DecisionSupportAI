@@ -26,6 +26,11 @@ app.config.from_object('config')
 # Set secret key for session
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 
+def is_authenticated():
+    """Check if the user is authenticated."""
+    return 'access_token' in session and session['access_token'] is not None
+
+
 def process_patient_record(patient_data):
     # Construct a query string based on the patient data
     query_parts = [patient_data.get('gender', ''), patient_data.get('birth_date', '')]
@@ -60,6 +65,8 @@ def generate_unique_state():
 
 @app.route('/')
 def index():
+    if not is_authenticated():
+        return redirect(url_for('start_auth'))
     return render_template('index.html')
 
 @app.route('/start_auth')
@@ -82,6 +89,10 @@ def callback():
 
 @app.route('/handle-fhir-id', methods=['POST'])
 def handle_fhir_id():
+        # Check if the user is authenticated
+    if not is_authenticated():
+        return jsonify({'error': 'User not authenticated'}), 401
+
     data = request.get_json()
     fhir_id = data.get('fhirId')
     if not fhir_id:

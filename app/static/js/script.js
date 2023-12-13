@@ -15,7 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
       body: JSON.stringify({ fhirId: fhirId }),
     })
       .then((response) => {
-        if (!response.ok) {
+        if (response.status === 401) {
+          // Redirect to authentication flow
+          window.location.href = "/start_auth";
+          return;
+        } else if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.json();

@@ -2,6 +2,7 @@
 import requests
 import xml.etree.ElementTree as ET
 from flask import current_app
+import datetime  # Import the datetime module
 
 class FhirClient:
     def __init__(self):
@@ -34,16 +35,27 @@ class FhirClient:
         gender = root.find('.//fhir:gender', ns)
         patient_gender = gender.attrib['value'] if gender is not None else "Unknown"
 
-        # Extracting patient's birth date
+        # Extracting patient's birth date and calculating age
         birth_date = root.find('.//fhir:birthDate', ns)
-        patient_birth_date = birth_date.attrib['value'] if birth_date is not None else "Unknown"
+        if birth_date is not None:
+            patient_birth_date = birth_date.attrib['value']
+            patient_age = self.calculate_age(patient_birth_date)
+        else:
+            patient_age = "Unknown"
 
         patient_data = {
             'gender': patient_gender,
-            'birth_date': patient_birth_date
+            'age': patient_age
         }
 
         return patient_data
+
+    def calculate_age(self, birth_date_str):
+        """Calculate age from birth date string (YYYY-MM-DD)."""
+        birth_date = datetime.datetime.strptime(birth_date_str, '%Y-%m-%d').date()
+        today = datetime.date.today()
+        age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+        return age
 
 
 

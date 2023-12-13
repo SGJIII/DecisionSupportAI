@@ -1,17 +1,21 @@
 patient_data,llama_response
-"{'gender': 'female', 'birth_date': '1987-09-12'}","Given a patient with gender female and birth date 1987-09-12, what would be your recommendation?
+"{'gender': 'female', 'age': 36}","Given a patient with gender female and age 36, what would be your recommendation?
 
-I'm not able to provide personalized medical advice or recommendations. However, I can provide some general information that may be helpful.
+Answer:
 
-If a patient is female and was born on September 12, 1987, she would be 34 years old. At this age, it's important for her to continue practicing healthy habits and getting regular check-ups to maintain her health and prevent any potential health issues.
+As a responsible AI language model, I cannot provide personalized medical advice. However, I can offer some general recommendations for a patient with gender female and age 36.
 
-Some general recommendations for a woman in this age group might include:
+Firstly, it is important to note that women in their 30s have a higher risk of developing certain health conditions, such as breast cancer, cervical cancer, and ovarian cancer. Therefore, it is crucial for women in this age group to receive regular cancer screenings, such as mammograms and Pap smears.
 
-* Getting regular exercise, such as walking, running, swimming, or other aerobic activities, to help maintain a healthy weight and reduce the risk of chronic diseases like heart disease and diabetes.
-* Eating a balanced diet that includes plenty of fruits, vegetables, whole grains, and lean protein sources to help maintain a healthy weight and get the nutrients her body needs.
-* Getting enough sleep each night, aiming for 7-9 hours, to help her body and mind recharge and reduce the risk of chronic diseases.
-* Practicing stress-reducing activities, such as meditation, yoga, or deep breathing exercises, to help manage stress and improve overall mental health.
-* Getting regular check-ups with her healthcare provider, including annual well-woman exams, to help detect and prevent any potential health issues.
-* Getting recommended vaccinations and screenings, such as the HPV vaccine and regular mammograms, to help prevent and detect cancer and other diseases.
+Additionally, women in their 30s may also experience certain health issues related to their reproductive system, such as polycystic ovary syndrome (PCOS), endometriosis, and fibroids. It is essential for them to receive regular gynecological check-ups to monitor their reproductive health and address any potential issues promptly.
 
-It's important to note that these are general recommendations and that individual recommendations may vary based on a patient's personal health history, lifestyle, and other factors. It's always best to consult with a healthcare provider to determine the best course of action for a patient's specific needs."
+Furthermore, women in their 30s may also be at a higher risk of developing chronic diseases, such as diabetes, hypertension, and cardiovascular disease. Therefore, it is important for them to maintain a healthy lifestyle, including a balanced diet, regular exercise, and adequate sleep.
+
+In summary, my recommendation for a patient with gender female and age 36 would be to:
+
+1. Receive regular cancer screenings, such as mammograms and Pap smears.
+2. Receive regular gynecological check-ups to monitor reproductive health.
+3. Maintain a healthy lifestyle, including a balanced diet, regular exercise, and adequate sleep.
+4. Be aware of the risk of chronic diseases, such as diabetes, hypertension, and cardiovascular disease, and take steps to prevent or manage them.
+
+It is important to note that these recommendations are general and may vary depending on the individual's medical history, family history, and lifestyle. Therefore, it is always best to consult with a healthcare professional for personalized medical advice."

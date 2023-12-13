@@ -32,8 +32,11 @@ def is_authenticated():
 
 
 def process_patient_record(patient_data):
+    # Ensure age is a string for concatenation
+    age_str = str(patient_data.get('age', ''))
+
     # Construct a query string based on the patient data
-    query_parts = [patient_data.get('gender', ''), patient_data.get('birth_date', '')]
+    query_parts = [patient_data.get('gender', ''), age_str]
     query = " AND ".join(filter(None, query_parts))
 
     # Fetch articles from PubMed
@@ -46,10 +49,10 @@ def process_patient_record(patient_data):
     generated_text = llama_response[0]['generated_text']
 
     return {'patient_data': patient_data, 'llama_response': generated_text}
-
+    
 def create_llama_prompt(patient_data, articles):
     prompt = (
-        f"Given a patient with gender {patient_data['gender']} and birth date {patient_data['birth_date']}, "
+        f"Given a patient with gender {patient_data['gender']} and age {patient_data['age']}, "
         f"what would be your recommendation?\n\n"
     )
 

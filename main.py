@@ -32,15 +32,16 @@ def is_authenticated():
 
 
 def process_patient_record(patient_data):
-    # Ensure age is a string for concatenation
-    age_str = str(patient_data.get('age', ''))
-
-    # Construct a query string based on the patient data
-    query_parts = [patient_data.get('gender', ''), age_str]
-    query = " AND ".join(filter(None, query_parts))
+    # Extract relevant data for PubMed and LLaMa queries
+    age = patient_data.get('age', '')
+    gender = patient_data.get('gender', '')
+    medications = patient_data.get('medications', [])
+    allergies = patient_data.get('allergies', [])
+    conditions = patient_data.get('conditions', [])
+    social_history = patient_data.get('social_history', [])
 
     # Fetch articles from PubMed
-    article_ids = fetch_pubmed_data(query)
+    article_ids = fetch_pubmed_data(age, gender, medications, allergies, conditions, social_history)
     articles = fetch_article_details(article_ids) if article_ids else []
 
     # Create prompt for LLaMa
@@ -49,7 +50,7 @@ def process_patient_record(patient_data):
     generated_text = llama_response[0]['generated_text']
 
     return {'patient_data': patient_data, 'llama_response': generated_text}
-    
+
 def create_llama_prompt(patient_data, articles):
     prompt = (
         f"Given a patient with gender {patient_data['gender']} and age {patient_data['age']}, "
@@ -92,7 +93,7 @@ def callback():
 
 @app.route('/handle-fhir-id', methods=['POST'])
 def handle_fhir_id():
-        # Check if the user is authenticated
+    # Check if the user is authenticated
     if not is_authenticated():
         return jsonify({'error': 'User not authenticated'}), 401
 
@@ -110,14 +111,20 @@ def handle_fhir_id():
 
     try:
         patient_data = fhir_client.get_patient_data_by_fhir_id(fhir_id)
+
+        # Retrieve additional information
+        patient_data['medications'] = fhir_client.get_medication_data(fhir_id)
+        patient_data['allergies'] = fhir_client.get_allergy_data(fhir_id)
+        patient_data['conditions'] = fhir_client.get_condition_data(fhir_id)
+        patient_data['social_history'] = fhir_client.get_social_history_data(fhir_id)
+
         result = process_patient_record(patient_data)
         # Save or handle the result as needed
-        # For example, writing to a file
         with open('data/llama_responses.csv', 'w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=['patient_data', 'llama_response'])
             writer.writeheader()
             writer.writerow(result)
-        result = process_patient_record(patient_data)
+
         return jsonify(result)  # Return the result as JSON
     except Exception as e:
         current_app.logger.error(f"Error in handle_fhir_id: {e}")

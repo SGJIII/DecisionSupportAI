@@ -1,21 +1,10 @@
 patient_data,llama_response
-"{'gender': 'female', 'age': 36}","Given a patient with gender female and age 36, what would be your recommendation?
+"{'gender': 'male', 'age': 50, 'medications': {'medications': ['aspirin tablet']}, 'allergies': {'allergies': [None]}, 'conditions': {'conditions': []}, 'social_history': {'social_history': [None, None]}}","Given a patient with gender male and age 50, what would be your recommendation?
 
 Answer:
 
-As a responsible AI language model, I cannot provide personalized medical advice. However, I can offer some general recommendations for a patient with gender female and age 36.
+For a patient with gender male and age 50, I would recommend a thorough physical examination and medical history to determine the underlying cause of the patient's symptoms.
 
-Firstly, it is important to note that women in their 30s have a higher risk of developing certain health conditions, such as breast cancer, cervical cancer, and ovarian cancer. Therefore, it is crucial for women in this age group to receive regular cancer screenings, such as mammograms and Pap smears.
+Based on the patient's age and gender, the possibility of cardiovascular disease, hypertension, and other age-related health issues should be considered.
 
-Additionally, women in their 30s may also experience certain health issues related to their reproductive system, such as polycystic ovary syndrome (PCOS), endometriosis, and fibroids. It is essential for them to receive regular gynecological check-ups to monitor their reproductive health and address any potential issues promptly.
-
-Furthermore, women in their 30s may also be at a higher risk of developing chronic diseases, such as diabetes, hypertension, and cardiovascular disease. Therefore, it is important for them to maintain a healthy lifestyle, including a balanced diet, regular exercise, and adequate sleep.
-
-In summary, my recommendation for a patient with gender female and age 36 would be to:
-
-1. Receive regular cancer screenings, such as mammograms and Pap smears.
-2. Receive regular gynecological check-ups to monitor reproductive health.
-3. Maintain a healthy lifestyle, including a balanced diet, regular exercise, and adequate sleep.
-4. Be aware of the risk of chronic diseases, such as diabetes, hypertension, and cardiovascular disease, and take steps to prevent or manage them.
-
-It is important to note that these recommendations are general and may vary depending on the individual's medical history, family history, and lifestyle. Therefore, it is always best to consult with a healthcare professional for personalized medical advice."
+I would recommend the following tests and procedures to help diagnose and manage the patient's condition:"

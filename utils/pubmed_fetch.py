@@ -9,12 +9,23 @@ from utils.data_processing import load_emr_data
 load_dotenv()
 api_key = os.getenv('PUBMED_API_KEY')
 
-def fetch_pubmed_data(query, max_results=1):
+def fetch_pubmed_data(age, gender, medications=None, allergies=None, conditions=None, social_history=None, max_results=1):
     base_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
     api_key = os.getenv('PUBMED_API_KEY')
 
-    # Encode the query for URL
-    encoded_query = requests.utils.quote(query)
+    # Constructing a detailed query
+    query_parts = [f"age:{age}", f"gender:{gender}"]
+    if medications:
+        query_parts.extend(medications)  # Assuming medications is a list of strings
+    if allergies:
+        query_parts.extend(allergies)  # Assuming allergies is a list of strings
+    if conditions:
+        query_parts.extend(conditions)  # Assuming conditions is a list of strings
+    if social_history:
+        query_parts.extend(social_history)  # Assuming social_history is a list of strings
+
+    detailed_query = " AND ".join([part for part in query_parts if part])
+    encoded_query = requests.utils.quote(detailed_query)
 
     search_url = f"{base_url}esearch.fcgi?db=pubmed&term={encoded_query}&retmax={max_results}&apikey={api_key}"
     
@@ -36,7 +47,7 @@ def fetch_pubmed_data(query, max_results=1):
         print(f"An error occurred: {err}")
 
     return None
-
+    
 def fetch_article_details(article_ids):
     base_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
     ids_string = ','.join(article_ids)

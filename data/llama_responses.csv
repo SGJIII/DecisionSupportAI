@@ -1,10 +1,6 @@
 patient_data,llama_response
-"{'gender': 'male', 'age': 50, 'medications': {'medications': ['aspirin tablet']}, 'allergies': {'allergies': [None]}, 'conditions': {'conditions': []}, 'social_history': {'social_history': [None, None]}}","Given a patient with gender male and age 50, what would be your recommendation?
+"{'gender': 'female', 'age': 54, 'medications': 'ibuprofen (MOTRIN) tablet', 'allergies': 'No known allergies', 'conditions': 'No known conditions', 'social_history': 'No social history assessed'}","Answer: Based on the information provided, I would recommend further evaluation and assessment to determine the underlying cause of the patient's symptoms. A patient with a history of breast cancer and recent onset of fatigue, weight loss, and fever could have a number of potential underlying conditions, including recurrent cancer, infection, or other non-cancerous conditions.
 
-Answer:
+I would recommend the following steps:
 
-For a patient with gender male and age 50, I would recommend a thorough physical examination and medical history to determine the underlying cause of the patient's symptoms.
-
-Based on the patient's age and gender, the possibility of cardiovascular disease, hypertension, and other age-related health issues should be considered.
-
-I would recommend the following tests and procedures to help diagnose and manage the patient's condition:"
+1. Complete a thorough physical examination, paying particular"

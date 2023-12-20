@@ -4,7 +4,7 @@ import os
 from flask import Flask, request, redirect, render_template, jsonify, url_for, session
 from models.llama_chat import query_llama_with_retry
 from utils.pubmed_fetch import fetch_pubmed_data, fetch_article_details
-from auth.oauth_handler import get_auth_url, exchange_code_for_token
+from auth.oauth_handler import get_auth_url, exchange_code_for_token, generate_code_verifier, generate_code_challenge
 from fhir.fhir_client import FhirClient
 import config
 from dotenv import load_dotenv
@@ -76,18 +76,21 @@ def index():
 @app.route('/start_auth')
 def start_auth():
     state = generate_unique_state()
+    code_verifier = generate_code_verifier()
+    code_challenge = generate_code_challenge(code_verifier)
     session['oauth_state'] = state  # Store state in session
-    auth_url = get_auth_url(state)
+    session['code_verifier'] = code_verifier  # Store code_verifier in session
+    auth_url = get_auth_url(state, code_challenge)
     return redirect(auth_url)
 
 @app.route('/callback')
 def callback():
     code = request.args.get('code')
     state = request.args.get('state')
-    # Compare the state in the callback with the one stored in the session
     if state != session.get('oauth_state'):
         return 'State mismatch error', 400
-    token_info = exchange_code_for_token(code)
+    code_verifier = session.get('code_verifier')  # Retrieve code_verifier from session
+    token_info = exchange_code_for_token(code, code_verifier)
     session['access_token'] = token_info['access_token']  # Store access token in session
     return redirect(url_for('index'))
 
@@ -133,4 +136,4 @@ def handle_fhir_id():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8080)

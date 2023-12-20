@@ -158,7 +158,7 @@ class FhirClient:
     def get_condition_data(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
         # Ensure to use the correct 'category' parameter as per the API documentation
-        condition_url = f"{self.base_url}Condition?patient={fhir_id}&category=medical-history"
+        condition_url = f"{self.base_url}Condition?category=encounter-diagnosis&patient={fhir_id}"
         try:
             response = requests.get(condition_url, headers=headers)
 

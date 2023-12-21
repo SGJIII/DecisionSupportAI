@@ -55,14 +55,14 @@ def create_llama_prompt(patient_data, articles):
                    f"Medications: {patient_data['medications']}, Allergies: {patient_data['allergies']}, " \
                    f"Conditions: {patient_data['conditions']}, Social History: {patient_data['social_history']}.\n\n"
 
-    article_context = "Relevant PubMed Articles:\n"
+    article_context = "Here are some relevant PubMed articles for context:\n"
     if articles:
         for article in articles:
             article_context += f"Title: {article['title']}\nAbstract: {article['abstract']}\n\n"
     else:
-        article_context += "No relevant articles found.\n\n"
+        article_context = "\n\n"
 
-    prompt = f"{medical_info}{article_context}Please provide clinical decision support"
+    prompt = f"For a patient who is a {patient_data['gender']} age {patient_data['age']} with {patient_data['conditions']} conditions, taking {patient_data['medications']}, allergies to {patient_data['allergies']}, and a social history of {patient_data['social_history']}, please provide clinical decision support. {article_context}"
 
     return prompt
 

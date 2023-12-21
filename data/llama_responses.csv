@@ -1,11 +1,11 @@
 patient_data,prompt,llama_response
-"{'gender': 'female', 'age': 36, 'medications': ['drospirenone-ethinyl estradiol (YAZ,GIANVI) tablet 3-0.02 mg'], 'allergies': ['Patient not asked'], 'conditions': ['PCOS (polycystic ovarian syndrome)'], 'social_history': ['Tobacco smoking consumption unknown']}","Patient Information: Age 36, Gender female, Medications: ['drospirenone-ethinyl estradiol (YAZ,GIANVI) tablet 3-0.02 mg'], Allergies: ['Patient not asked'], Conditions: ['PCOS (polycystic ovarian syndrome)'], Social History: ['Tobacco smoking consumption unknown'].
+"{'gender': 'male', 'age': 30, 'medications': ['ibuprofen (MOTRIN) tablet'], 'allergies': ['LACTOSE', 'LATEX'], 'conditions': ['Right upper lobe pneumonia', 'Broken arm'], 'social_history': ['Never smoked tobacco']}","For a patient who is a male age 30 with ['Right upper lobe pneumonia', 'Broken arm'] conditions, taking ['ibuprofen (MOTRIN) tablet'], allergies to ['LACTOSE', 'LATEX'], and a social history of ['Never smoked tobacco'], please provide clinical decision support. 
 
-Relevant PubMed Articles:
-No relevant articles found.
+","Assume that the patient is not taking any other medications and has no other medical conditions.
 
-Please provide clinical decision support"," for the patient's current medication regimen and any potential changes that may be considered.
+Please provide the following information:
 
-Assessment:
-
-The patient's current medication regimen includes drospirenone-ethinyl estradiol (YAZ, GIANVI) tablet 3-0.02 mg. This medication is a combination oral contraceptive that contains drospirenone, a synthetic progestin, and eth"
+1. Assessment: What are the potential risks and benefits of taking ibuprofen for this patient?
+2. Recommendation: Should the patient be prescribed ibuprofen, or is there a safer alternative?
+3. Rationale: What is the rationale for the recommendation?
+4. Contra"

@@ -1,6 +1,11 @@
-patient_data,llama_response
-"{'gender': 'female', 'age': 36, 'medications': 'drospirenone-ethinyl estradiol (YAZ,GIANVI) tablet 3-0.02 mg', 'allergies': 'No known allergies', 'conditions': 'No known conditions', 'social_history': 'No social history assessed'}","Answer:
+patient_data,prompt,llama_response
+"{'gender': 'female', 'age': 36, 'medications': ['drospirenone-ethinyl estradiol (YAZ,GIANVI) tablet 3-0.02 mg'], 'allergies': ['Patient not asked'], 'conditions': ['PCOS (polycystic ovarian syndrome)'], 'social_history': ['Tobacco smoking consumption unknown']}","Patient Information: Age 36, Gender female, Medications: ['drospirenone-ethinyl estradiol (YAZ,GIANVI) tablet 3-0.02 mg'], Allergies: ['Patient not asked'], Conditions: ['PCOS (polycystic ovarian syndrome)'], Social History: ['Tobacco smoking consumption unknown'].
 
-As a responsible AI language model, I cannot provide personalized medical advice. However, I can offer some general recommendations for a patient with gender female and age 36.
+Relevant PubMed Articles:
+No relevant articles found.
 
-Firstly, it is important to note that women in their 30s have a higher risk of developing certain health conditions, such as breast cancer, cervical cancer, and ovarian cancer. Therefore, it is crucial for women in this age group to receive regular"
+Please provide clinical decision support"," for the patient's current medication regimen and any potential changes that may be considered.
+
+Assessment:
+
+The patient's current medication regimen includes drospirenone-ethinyl estradiol (YAZ, GIANVI) tablet 3-0.02 mg. This medication is a combination oral contraceptive that contains drospirenone, a synthetic progestin, and eth"

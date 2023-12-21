@@ -97,16 +97,12 @@ class FhirClient:
 
             root = ET.fromstring(response.text)
             ns = {'fhir': 'http://hl7.org/fhir'}
-            medication_display = root.find('.//fhir:medicationReference/fhir:display', ns)
-            if medication_display is not None:
-                medication_display_value = medication_display.attrib.get('value')
-                if not medication_display_value:  # If 'value' attribute is not found, set a default
-                    medication_display_value = 'Unknown medication'
-            else:
-                medication_display_value = 'Unknown medication'
-
-            # Return the medication information as a string
-            return medication_display_value
+            medications = []
+            for entry in root.findall('.//fhir:entry', ns):
+                medication_display = entry.find('.//fhir:medicationReference/fhir:display', ns)
+                if medication_display is not None:
+                    medications.append(medication_display.attrib.get('value', 'Unknown medication'))
+            return medications if medications else ['Unknown medication']
 
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_medication_data: {e}")
@@ -124,31 +120,16 @@ class FhirClient:
                 current_app.logger.error(error_message)
                 raise Exception(error_message)
 
-            if not response.text:
-                error_message = "Empty response received from allergy data API"
-                current_app.logger.error(error_message)
-                raise Exception(error_message)
-
             current_app.logger.debug(f"Allergy API Response: {response.text}")
 
             root = ET.fromstring(response.text)
             ns = {'fhir': 'http://hl7.org/fhir'}
             allergies = []
             for entry in root.findall('.//fhir:entry', ns):
-                allergy_text = entry.find('.//fhir:code/fhir:text', ns)
-                # Append to allergies list if allergy_text is not None and has text
-                if allergy_text is not None and allergy_text.text:
-                    allergies.append(allergy_text.text)
-                else:
-                    # If no specific allergy text is found, use a general description
-                    general_status = entry.find('.//fhir:verificationStatus/fhir:coding/fhir:display', ns)
-                    if general_status is not None and general_status.text:
-                        allergies.append(general_status.text)
-
-            # Join the list of allergies into a single string, or provide a default if empty
-            allergies_str = ', '.join(allergies) if allergies else 'No known allergies'
-            
-            return allergies_str
+                allergy_display = entry.find('.//fhir:AllergyIntolerance/fhir:code/fhir:coding/fhir:display', ns)
+                if allergy_display is not None:
+                    allergies.append(allergy_display.attrib.get('value', 'No known allergies'))
+            return allergies if allergies else ['No known allergies']
 
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_allergy_data: {e}")
@@ -157,18 +138,12 @@ class FhirClient:
         
     def get_condition_data(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
-        # Ensure to use the correct 'category' parameter as per the API documentation
-        condition_url = f"{self.base_url}Condition?category=encounter-diagnosis&patient={fhir_id}"
+        condition_url = f"{self.base_url}Condition?category=problem-list-item&clinical-status=active&patient={fhir_id}"
         try:
             response = requests.get(condition_url, headers=headers)
 
             if response.status_code != 200:
                 error_message = f"Failed to retrieve condition data: {response.text}, Status Code: {response.status_code}"
-                current_app.logger.error(error_message)
-                raise Exception(error_message)
-
-            if not response.text:
-                error_message = "Empty response received from condition data API"
                 current_app.logger.error(error_message)
                 raise Exception(error_message)
 
@@ -178,21 +153,15 @@ class FhirClient:
             ns = {'fhir': 'http://hl7.org/fhir'}
             conditions = []
             for entry in root.findall('.//fhir:entry', ns):
-                condition = entry.find('.//fhir:Condition', ns)
-                if condition is not None:
-                    # Extract the display value of the condition code
-                    condition_code = condition.find('.//fhir:code/fhir:coding/fhir:display', ns)
-                    if condition_code is not None and condition_code.text:
-                        conditions.append(condition_code.text)
-
-            # Join the list of conditions into a single string, or provide a default if empty
-            conditions_str = ', '.join(conditions) if conditions else 'No known conditions'
-            
-            return conditions_str
+                condition_text = entry.find('.//fhir:Condition/fhir:code/fhir:text', ns)
+                if condition_text is not None:
+                    conditions.append(condition_text.attrib.get('value', 'No known conditions'))
+            return conditions if conditions else ['No known conditions']
 
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_condition_data: {e}")
             raise
+
 
     def get_social_history_data(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
@@ -201,14 +170,9 @@ class FhirClient:
             response = requests.get(social_history_url, headers=headers)
 
             if response.status_code != 200:
-                error_message = f"Failed to retrieve social history data: {response.text}, Status Code: {response.status_code}"
-                current_app.logger.error(error_message)
-                raise Exception(error_message)
+                current_app.logger.error(f"Failed to retrieve social history data: {response.text}, Status Code: {response.status_code}")
+                return "None"
 
-            if not response.text:
-                error_message = "Empty response received from social history data API"
-                current_app.logger.error(error_message)
-                raise Exception(error_message)
 
             current_app.logger.debug(f"Social History API Response: {response.text}")
 
@@ -216,23 +180,11 @@ class FhirClient:
             ns = {'fhir': 'http://hl7.org/fhir'}
             social_histories = []
             for entry in root.findall('.//fhir:entry', ns):
-                observation = entry.find('.//fhir:Observation', ns)
-                if observation is not None:
-                    # Extracting display text for the social history observation
-                    display_text = observation.find('.//fhir:code/fhir:text', ns)
-                    if display_text is not None and display_text.text:
-                        social_histories.append(display_text.text)
-
-                    # Extracting from valueCodeableConcept if available
-                    value_codeable_concept = observation.find('.//fhir:valueCodeableConcept/fhir:text', ns)
-                    if value_codeable_concept is not None and value_codeable_concept.text:
-                        social_histories.append(value_codeable_concept.text)
-
-            # Join the list of social history items into a single string, or provide a default if empty
-            social_history_str = ', '.join(social_histories) if social_histories else 'No social history assessed'
-            
-            return social_history_str
+                social_history_display = entry.find('.//fhir:Observation/fhir:valueCodeableConcept/fhir:coding/fhir:display', ns)
+                if social_history_display is not None:
+                    social_histories.append(social_history_display.attrib.get('value', 'No social history assessed'))
+            return social_histories if social_histories else ['No social history assessed']
 
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_social_history_data: {e}")
-            raise
+            return "None"

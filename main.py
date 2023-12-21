@@ -32,16 +32,15 @@ def is_authenticated():
 
 
 def process_patient_record(patient_data):
-    # Extract relevant data for PubMed and LLaMa queries
-    age = patient_data.get('age', '')
-    gender = patient_data.get('gender', '')
-    medications = patient_data.get('medications', [])
-    allergies = patient_data.get('allergies', [])
-    conditions = patient_data.get('conditions', [])
-    social_history = patient_data.get('social_history', [])
-
     # Fetch articles from PubMed
-    article_ids = fetch_pubmed_data(age, gender, medications, allergies, conditions, social_history)
+    article_ids = fetch_pubmed_data(
+        age=patient_data.get('age', ''),
+        gender=patient_data.get('gender', ''),
+        medications=patient_data.get('medications', []),
+        allergies=patient_data.get('allergies', []),
+        conditions=patient_data.get('conditions', []),
+        social_history=patient_data.get('social_history', [])
+    )
     articles = fetch_article_details(article_ids) if article_ids else []
 
     # Create prompt for LLaMa
@@ -49,20 +48,24 @@ def process_patient_record(patient_data):
     llama_response = query_llama_with_retry(prompt)
     generated_text = llama_response[0]['generated_text']
 
-    return {'patient_data': patient_data, 'llama_response': generated_text}
+    return {'patient_data': patient_data, 'prompt': prompt, 'llama_response': generated_text}
 
 def create_llama_prompt(patient_data, articles):
-    prompt = (
-        f"Given a patient with gender {patient_data['gender']} and age {patient_data['age']}, "
-        f"what would be your recommendation?\n\n"
-    )
+    medical_info = f"Patient Information: Age {patient_data['age']}, Gender {patient_data['gender']}, " \
+                   f"Medications: {patient_data['medications']}, Allergies: {patient_data['allergies']}, " \
+                   f"Conditions: {patient_data['conditions']}, Social History: {patient_data['social_history']}.\n\n"
 
+    article_context = "Relevant PubMed Articles:\n"
     if articles:
-        prompt += "Here are some articles and abstracts for additional context to help with your recommendation:\n\n"
         for article in articles:
-            prompt += f"Title: {article['title']}\nAbstract: {article['abstract']}\n\n"
+            article_context += f"Title: {article['title']}\nAbstract: {article['abstract']}\n\n"
+    else:
+        article_context += "No relevant articles found.\n\n"
+
+    prompt = f"{medical_info}{article_context}Please provide clinical decision support"
 
     return prompt
+
 
 def generate_unique_state():
     return str(uuid.uuid4())
@@ -124,7 +127,7 @@ def handle_fhir_id():
         result = process_patient_record(patient_data)
         # Save or handle the result as needed
         with open('data/llama_responses.csv', 'w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=['patient_data', 'llama_response'])
+            writer = csv.DictWriter(file, fieldnames=['patient_data', 'prompt', 'llama_response'])
             writer.writeheader()
             writer.writerow(result)
 

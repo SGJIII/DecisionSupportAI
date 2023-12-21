@@ -16,18 +16,21 @@ def fetch_pubmed_data(age, gender, medications=None, allergies=None, conditions=
     # Constructing a detailed query
     query_parts = [f"age:{age}", f"gender:{gender}"]
     if medications:
-        query_parts.extend(medications)  # Assuming medications is a list of strings
+        query_parts.append(f"medications:({' '.join(medications)})")
     if allergies:
-        query_parts.extend(allergies)  # Assuming allergies is a list of strings
+        query_parts.append(f"allergies:({' '.join(allergies)})")
     if conditions:
-        query_parts.extend(conditions)  # Assuming conditions is a list of strings
+        query_parts.append(f"conditions:({' '.join(conditions)})")
     if social_history:
-        query_parts.extend(social_history)  # Assuming social_history is a list of strings
+        query_parts.append(f"social_history:({' '.join(social_history)})")
 
     detailed_query = " AND ".join([part for part in query_parts if part])
     encoded_query = requests.utils.quote(detailed_query)
 
     search_url = f"{base_url}esearch.fcgi?db=pubmed&term={encoded_query}&retmax={max_results}&apikey={api_key}"
+
+    print(f"Detailed Query: {detailed_query}")  # Add this line
+    print(f"Search URL: {search_url}")  # Add this line
     
     try:
         response = requests.get(search_url)

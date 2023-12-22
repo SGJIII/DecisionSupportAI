@@ -4,17 +4,19 @@ body {
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 .container {
-  background-color: white;
+  max-width: 600px; /* Set a max-width for the container */
+  margin: 20px auto; /* Center container in the middle with margin top and bottom */
   padding: 20px;
+  background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+  margin-bottom: 20px; /* Add some space between the form and results */
 }
 
 form {
@@ -40,4 +42,31 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.decision-support {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.decision-support h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.decision-support p {
+  margin-bottom: 10px;
+}
+
+.decision-support strong {
+  font-weight: bold;
+}
+
+.decision-support-list {
+  padding-left: 20px; /* Adjust as necessary for your design */
+}
+
+.decision-support-list li {
+  margin-bottom: 10px;
 }

@@ -102,7 +102,7 @@ class FhirClient:
                 medication_display = entry.find('.//fhir:medicationReference/fhir:display', ns)
                 if medication_display is not None:
                     medications.append(medication_display.attrib.get('value', 'Unknown medication'))
-            return medications if medications else ['Unknown medication']
+            return ', '.join(medications) if medications else ['Unknown medication']
 
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_medication_data: {e}")
@@ -129,7 +129,7 @@ class FhirClient:
                 allergy_display = entry.find('.//fhir:AllergyIntolerance/fhir:code/fhir:coding/fhir:display', ns)
                 if allergy_display is not None:
                     allergies.append(allergy_display.attrib.get('value', 'No known allergies'))
-            return allergies if allergies else ['No known allergies']
+            return ', '.join(allergies) if allergies else ['No known allergies']
 
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_allergy_data: {e}")
@@ -156,7 +156,7 @@ class FhirClient:
                 condition_text = entry.find('.//fhir:Condition/fhir:code/fhir:text', ns)
                 if condition_text is not None:
                     conditions.append(condition_text.attrib.get('value', 'No known conditions'))
-            return conditions if conditions else ['No known conditions']
+            return ', '.join(conditions) if conditions else ['No known conditions']
 
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_condition_data: {e}")
@@ -183,7 +183,7 @@ class FhirClient:
                 social_history_display = entry.find('.//fhir:Observation/fhir:valueCodeableConcept/fhir:coding/fhir:display', ns)
                 if social_history_display is not None:
                     social_histories.append(social_history_display.attrib.get('value', 'No social history assessed'))
-            return social_histories if social_histories else ['No social history assessed']
+            return ', '.join(social_histories) if social_histories else ['No social history assessed']
 
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_social_history_data: {e}")

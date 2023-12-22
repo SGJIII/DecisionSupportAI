@@ -9,32 +9,26 @@ from utils.data_processing import load_emr_data
 load_dotenv()
 api_key = os.getenv('PUBMED_API_KEY')
 
-def fetch_pubmed_data(age, gender, medications=None, allergies=None, conditions=None, social_history=None, max_results=1):
+def fetch_pubmed_data(age, gender, medications=None, allergies=None, conditions=None, social_history=None, max_results=10):
     base_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
     api_key = os.getenv('PUBMED_API_KEY')
 
-    # Constructing a detailed query
-    query_parts = [f"age:{age}", f"gender:{gender}"]
-    if medications:
-        query_parts.append(f"medications:({' '.join(medications)})")
-    if allergies:
-        query_parts.append(f"allergies:({' '.join(allergies)})")
-    if conditions:
-        query_parts.append(f"conditions:({' '.join(conditions)})")
-    if social_history:
-        query_parts.append(f"social_history:({' '.join(social_history)})")
+    # Check if conditions are provided
+    if not conditions:
+        return None
 
-    detailed_query = " AND ".join([part for part in query_parts if part])
+    # Constructing a query with gender and conditions
+    detailed_query = f"{gender} AND {conditions}"
     encoded_query = requests.utils.quote(detailed_query)
 
     search_url = f"{base_url}esearch.fcgi?db=pubmed&term={encoded_query}&retmax={max_results}&apikey={api_key}"
 
-    print(f"Detailed Query: {detailed_query}")  # Add this line
-    print(f"Search URL: {search_url}")  # Add this line
-    
+    print(f"Detailed Query: {detailed_query}")
+    print(f"Search URL: {search_url}")
+
     try:
         response = requests.get(search_url)
-        time.sleep(0.1)  # Adjusted rate limiting for 10 requests per second
+        time.sleep(0.1)
         response.raise_for_status()
 
         if response.status_code == 200:

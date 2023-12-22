@@ -9,6 +9,7 @@ from fhir.fhir_client import FhirClient
 import config
 from dotenv import load_dotenv
 from flask import current_app
+from models.openai_chat import query_openai
 
 load_dotenv()
 
@@ -36,35 +37,34 @@ def process_patient_record(patient_data):
     article_ids = fetch_pubmed_data(
         age=patient_data.get('age', ''),
         gender=patient_data.get('gender', ''),
-        medications=patient_data.get('medications', []),
-        allergies=patient_data.get('allergies', []),
-        conditions=patient_data.get('conditions', []),
-        social_history=patient_data.get('social_history', [])
+        medications=patient_data.get('medications', ''),
+        allergies=patient_data.get('allergies', ''),
+        conditions=patient_data.get('conditions', ''),
+        social_history=patient_data.get('social_history', '')
     )
     articles = fetch_article_details(article_ids) if article_ids else []
 
-    # Create prompt for LLaMa
-    prompt = create_llama_prompt(patient_data, articles)
-    llama_response = query_llama_with_retry(prompt)
-    generated_text = llama_response[0]['generated_text']
+    # Create prompt for OpenAI
+    prompt = create_openai_prompt(patient_data, articles)
+    openai_response = query_openai(prompt)
+    generated_text = openai_response.get('choices', [{}])[0].get('message', {}).get('content', '')
+    current_app.logger.debug(f"OpenAI Response: {openai_response}")
 
-    return {'patient_data': patient_data, 'prompt': prompt, 'llama_response': generated_text}
+    return {'patient_data': patient_data, 'prompt': prompt, 'articles': articles, 'openai_response': generated_text}
 
-def create_llama_prompt(patient_data, articles):
+def create_openai_prompt(patient_data, articles):
     medical_info = f"Patient Information: Age {patient_data['age']}, Gender {patient_data['gender']}, " \
                    f"Medications: {patient_data['medications']}, Allergies: {patient_data['allergies']}, " \
                    f"Conditions: {patient_data['conditions']}, Social History: {patient_data['social_history']}.\n\n"
 
     article_context = "Here are some relevant PubMed articles for context:\n"
-    if articles:
-        for article in articles:
-            article_context += f"Title: {article['title']}\nAbstract: {article['abstract']}\n\n"
-    else:
-        article_context = "\n\n"
+    for article in articles:
+        article_context += f"Title: {article['title']}\nAbstract: {article['abstract']}\n"
 
-    prompt = f"For a patient who is a {patient_data['gender']} age {patient_data['age']} with {patient_data['conditions']} conditions, taking {patient_data['medications']}, allergies to {patient_data['allergies']}, and a social history of {patient_data['social_history']}, please provide clinical decision support. {article_context}"
+    prompt = f"{medical_info}{article_context}\nBased on this information, please provide clinical decision support on how I might treat this patient. Note: I understand you're not a doctor."
 
     return prompt
+
 
 
 def generate_unique_state():
@@ -127,7 +127,7 @@ def handle_fhir_id():
         result = process_patient_record(patient_data)
         # Save or handle the result as needed
         with open('data/llama_responses.csv', 'w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=['patient_data', 'prompt', 'llama_response'])
+            writer = csv.DictWriter(file, fieldnames=['patient_data', 'prompt', 'openai_response', 'articles'])
             writer.writeheader()
             writer.writerow(result)
 

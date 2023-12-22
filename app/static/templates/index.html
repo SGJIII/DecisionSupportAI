@@ -10,16 +10,23 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
   </head>
   <body>
     <div class="container">
-      <h1>CurnexaHealthAI - Patient Data Query</h1>
-      <form id="patient-form">
-        <label for="FHIR">Enter Patient FHIR ID:</label>
-        <input type="text" id="FHIR" name="FHIR" required />
-        <button type="submit">Submit</button>
-      </form>
-      <div id="results" style="margin-top: 20px"></div>
+      <div class="form-container">
+        <h1>CurnexaHealthAI - Patient Data Query</h1>
+        <form id="patient-form">
+          <label for="FHIR">Enter Patient FHIR ID:</label>
+          <input type="text" id="FHIR" name="FHIR" required />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div
+        class="results-container"
+        id="results"
+        style="margin-top: 20px"
+      ></div>
     </div>
 
     <!-- Update the path to the JavaScript file -->

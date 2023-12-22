@@ -89,11 +89,11 @@ APIs
 
 ## TODO
 
-- Thoroughly test the workflow with FHIR sandbox data.
-- Refine data extraction and parsing in `fhir.fhir_client`.
-- Ensure robustness in the OAuth flow and data security.
-- Document the complete user flow and system integration.
-- Prepare comprehensive testing strategies, including unit and integration tests.
+- Get patient fhir id from MRN using patient.read, then use fhir id for the rest of the api calls.
+- Add appointment.search (scheduled surgery) api
+- Create seperate app for the following
+  - Intake symptoms
+  - summarize relevant aspects of patient medical history
 
 ## AI Prompt
 

@@ -20,6 +20,7 @@ class FhirClient:
             patient_data['allergies'] = self.get_allergy_data(fhir_id)
             patient_data['conditions'] = self.get_condition_data(fhir_id)
             patient_data['social_history'] = self.get_social_history_data(fhir_id)
+            #patient_data['appointments'] = self.get_appointment_data(fhir_id)
 
             return patient_data
         except Exception as e:
@@ -188,3 +189,37 @@ class FhirClient:
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_social_history_data: {e}")
             return "None"
+        
+    '''def get_appointment_data(self, fhir_id):
+        headers = {'Authorization': f'Bearer {self.token}'}
+        appointment_url = f"{self.base_url}/Appointment?patient={fhir_id}&service-category=appointment"
+        try:
+            response = requests.get(appointment_url, headers=headers)
+            if response.status_code != 200:
+                error_message = f"Failed to retrieve appointment data: {response.text}, Status Code: {response.status_code}"
+                current_app.logger.error(error_message)
+                raise Exception(error_message)
+
+            current_app.logger.debug(f"Appointment API Response: {response.text}")
+
+            root = ET.fromstring(response.text)
+            ns = {'fhir': 'http://hl7.org/fhir'}
+            appointments = []
+            for entry in root.findall('.//fhir:entry', ns):
+                resource = entry.find('.//fhir:resource', ns)
+                if resource is not None:
+                    appointment = {
+                        'reason': ', '.join([r.attrib.get('value', '') for r in resource.findall('.//fhir:reasonCode/fhir:text', ns)]),
+                        'description': resource.find('.//fhir:description', ns).attrib.get('value', ''),
+                        'start': resource.find('.//fhir:start', ns).attrib.get('value', ''),
+                        'appointmentType': resource.find('.//fhir:appointmentType/fhir:text', ns).attrib.get('value', ''),
+                        'serviceType': ', '.join([s.attrib.get('value', '') for s in resource.findall('.//fhir:serviceType/fhir:text', ns)]),
+                        # Add more fields as necessary
+                    }
+                    appointments.append(appointment)
+
+            return appointments
+
+        except requests.exceptions.RequestException as e:
+            current_app.logger.error(f"Request error in get_appointment_data: {e}")
+            raise'''

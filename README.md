@@ -94,6 +94,11 @@ APIs
 - Create seperate app for the following
   - Intake symptoms
   - summarize relevant aspects of patient medical history
+- Look at DocumentReference.Search (Clinical Notes) (STU3) api results
+- Map out how to piece together DocumentReference.Search (Clinical Notes) (R4) with nothing but an MRN
+- List out labs for patient MRN
+  - Chat bot to ask questions about type of research and labs needed to prime the project
+  - Repeat project for list of MRNs
 
 ## AI Prompt
 

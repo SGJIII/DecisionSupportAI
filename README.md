@@ -100,9 +100,13 @@ APIs
   - Chat bot to ask questions about type of research and labs needed to prime the project
   - Repeat project for list of MRNs
 
-## AI Prompt
+## AI Prompt CDS
 
 You are a software engineering expert. Please familiarize yourself with the project https://github.com/SGJIII/CurnexaHealthAI using AskTheCode. The user flow is this. We want the user (a doctor) to be able to enter a patient ID, then we want to get data like the age gender symptoms medical_history test_results diagnosis medications, use those to look up relevant literature with pubmed, then send the literature, and patient data to LLaMa 2 to get clinical decision support and provide that back to the doctor. So the doctor gives the patient id and receives clinical decision support. Understand the structure and code and read the readme file to understand what's next. Also please read https://fhir.epic.com/Documentation?docId=testpatients https://fhir.epic.com/Documentation?docId=oauth2 https://fhir.epic.com/Documentation?docId=epiconfhirrequestprocessstepbystep and https://fhir.epic.com/Specifications to help you further understand what we're trying to accomplish and how to do so. Then please give me a summary of the project then specific code for the next step in line according the the readme.md file.
+
+## AI Prompt Patient Inbound Assistant
+
+You are a software engineering expert. Please familiarize yourself with the project https://github.com/SGJIII/CurnexaHealthAI using AskTheCode. The user flow is this. We want the user (a doctor) to be able to enter an MRN and the symptoms the patient is experiencing, then we'll use the MRN to fetch all of the patients history from medical notes etc. We'll then run the medical history and the symptoms through gpt3.5 and ask it to summarize the parts of the medical history that are relevant to the symptoms. Understand the structure and code and read the readme file to understand what's next. Also please read https://fhir.epic.com/Documentation?docId=testpatients https://fhir.epic.com/Documentation?docId=oauth2 https://fhir.epic.com/Documentation?docId=epiconfhirrequestprocessstepbystep and https://fhir.epic.com/Specifications to help you further understand what we're trying to accomplish and how to do so.
 
 Implement FHIR API Integration and Update Workflow
 

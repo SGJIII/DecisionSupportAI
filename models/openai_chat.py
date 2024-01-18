@@ -12,7 +12,7 @@ def query_openai(text):
     }
     data = {
         #'model': 'gpt-4-1106-preview', #gpt 4 hight end. very expensive
-        'model': 'gpt-3.5-turbo-16k-0613', #gpt 3.5 turbo order of magnitide cheaper. Use for testing non response features. 
+        #'model': 'gpt-3.5-turbo-16k-0613', #gpt 3.5 turbo order of magnitide cheaper. Use for testing non response features. 
         'messages': [
             {'role': 'system', 'content': 'You are a virtual assistant trained to provide clinical decision support. While you are not a doctor, you can offer insights based on medical data and research. Please assess any articles given as additional context. Please never speak in the first person.'},
             {'role': 'user', 'content': text}

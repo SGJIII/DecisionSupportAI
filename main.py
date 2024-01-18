@@ -124,6 +124,15 @@ def handle_fhir_id():
         patient_data['conditions'] = fhir_client.get_condition_data(fhir_id)
         patient_data['social_history'] = fhir_client.get_social_history_data(fhir_id)
 
+        # Retrieve clinical notes
+        patient_data['clinical_notes'] = fhir_client.get_clinical_notes(fhir_id)
+
+        # Temporary: Directly calling get_clinical_notes_content with a test URL
+        test_url = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4/Binary/eYjyNQjrBZrk7KP-Skf2XyQ3"  # Replace with an actual URL if available
+        test_content = fhir_client.get_clinical_notes_content(test_url)
+        current_app.logger.debug(f"Test content from get_clinical_notes_content: {test_content}")
+
+
         result = process_patient_record(patient_data)
         # Save or handle the result as needed
         with open('data/llama_responses.csv', 'w', newline='') as file:
@@ -135,8 +144,6 @@ def handle_fhir_id():
     except Exception as e:
         current_app.logger.error(f"Error in handle_fhir_id: {e}")
         return jsonify({'error': str(e)}), 500
-
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

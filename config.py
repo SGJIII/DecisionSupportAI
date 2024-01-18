@@ -21,7 +21,7 @@ EPIC_CLIENT_ID_PROD = 'e4a1fcac-86fc-40b4-b1ab-a8e34f5d626e'
 EPIC_CLIENT_ID_DEV = 'dac06186-2fc7-46f6-9d52-c700e0555077'
 EPIC_AUTH_ENDPOINT = "https://fhir.epic.com/interconnect-fhir-oauth/oauth2/authorize"
 EPIC_TOKEN_ENDPOINT = "https://fhir.epic.com/interconnect-fhir-oauth/oauth2/token"
-REDIRECT_URI_DEV = "https://79e8-98-38-147-13.ngrok-free.app/callback"  # Update with your actual redirect URI
+REDIRECT_URI_DEV = "https://91d8-190-113-102-97.ngrok-free.app/callback"  # Update with your actual redirect URI
 REDIRECT_URI_PROD = "https://cds.curnexa.org/callback"
 
 

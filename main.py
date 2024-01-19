@@ -116,24 +116,25 @@ def handle_fhir_id():
     fhir_client.token = access_token
 
     try:
+        # Retrieve patient data and additional information
         patient_data = fhir_client.get_patient_data_by_fhir_id(fhir_id)
-
-        # Retrieve additional information
         patient_data['medications'] = fhir_client.get_medication_data(fhir_id)
         patient_data['allergies'] = fhir_client.get_allergy_data(fhir_id)
         patient_data['conditions'] = fhir_client.get_condition_data(fhir_id)
         patient_data['social_history'] = fhir_client.get_social_history_data(fhir_id)
 
-        # Retrieve clinical notes
-        patient_data['clinical_notes'] = fhir_client.get_clinical_notes(fhir_id)
+        # Retrieve and process clinical notes
+        decoded_clinical_notes = fhir_client.get_all_clinical_notes_content(fhir_id)
+        patient_data['clinical_notes'] = decoded_clinical_notes
 
-        # Temporary: Directly calling get_clinical_notes_content with a test URL
-        test_url = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4/Binary/eYjyNQjrBZrk7KP-Skf2XyQ3"  # Replace with an actual URL if available
-        test_content = fhir_client.get_clinical_notes_content(test_url)
-        current_app.logger.debug(f"Test content from get_clinical_notes_content: {test_content}")
+        # Log the clinical notes for debugging
+        current_app.logger.debug("Decoded Clinical Notes:")
+        for note in decoded_clinical_notes:
+            current_app.logger.debug(note)
 
-
+        # Process patient record
         result = process_patient_record(patient_data)
+
         # Save or handle the result as needed
         with open('data/llama_responses.csv', 'w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=['patient_data', 'prompt', 'openai_response', 'articles'])

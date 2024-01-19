@@ -4,6 +4,9 @@ import xml.etree.ElementTree as ET
 from flask import current_app
 import datetime  # Import the datetime module
 import json
+import base64
+from striprtf.striprtf import rtf_to_text
+import urllib.parse
 
 class FhirClient:
     def __init__(self):
@@ -190,95 +193,65 @@ class FhirClient:
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_social_history_data: {e}")
             return "None"
-        
-    def get_clinical_notes_content(self, content_url):
-        # Check if content_url is a full URL or a relative URL
-        if not content_url.startswith("http"):
-            full_url = f"{self.base_url}{content_url}"
-            current_app.logger.debug(f"Relative URL detected, converted to full URL: {full_url}")
-        else:
-            full_url = content_url
-            current_app.logger.debug(f"Full URL detected: {full_url}")
 
+    def get_all_clinical_notes_content(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
-        try:
-            current_app.logger.debug(f"Attempting to fetch clinical note content from URL: {full_url}")
-            response = requests.get(full_url, headers=headers)
+        doc_ref_url = f"{self.base_url}/DocumentReference"
+        params = {'patient': fhir_id, 'category': 'clinical-note'}
+        ns = {'fhir': 'http://hl7.org/fhir'}
+        clinical_notes_contents = []
 
-            if response.status_code == 200:
-                # Check the content type and handle accordingly
-                content_type = response.headers.get('Content-Type', '')
-                if 'text' in content_type:
-                    snippet = response.text[:100] + '...' if len(response.text) > 100 else response.text
-                    current_app.logger.debug(f"Text content retrieved from {full_url}: {snippet}")
-                    return response.text
-                else:
-                    # Handle non-text content (binary, etc.) as needed
-                    current_app.logger.debug(f"Non-text content retrieved from {full_url}, needs special handling")
-                    return response.content
-            else:
-                error_message = f"Failed to retrieve content from {full_url}: Status Code {response.status_code}, Response: {response.text[:100]}..."
-                current_app.logger.error(error_message)
-                return None
-        except requests.exceptions.RequestException as e:
-            current_app.logger.error(f"Request exception for URL {full_url}: {e}")
-            return None
-
-    def get_clinical_notes(self, fhir_id, category="clinical-note", docstatus=None, encounter=None, date=None, period=None, subject=None, type=None):
-        try:
-            headers = {'Authorization': f'Bearer {self.token}'}
-            url = f"{self.base_url}/DocumentReference"
-            params = {'patient': fhir_id, 'category': category, '_count': 3}
-
-            # Add optional parameters if provided
-            if docstatus:
-                params['docstatus'] = docstatus
-            if encounter:
-                params['encounter'] = encounter
-            if date:
-                params['date'] = date
-            if period:
-                params['period'] = period
-            if subject:
-                params['subject'] = subject
-            if type:
-                params['type'] = type
-
-            response = requests.get(url, headers=headers, params=params)
-            current_app.logger.debug(f"Querying clinical notes for FHIR ID {fhir_id}: {url} with params {params}")
-            current_app.logger.debug(f"Clinical Notes API Response: {response.text}")
+        def process_page(url):
+            current_app.logger.debug(f"Calling DocumentReference API: {url}")
+            response = requests.get(url, headers=headers)
+            current_app.logger.debug(f"DocumentReference API Response: {response.text}")
 
             if response.status_code != 200:
-                error_message = f"Failed to retrieve clinical notes: {response.text}, Status Code: {response.status_code}"
-                current_app.logger.error(error_message)
-                raise Exception(error_message)
+                raise Exception(f"Failed to retrieve DocumentReference: {response.text}, Status Code: {response.status_code}")
 
             root = ET.fromstring(response.text)
-            ns = {'fhir': 'http://hl7.org/fhir'}
-            clinical_notes = []
-
             for entry in root.findall('.//fhir:entry', ns):
-                note = {'id': None, 'content': []}
-                id_element = entry.find('.//fhir:DocumentReference/fhir:id', ns)
-                if id_element is not None:
-                    note['id'] = id_element.attrib.get('value')
+                content_elements = entry.findall('.//fhir:DocumentReference/fhir:content/fhir:attachment/fhir:url', ns)
+                for content_element in content_elements:
+                    if content_element is not None:
+                        binary_relative_url = content_element.attrib.get('value')
+                        if binary_relative_url:
+                            binary_url = f"{self.base_url}/{binary_relative_url}"
+                            current_app.logger.debug(f"Attempting to fetch content from Binary URL: {binary_url}")
 
-                    content_elements = entry.findall('.//fhir:DocumentReference/fhir:content/fhir:attachment/fhir:url', ns)
-                    for content_element in content_elements:
-                        if content_element is not None and content_element.text:
-                            content_url = content_element.text
-                            current_app.logger.debug(f"Extracted content URL: {content_url}")
-                            note_content = self.get_clinical_notes_content(content_url)
-                            if note_content:
-                                note['content'].append(note_content)
-                                current_app.logger.debug(f"Clinical Note Content for ID {note['id']}: {note_content[:100]}...")
+                            binary_response = requests.get(binary_url, headers={
+                                'Authorization': f'Bearer {self.token}',
+                                'Accept': 'application/fhir+json'
+                            })
+                            current_app.logger.debug(f"Binary.read API Response for URL {binary_url}: {binary_response.text}")
 
-                if note['id']:
-                    clinical_notes.append(note)
+                            content_data = binary_response.json()
+                            content_type = content_data.get('contentType', '')
+                            encoded_content = content_data.get('data', '')
 
-            return clinical_notes
-        except Exception as e:
-            current_app.logger.error(f"Error in get_clinical_notes for FHIR ID {fhir_id}: {e}")
+                            if content_type == 'text/html':
+                                decoded_content = base64.b64decode(encoded_content).decode('utf-8')
+                            elif content_type == 'text/rtf':
+                                decoded_content = rtf_to_text(base64.b64decode(encoded_content).decode('utf-8'))
+                            else:
+                                decoded_content = "Unsupported content type."
+
+                            clinical_notes_contents.append(decoded_content)
+            next_link = root.find(".//fhir:link[@relation='next']", ns)
+            return next_link.get('url') if next_link is not None else None
+
+        try:
+            # Initial API call
+            next_page_url = process_page(doc_ref_url + '?' + urllib.parse.urlencode(params))
+
+            # Handle pagination
+            while next_page_url:
+                next_page_url = process_page(next_page_url)
+
+            return clinical_notes_contents
+
+        except requests.exceptions.RequestException as e:
+            current_app.logger.error(f"Request exception: {e}")
             raise
 
         

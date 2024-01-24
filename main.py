@@ -10,8 +10,11 @@ import config
 from dotenv import load_dotenv
 from flask import current_app
 from models.openai_chat import query_openai
+import logging_config
 
 load_dotenv()
+
+logging_config.setup_logging()
 
 # Define the base directory of your application
 basedir = os.path.abspath(os.path.dirname(__file__))

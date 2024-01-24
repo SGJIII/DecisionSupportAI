@@ -13,6 +13,23 @@ class FhirClient:
         self.base_url = current_app.config['EPIC_FHIR_BASE_URL']
         self.token = None
 
+    def get_fhir_id(self, mrn):
+        headers = {'Authorization': f'Bearer {self.token}'}
+        patient_id_url = f"{self.base_url}/Patient?identifier=MRN|{mrn}"
+        try:
+            response = requests.get(patient_id_url, headers=headers)
+            if response.status_code != 200:
+                raise Exception(f"Failed to retrieve patient FHIR ID: {response.text}, Status Code: {response.status_code}")
+
+            current_app.logger.debug(f"Patient Search API Response: {response.text}")
+            
+            root = ET.fromstring(response.text)
+            ns = {'fhir': 'http://hl7.org/fhir'}
+            fhir_id = root.find('.//fhir:Patient/fhir:id', ns)
+            return fhir_id.attrib['value'] if fhir_id is not None else None
+        except requests.exceptions.RequestException as e:
+            raise
+    
     def get_patient_data_by_fhir_id(self, fhir_id):
         try:
             if not self.token:
@@ -233,6 +250,20 @@ class FhirClient:
                                 decoded_content = base64.b64decode(encoded_content).decode('utf-8')
                             elif content_type == 'text/rtf':
                                 decoded_content = rtf_to_text(base64.b64decode(encoded_content).decode('utf-8'))
+                            elif content_type == 'application/pdf':
+                                try:
+                                    pdf_content = base64.b64decode(encoded_content)
+                                    pdf_filename = f"pdf_{entry.find('.//fhir:id', ns).attrib.get('value')}.pdf"  # Generating a filename based on the document ID
+                                    pdf_filepath = f"data/Clinical_Notes_PDFs/{pdf_filename}"  # Replace with your desired file path
+
+                                    with open(pdf_filepath, 'wb') as pdf_file:
+                                        pdf_file.write(pdf_content)
+
+                                    current_app.logger.info(f"PDF saved locally: {pdf_filepath}")
+                                    decoded_content = f"PDF content saved at {pdf_filepath}"
+                                except Exception as e:
+                                    current_app.logger.error(f"Error processing PDF: {e}")
+                                    decoded_content = "Error processing PDF content."
                             else:
                                 decoded_content = "Unsupported content type."
 
@@ -253,7 +284,6 @@ class FhirClient:
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request exception: {e}")
             raise
-
         
     '''def get_appointment_data(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}

@@ -99,14 +99,13 @@ def callback():
 
 @app.route('/handle-fhir-id', methods=['POST'])
 def handle_fhir_id():
-    # Check if the user is authenticated
     if not is_authenticated():
         return jsonify({'error': 'User not authenticated'}), 401
 
     data = request.get_json()
-    fhir_id = data.get('fhirId')
-    if not fhir_id:
-        return jsonify({'error': 'FHIR ID is missing'}), 400
+    mrn = data.get('mrn')  # Assuming you're sending MRN in your request
+    if not mrn:
+        return jsonify({'error': 'MRN is missing'}), 400
 
     access_token = session.get('access_token')
     if not access_token:
@@ -116,6 +115,10 @@ def handle_fhir_id():
     fhir_client.token = access_token
 
     try:
+        # Retrieve FHIR ID from MRN
+        fhir_id = fhir_client.get_fhir_id(mrn)
+        if not fhir_id:
+            return jsonify({'error': 'No FHIR ID found for given MRN'}), 404
         # Retrieve patient data and additional information
         patient_data = fhir_client.get_patient_data_by_fhir_id(fhir_id)
         patient_data['medications'] = fhir_client.get_medication_data(fhir_id)

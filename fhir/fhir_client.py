@@ -7,6 +7,8 @@ import json
 import base64
 from striprtf.striprtf import rtf_to_text
 import urllib.parse
+from PyPDF2 import PdfReader
+import io
 
 class FhirClient:
     def __init__(self):
@@ -210,6 +212,29 @@ class FhirClient:
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_social_history_data: {e}")
             return "None"
+        
+    def process_pdf_content(self, pdf_binary, pdf_filename):
+        try:
+            # Save binary data as a PDF file
+            pdf_filepath = f"/Users/samjohnson/CurnexaHealthAI/data/Clinical_Notes_PDFs/{pdf_filename}"
+            with open(pdf_filepath, 'wb') as pdf_file:
+                pdf_file.write(pdf_binary)
+            current_app.logger.info(f"PDF saved locally: {pdf_filepath}")
+
+            # Read and process PDF content using PyPDF2
+            pdf_file = io.BytesIO(pdf_binary)
+            pdf_reader = PdfReader(pdf_file)  # Use PdfReader here
+            text = ""
+            for page in pdf_reader.pages:
+                text += page.extract_text()
+            pdf_file.close()
+
+            current_app.logger.debug(f"Extracted PDF content: {text}")
+            return text
+        except Exception as e:
+            current_app.logger.error(f"Error processing PDF: {e}")
+            return "Error processing PDF content."
+
 
     def get_all_clinical_notes_content(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
@@ -246,41 +271,32 @@ class FhirClient:
                             content_type = content_data.get('contentType', '')
                             encoded_content = content_data.get('data', '')
 
-                            if content_type == 'text/html':
+                            if content_type == 'text/html' or content_type == 'text/rtf':
                                 decoded_content = base64.b64decode(encoded_content).decode('utf-8')
-                            elif content_type == 'text/rtf':
-                                decoded_content = rtf_to_text(base64.b64decode(encoded_content).decode('utf-8'))
-                            elif content_type == 'application/pdf':
-                                try:
-                                    pdf_content = base64.b64decode(encoded_content)
-                                    pdf_filename = f"pdf_{entry.find('.//fhir:id', ns).attrib.get('value')}.pdf"  # Generating a filename based on the document ID
-                                    pdf_filepath = f"data/Clinical_Notes_PDFs/{pdf_filename}"  # Replace with your desired file path
-
-                                    with open(pdf_filepath, 'wb') as pdf_file:
-                                        pdf_file.write(pdf_content)
-
-                                    current_app.logger.info(f"PDF saved locally: {pdf_filepath}")
-                                    decoded_content = f"PDF content saved at {pdf_filepath}"
-                                except Exception as e:
-                                    current_app.logger.error(f"Error processing PDF: {e}")
-                                    decoded_content = "Error processing PDF content."
+                                if 'pdf' in decoded_content.lower():
+                                    # Pass the raw binary data to the process_pdf_content method
+                                    pdf_binary = base64.b64decode(encoded_content)
+                                    pdf_filename = f"pdf_{entry.find('.//fhir:id', ns).attrib.get('value')}.pdf"
+                                    decoded_content = self.process_pdf_content(pdf_binary, pdf_filename)
+                                elif content_type == 'text/rtf':
+                                    try:
+                                        decoded_content = rtf_to_text(decoded_content)
+                                    except Exception as e:
+                                        current_app.logger.error(f"Error processing RTF content: {e}")
+                                        decoded_content = "Error processing RTF content."
                             else:
                                 decoded_content = "Unsupported content type."
 
                             clinical_notes_contents.append(decoded_content)
+
             next_link = root.find(".//fhir:link[@relation='next']", ns)
             return next_link.get('url') if next_link is not None else None
 
         try:
-            # Initial API call
             next_page_url = process_page(doc_ref_url + '?' + urllib.parse.urlencode(params))
-
-            # Handle pagination
             while next_page_url:
                 next_page_url = process_page(next_page_url)
-
             return clinical_notes_contents
-
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request exception: {e}")
             raise

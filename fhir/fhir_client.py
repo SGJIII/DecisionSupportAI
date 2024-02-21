@@ -1,6 +1,7 @@
 # fhir/fhir_client.py
 import requests
 import xml.etree.ElementTree as ET
+from xml.etree import ElementTree as ET
 from flask import current_app
 import datetime  # Import the datetime module
 import json
@@ -239,7 +240,7 @@ class FhirClient:
     def get_all_clinical_notes_content(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
         doc_ref_url = f"{self.base_url}/DocumentReference"
-        params = {'patient': fhir_id, 'category': 'clinical-note'}
+        params = {'patient': fhir_id}  # removed, 'category': 'clinical-note' to see if we get other document types
         ns = {'fhir': 'http://hl7.org/fhir'}
         clinical_notes_contents = []
 
@@ -271,10 +272,15 @@ class FhirClient:
                             content_type = content_data.get('contentType', '')
                             encoded_content = content_data.get('data', '')
 
-                            if content_type == 'text/html' or content_type == 'text/rtf':
+                            if content_type in ['text/html', 'text/rtf', 'application/xml']:
                                 decoded_content = base64.b64decode(encoded_content).decode('utf-8')
-                                if 'pdf' in decoded_content.lower():
-                                    # Pass the raw binary data to the process_pdf_content method
+                                if content_type == 'application/xml':
+                                    # Parse the XML content
+                                    xml_root = ET.fromstring(decoded_content)
+                                    xml_texts = [elem.text for elem in xml_root.iter() if elem.text]
+                                    decoded_content = ' '.join(filter(None, xml_texts))
+                                elif 'pdf' in decoded_content.lower():
+                                    # Process PDF content
                                     pdf_binary = base64.b64decode(encoded_content)
                                     pdf_filename = f"pdf_{entry.find('.//fhir:id', ns).attrib.get('value')}.pdf"
                                     decoded_content = self.process_pdf_content(pdf_binary, pdf_filename)

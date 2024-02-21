@@ -6,3 +6,4 @@ fire
 sentencepiece
 pandas
 python-dotenv
+striprtf

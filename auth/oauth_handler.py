@@ -32,7 +32,7 @@ def get_auth_url(state, code_challenge):
         "client_id": current_app.config['EPIC_CLIENT_ID_DEV'],
         "redirect_uri": current_app.config['REDIRECT_URI_DEV'],
         "state": state,
-        "scope": "Patient.read MedicationRequest.search AllergyIntolerance.search Condition.search Observation.search DocumentReference.search",
+        "scope": "Patient.read MedicationRequest.search AllergyIntolerance.search Condition.search Observation.search DocumentReference.search Procedure.search",
         "code_challenge": code_challenge,
         "code_challenge_method": "S256"
     }
@@ -55,8 +55,3 @@ def exchange_code_for_token(code, code_verifier):
         return response.json()
     else:
         raise Exception(f"Failed to exchange code for token: {response.text}")
-
-
-
-
-

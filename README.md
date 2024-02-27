@@ -108,7 +108,43 @@ You are a software engineering expert. Please familiarize yourself with the proj
 
 You are a software engineering expert. Please familiarize yourself with the project https://github.com/SGJIII/DecisionSupportAI using AskTheCode. The user flow is this. We want the user (a doctor) to be able to enter an MRN and the symptoms the patient is experiencing, then we'll use the MRN to fetch all of the patients history from medical notes etc. We'll then run the medical history and the symptoms through gpt3.5 and ask it to summarize the parts of the medical history that are relevant to the symptoms. Understand the structure and code and read the readme file to understand what's next. Also please use Webpilot to read https://fhir.epic.com/Documentation?docId=testpatients https://fhir.epic.com/Documentation?docId=oauth2 https://fhir.epic.com/Documentation?docId=epiconfhirrequestprocessstepbystep and https://fhir.epic.com/Specifications to help you further understand what we're trying to accomplish and how to do so.
 
-Implement FHIR API Integration and Update Workflow
+Here's the user story for the application we're building:
+We've already built the EMR-Integrated Clinical Decision Support System
+User Story: As a doctor, I want a system that retrieves a patient's medical history from an Electronic Medical Record (EMR) and cross-references it with the latest scientific research and guidelines to provide clinical decision support, enabling me to make informed, evidence-based decisions for patient care.
+
+Now we're building the EMR Summary Generator for Patient History
+User Story: As a doctor, when presented with a patient's symptoms, I want a tool that can automatically summarize the relevant parts of the patient's medical history from the EMR, so I can quickly understand their background without having to read through their entire history, saving time and improving care efficiency.
+
+Project Context and Next Steps: Extending FHIR API Integration for Lab Observations
+
+Project Overview:
+We are working on a healthcare application that integrates with Epic's FHIR API to securely access and process patient data. The application enhances clinical decision support by retrieving and interpreting various types of patient information, including clinical notes and laboratory results. We've successfully implemented functionality to fetch and decode clinical notes from DocumentReference resources, handling content types like text/html, text/rtf, and application/xml, and even decoding base64-encoded binary data.
+
+Accomplishments So Far:
+
+Implemented OAuth 2.0 authentication flow with PKCE, resolving an authentication error by aligning the redirect URI and regenerating the client secret.
+Enhanced the get_all_clinical_notes_content method to fetch clinical notes from DocumentReference resources, including handling for multiple content types and base64-encoded binary data.
+Broadened document retrieval scope by removing the 'category': 'clinical-note' filter, allowing for a wider range of document types to be fetched and analyzed.
+Next Steps: Integrating Observation.Read for Lab Results:
+The next phase of development focuses on extending the application's capabilities to include the retrieval and processing of laboratory observation results using the Observation.Read operation in the R4 version of the FHIR standard. This will involve:
+
+Implementing a new method to fetch laboratory observation data (Observation resources) related to patients, specifically focusing on lab results.
+Handling the retrieval of binary data for lab results, similar to how clinical notes are processed, including decoding any base64-encoded binary responses.
+Parsing and interpreting the lab observation data to extract relevant information that can be used to support clinical decisions.
+Objective:
+To enhance the application's functionality by providing comprehensive access to a patient's laboratory results, alongside clinical notes, thereby offering a more complete picture of the patient's health status for clinical decision support.
+
+Challenges and Considerations:
+
+Ensuring secure and authorized access to patient data while complying with healthcare regulations and privacy standards.
+Efficiently handling and parsing the FHIR Observation resources to extract and present lab results in a meaningful way.
+Addressing any content type and data encoding variations in the lab results data similar to the approach taken for clinical notes.
+Reminder for Next Session:
+
+Review the FHIR R4 documentation for Observation.Read and related operations to understand the structure and types of data available for lab results.
+Plan the implementation approach for fetching, decoding, and processing lab observation data, considering the lessons learned and patterns established in handling clinical notes.
+
+## Implement FHIR API Integration and Update Workflow
 
 - Integrated OAuth authentication with Epics FHIR API in `fhir/fhir_client.py`.
 - Enhanced `main.py` to support fetching patient data using the patient ID provided by the user.

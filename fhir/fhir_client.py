@@ -306,7 +306,65 @@ class FhirClient:
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request exception: {e}")
             raise
+
+    def fetch_patient_observations(self, fhir_id):
+        headers = {'Authorization': f'Bearer {self.token}'}
+        observation_url = f"{self.base_url}/Observation?patient={fhir_id}&category=laboratory"
         
+        current_app.logger.debug("About to fetch laboratory observations")
+        response = requests.get(observation_url, headers=headers)
+        if response.status_code == 200:
+            current_app.logger.debug("Successfully fetched laboratory observations.")
+            try:
+                root = ET.fromstring(response.content)
+                ns = {'fhir': 'http://hl7.org/fhir'}
+                observations = []
+
+                for entry in root.findall('.//fhir:entry', ns):
+                    observation = entry.find('.//fhir:Observation', ns)
+                    if observation is not None:
+                        test_name_element = observation.find('.//fhir:code/fhir:coding/fhir:display', ns)
+                        test_name = test_name_element.attrib.get('value') if test_name_element is not None else 'Unknown Test'
+
+                        value_element = observation.find('.//fhir:valueQuantity/fhir:value', ns)
+                        unit_element = observation.find('.//fhir:valueQuantity/fhir:unit', ns)
+                        value = value_element.attrib.get('value', 'No result') if value_element is not None else 'No result'
+                        unit = unit_element.attrib.get('value', '') if unit_element is not None else ''
+                        result = f"{value} {unit}".strip()
+
+                        low_element = observation.find('.//fhir:referenceRange/fhir:low/fhir:value', ns)
+                        high_element = observation.find('.//fhir:referenceRange/fhir:high/fhir:value', ns)
+                        low_value = low_element.attrib.get('value', '') if low_element is not None else ''
+                        high_value = high_element.attrib.get('value', '') if high_element is not None else ''
+                        reference_range = f"{low_value}-{high_value}".strip() if low_value or high_value else 'No reference range'
+
+                        observations.append({
+                            'test_name': test_name,
+                            'result': result,
+                            'reference_range': reference_range
+                        })
+
+                return observations
+            except ET.ParseError as e:
+                current_app.logger.error(f"XML parsing error: {e}")
+                return {"error": f"XML parsing error: {e}"}
+        else:
+            current_app.logger.error(f"Failed to fetch laboratory observations: {response.status_code}")
+            return None
+        
+    def fetch_patient_procedures(self, fhir_id):
+        headers = {'Authorization': f'Bearer {self.token}'}
+        procedure_url = f"{self.base_url}/Procedure?patient={fhir_id}"
+        
+        current_app.logger.debug("About to fetch patient procedures")
+        response = requests.get(procedure_url, headers=headers)
+        if response.status_code == 200:
+            current_app.logger.debug("Successfully fetched patient procedures.")
+            return response.text  # Return the raw XML response
+        else:
+            current_app.logger.error(f"Failed to fetch patient procedures: {response.status_code}")
+            return None
+
     '''def get_appointment_data(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
         appointment_url = f"{self.base_url}/Appointment?patient={fhir_id}&service-category=appointment"

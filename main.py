@@ -138,6 +138,21 @@ def handle_fhir_id():
         for note in decoded_clinical_notes:
             current_app.logger.debug(note)
 
+              # Fetch and process laboratory observations
+        observations_data = fhir_client.fetch_patient_observations(fhir_id)
+        patient_data['laboratory_observations'] = observations_data  # Add observations data to patient data
+
+        # Log the observations for debugging
+        current_app.logger.debug("Laboratory Observations Data:")
+        current_app.logger.debug(observations_data)
+
+        procedures_data = fhir_client.fetch_patient_procedures(fhir_id)
+        patient_data['procedures'] = procedures_data  # Add procedures data to patient data
+
+        # Log the procedures for debugging
+        current_app.logger.debug("Patient Procedures Data:")
+        current_app.logger.debug(procedures_data)
+
         # Process patient record
         result = process_patient_record(patient_data)
 

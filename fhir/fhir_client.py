@@ -396,6 +396,7 @@ class FhirClient:
             current_app.logger.error(f"Failed to fetch patient procedures: {response.status_code}")
             return None
         
+        
     def fetch_patient_appointments(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
         appointment_url = f"{self.base_url}/Appointment?patient={fhir_id}"

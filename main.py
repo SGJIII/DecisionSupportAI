@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 from flask import current_app
 from models.openai_chat import query_openai
 import logging_config
+from flask import send_from_directory
 
 load_dotenv()
 
@@ -68,8 +69,6 @@ def create_openai_prompt(patient_data, articles):
 
     return prompt
 
-
-
 def generate_unique_state():
     return str(uuid.uuid4())
 
@@ -78,6 +77,14 @@ def index():
     if not is_authenticated():
         return redirect(url_for('start_auth'))
     return render_template('index.html')
+
+@app.route('/lab-compilation')
+def lab_compilation():
+    return render_template('lab_compilation.html')
+
+@app.route('/medical-history-summary')
+def medical_history_summary():
+    return render_template('medical_history_summary.html')
 
 @app.route('/start_auth')
 def start_auth():
@@ -184,6 +191,19 @@ def handle_fhir_id():
     except Exception as e:
         current_app.logger.error(f"Error in handle_fhir_id: {e}")
         return jsonify({'error': str(e)}), 500
+
+@app.route('/get-all-lab-data', methods=['GET'])
+def get_all_lab_data():
+    lab_data = []
+    with open('data/Labs/lab_data.csv', mode='r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        lab_data = list(reader)
+    return jsonify(lab_data)
+
+@app.route('/download-lab-data')
+def download_lab_data():
+    return send_from_directory('data/Labs', 'lab_data.csv', as_attachment=True)
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

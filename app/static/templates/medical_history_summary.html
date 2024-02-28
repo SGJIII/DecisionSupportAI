@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CurnexaHealthAI</title>
+  <title>Medical History Summary - CurnexaHealthAI</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
 </head>
 <body>
   <!-- Sidebar navigation -->
@@ -22,18 +21,23 @@
   <div id="main-content">
     <div class="container">
       <div class="form-container">
-        <h1>CurnexaHealthAI - Patient Data Query</h1>
-        <form id="patient-form">
+        <h1>Medical History Summary</h1>
+        <form id="history-form">
           <label for="MRN">Enter Patient MRN:</label>
-          <input type="text" id="MRN" name="MRN" required />
+          <input type="text" id="history-MRN" name="MRN" required />
+          
+          <label for="symptoms">Enter Symptoms:</label>
+          <textarea id="symptoms" name="symptoms" required></textarea>
+          
           <button type="submit">Submit</button>
         </form>
       </div>
-      <div class="results-container" id="results" style="margin-top: 20px"></div>
+      <div class="summary-container" id="history-results" style="margin-top: 20px">
+        <!-- The summary information will be inserted here by JavaScript -->
+      </div>
     </div>
   </div>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/medical_history_summary_script.js') }}"></script>
 </body>
 </html>
-

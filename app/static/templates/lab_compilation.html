@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CurnexaHealthAI</title>
+  <title>Lab Compilation - CurnexaHealthAI</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
 </head>
 <body>
   <!-- Sidebar navigation -->
@@ -22,18 +21,20 @@
   <div id="main-content">
     <div class="container">
       <div class="form-container">
-        <h1>CurnexaHealthAI - Patient Data Query</h1>
-        <form id="patient-form">
+        <h1>Lab Compilation</h1>
+        <form id="lab-form">
           <label for="MRN">Enter Patient MRN:</label>
-          <input type="text" id="MRN" name="MRN" required />
+          <input type="text" id="lab-MRN" name="MRN" required />
           <button type="submit">Submit</button>
         </form>
       </div>
-      <div class="results-container" id="results" style="margin-top: 20px"></div>
+      <div class="table-container" id="lab-results" style="margin-top: 20px">
+        <!-- The table for lab results will be inserted here by JavaScript -->
+      </div>
     </div>
   </div>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <!-- Insert the path to the appropriate JavaScript file -->
+  <script src="{{ url_for('static', filename='js/lab_compilation_script.js') }}"></script>
 </body>
 </html>
-

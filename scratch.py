@@ -12,3 +12,13 @@
         headers = {'Authorization': f'Bearer {self.token}'}
         binary_clinical_notes_url = f"{self.base_url}{content_url}"
 
+
+
+'system': system,
+'code': code,
+'test_name': test_name,
+'result': result_value,
+'high_value': high_value,
+'low_value': low_value,
+'units': unit
+

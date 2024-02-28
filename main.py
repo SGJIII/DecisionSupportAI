@@ -124,10 +124,6 @@ def handle_fhir_id():
             return jsonify({'error': 'No FHIR ID found for given MRN'}), 404
         # Retrieve patient data and additional information
         patient_data = fhir_client.get_patient_data_by_fhir_id(fhir_id)
-        patient_data['medications'] = fhir_client.get_medication_data(fhir_id)
-        patient_data['allergies'] = fhir_client.get_allergy_data(fhir_id)
-        patient_data['conditions'] = fhir_client.get_condition_data(fhir_id)
-        patient_data['social_history'] = fhir_client.get_social_history_data(fhir_id)
 
         # Retrieve and process clinical notes
         decoded_clinical_notes = fhir_client.get_all_clinical_notes_content(fhir_id)
@@ -138,13 +134,21 @@ def handle_fhir_id():
         for note in decoded_clinical_notes:
             current_app.logger.debug(note)
 
+        patient_data['medications'] = fhir_client.get_medication_data(fhir_id)
+        patient_data['allergies'] = fhir_client.get_allergy_data(fhir_id)
+        patient_data['conditions'] = fhir_client.get_condition_data(fhir_id)
+        patient_data['social_history'] = fhir_client.get_social_history_data(fhir_id)
+
               # Fetch and process laboratory observations
-        observations_data = fhir_client.fetch_patient_observations(fhir_id)
+        observations_data = fhir_client.fetch_patient_observations(fhir_id, mrn)
         patient_data['laboratory_observations'] = observations_data  # Add observations data to patient data
 
         # Log the observations for debugging
         current_app.logger.debug("Laboratory Observations Data:")
         current_app.logger.debug(observations_data)
+
+        # Call the method to update the CSV
+        fhir_client.update_lab_data_csv(observations_data)  
 
         procedures_data = fhir_client.fetch_patient_procedures(fhir_id)
         patient_data['procedures'] = procedures_data  # Add procedures data to patient data
@@ -152,6 +156,20 @@ def handle_fhir_id():
         # Log the procedures for debugging
         current_app.logger.debug("Patient Procedures Data:")
         current_app.logger.debug(procedures_data)
+
+        appointments_data = fhir_client.fetch_patient_appointments(fhir_id)
+        patient_data['appointments'] = appointments_data  # Add appointments data to patient data
+
+        # Log the appointments for debugging
+        current_app.logger.debug("Patient Appointments Data:")
+        current_app.logger.debug(appointments_data)
+
+        diagnostic_reports_data = fhir_client.fetch_patient_diagnostic_reports(fhir_id)
+        patient_data['diagnostic_reports'] = diagnostic_reports_data  # Add diagnostic reports data to patient data
+
+        # Log the diagnostic reports for debugging
+        current_app.logger.debug("Patient Diagnostic Reports Data:")
+        current_app.logger.debug(diagnostic_reports_data)
 
         # Process patient record
         result = process_patient_record(patient_data)

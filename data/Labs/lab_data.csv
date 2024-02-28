@@ -1,0 +1,7 @@
+MRN,system,code,test_name,result_value,high_value,low_value,units
+203713,http://loinc.org,4548-4,Hemoglobin A1c/Hemoglobin.total in Blood,5.1,,,
+203713,http://loinc.org,777-3,Platelets [#/volume] in Blood by Automated count,322,399,150,10*3/uL
+203713,http://loinc.org,789-8,Erythrocytes [#/volume] in Blood by Automated count,4.80,5.2,4,10*6/µL
+203713,http://loinc.org,6690-2,Leukocytes [#/volume] in Blood by Automated count,6.5,10,3.3,10*3/mL
+203713,urn:oid:1.2.840.114350.1.13.0.1.7.2.768282,1811482,Genotype:,No result,,,
+203710,http://loinc.org,2093-3,Cholesterol [Mass/volume] in Serum or Plasma,187,,,mg/dL

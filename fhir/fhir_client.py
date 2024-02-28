@@ -10,6 +10,8 @@ from striprtf.striprtf import rtf_to_text
 import urllib.parse
 from PyPDF2 import PdfReader
 import io
+import csv
+import os
 
 class FhirClient:
     def __init__(self):
@@ -307,12 +309,13 @@ class FhirClient:
             current_app.logger.error(f"Request exception: {e}")
             raise
 
-    def fetch_patient_observations(self, fhir_id):
+    def fetch_patient_observations(self, fhir_id, mrn):
         headers = {'Authorization': f'Bearer {self.token}'}
         observation_url = f"{self.base_url}/Observation?patient={fhir_id}&category=laboratory"
         
         current_app.logger.debug("About to fetch laboratory observations")
         response = requests.get(observation_url, headers=headers)
+        current_app.logger.debug(f"Raw API Response: {response.text}")  # Log the raw response text
         if response.status_code == 200:
             current_app.logger.debug("Successfully fetched laboratory observations.")
             try:
@@ -323,27 +326,34 @@ class FhirClient:
                 for entry in root.findall('.//fhir:entry', ns):
                     observation = entry.find('.//fhir:Observation', ns)
                     if observation is not None:
-                        test_name_element = observation.find('.//fhir:code/fhir:coding/fhir:display', ns)
-                        test_name = test_name_element.attrib.get('value') if test_name_element is not None else 'Unknown Test'
+                        coding_element = observation.find('.//fhir:code/fhir:coding', ns)
+                        system = coding_element.find('.//fhir:system', ns).attrib['value']
+                        code = coding_element.find('.//fhir:code', ns).attrib['value']
+                        test_name = coding_element.find('.//fhir:display', ns).attrib['value']
 
                         value_element = observation.find('.//fhir:valueQuantity/fhir:value', ns)
                         unit_element = observation.find('.//fhir:valueQuantity/fhir:unit', ns)
-                        value = value_element.attrib.get('value', 'No result') if value_element is not None else 'No result'
-                        unit = unit_element.attrib.get('value', '') if unit_element is not None else ''
-                        result = f"{value} {unit}".strip()
+                        result_value = value_element.attrib['value'] if value_element is not None else 'No result'
+                        unit = unit_element.attrib['value'] if unit_element is not None else ''
 
                         low_element = observation.find('.//fhir:referenceRange/fhir:low/fhir:value', ns)
                         high_element = observation.find('.//fhir:referenceRange/fhir:high/fhir:value', ns)
-                        low_value = low_element.attrib.get('value', '') if low_element is not None else ''
-                        high_value = high_element.attrib.get('value', '') if high_element is not None else ''
-                        reference_range = f"{low_value}-{high_value}".strip() if low_value or high_value else 'No reference range'
+                        low_value = low_element.attrib['value'] if low_element is not None else ''
+                        high_value = high_element.attrib['value'] if high_element is not None else ''
 
-                        observations.append({
+                        observation_data = {
+                            'MRN': mrn,
+                            'system': system,
+                            'code': code,
                             'test_name': test_name,
-                            'result': result,
-                            'reference_range': reference_range
-                        })
+                            'result_value': result_value,
+                            'high_value': high_value,
+                            'low_value': low_value,
+                            'units': unit
+                        }
+                        observations.append(observation_data)
 
+                self.update_lab_data_csv(observations)
                 return observations
             except ET.ParseError as e:
                 current_app.logger.error(f"XML parsing error: {e}")
@@ -351,6 +361,27 @@ class FhirClient:
         else:
             current_app.logger.error(f"Failed to fetch laboratory observations: {response.status_code}")
             return None
+    
+    def update_lab_data_csv(self, observations):
+        csv_file_path = 'data/Labs/lab_data.csv'
+        fieldnames = ['MRN', 'system', 'code', 'test_name', 'result_value', 'high_value', 'low_value', 'units']
+        
+        # Check if file exists and read existing data
+        if os.path.exists(csv_file_path):
+            with open(csv_file_path, mode='r', newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                existing_data = [row for row in reader]
+        else:
+            existing_data = []
+
+        # Append new observations if not duplicate
+        with open(csv_file_path, mode='a', newline='') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            if not existing_data:  # If file was empty, write header
+                writer.writeheader()
+            for observation in observations:
+                if observation not in existing_data:
+                    writer.writerow(observation)
         
     def fetch_patient_procedures(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
@@ -363,6 +394,32 @@ class FhirClient:
             return response.text  # Return the raw XML response
         else:
             current_app.logger.error(f"Failed to fetch patient procedures: {response.status_code}")
+            return None
+        
+    def fetch_patient_appointments(self, fhir_id):
+        headers = {'Authorization': f'Bearer {self.token}'}
+        appointment_url = f"{self.base_url}/Appointment?patient={fhir_id}"
+        
+        current_app.logger.debug("About to fetch patient appointments")
+        response = requests.get(appointment_url, headers=headers)
+        if response.status_code == 200:
+            current_app.logger.debug("Successfully fetched patient appointments.")
+            return response.text  # Return the raw XML response
+        else:
+            current_app.logger.error(f"Failed to fetch patient appointments: {response.status_code}")
+            return None
+        
+    def fetch_patient_diagnostic_reports(self, fhir_id):
+        headers = {'Authorization': f'Bearer {self.token}'}
+        diagnostic_report_url = f"{self.base_url}/DiagnosticReport?patient={fhir_id}"
+        
+        current_app.logger.debug("About to fetch patient diagnostic reports")
+        response = requests.get(diagnostic_report_url, headers=headers)
+        if response.status_code == 200:
+            current_app.logger.debug("Successfully fetched patient diagnostic reports.")
+            return response.text  # Return the raw XML response
+        else:
+            current_app.logger.error(f"Failed to fetch patient diagnostic reports: {response.status_code}")
             return None
 
     '''def get_appointment_data(self, fhir_id):

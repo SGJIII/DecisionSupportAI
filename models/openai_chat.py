@@ -1,6 +1,7 @@
 import requests
 from dotenv import load_dotenv
 import os
+import json
 
 load_dotenv()
 openai_api_key = os.getenv('OPENAI_API_KEY')
@@ -21,6 +22,25 @@ def query_openai(text):
     response = requests.post('https://api.openai.com/v1/chat/completions', json=data, headers=headers)
     if response.status_code == 200:
         return response.json()
+    else:
+        raise Exception(f"Error in OpenAI API call: {response.text}")
+    
+def summarize_patient_data(symptoms, patient_data):
+    headers = {
+        'Authorization': f'Bearer {openai_api_key}',
+        'Content-Type': 'application/json'
+    }
+    patient_data_str = json.dumps(patient_data)  # Convert patient data to a string
+    data = {
+        'model': 'gpt-3.5-turbo',  # Updated to use gpt-3.5-turbo model
+        'messages': [
+            {'role': 'system', 'content': 'Your job is to summarize the given patient data based on the symptoms. Please only return a summary of the data that you have been given. It is important not to add anything that is not in the patient data but also not to leave anything important out. Please never speak in the first person.'},
+            {'role': 'user', 'content': f"Patient data: {patient_data_str}\nSymptoms: {symptoms}\n\nPlease summarize the relevant patient information that correlates with the provided symptoms."}
+        ]
+    }
+    response = requests.post('https://api.openai.com/v1/chat/completions', json=data, headers=headers)  # Updated endpoint
+    if response.status_code == 200:
+        return response.json()['choices'][0]['message']['content']  # Updated to correctly parse the response
     else:
         raise Exception(f"Error in OpenAI API call: {response.text}")
 

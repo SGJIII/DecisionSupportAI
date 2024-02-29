@@ -9,9 +9,10 @@ from fhir.fhir_client import FhirClient
 import config
 from dotenv import load_dotenv
 from flask import current_app
-from models.openai_chat import query_openai
+from models.openai_chat import query_openai, summarize_patient_data
 import logging_config
 from flask import send_from_directory
+import traceback
 
 load_dotenv()
 
@@ -114,6 +115,7 @@ def handle_fhir_id():
 
     data = request.get_json()
     mrn = data.get('mrn')  # Assuming you're sending MRN in your request
+    symptoms = data.get('symptoms', '')  # This is new, to receive symptoms from the frontend.
     if not mrn:
         return jsonify({'error': 'MRN is missing'}), 400
 
@@ -178,7 +180,18 @@ def handle_fhir_id():
         current_app.logger.debug("Patient Diagnostic Reports Data:")
         current_app.logger.debug(diagnostic_reports_data)
 
-        # Process patient record
+        if symptoms:
+            # Assume summarize_patient_data is correctly implemented to handle symptoms and patient_data.
+            summary = summarize_patient_data(symptoms, patient_data)
+            
+            # Construct result to include both summary and patient data.
+            result = {
+                'summary': summary,
+                'patient_data': patient_data  # Ensure this structure aligns with your frontend expectations.
+            }
+            return jsonify(result)
+
+                # Process patient record
         result = process_patient_record(patient_data)
 
         # Save or handle the result as needed
@@ -203,7 +216,6 @@ def get_all_lab_data():
 @app.route('/download-lab-data')
 def download_lab_data():
     return send_from_directory('data/Labs', 'lab_data.csv', as_attachment=True)
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

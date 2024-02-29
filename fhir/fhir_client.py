@@ -164,7 +164,7 @@ class FhirClient:
         
     def get_condition_data(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
-        condition_url = f"{self.base_url}Condition?category=problem-list-item&clinical-status=active&patient={fhir_id}"
+        condition_url = f"{self.base_url}Condition?patient={fhir_id}" #removed category=problem-list-item&clinical-status=active&
         try:
             response = requests.get(condition_url, headers=headers)
 
@@ -422,6 +422,8 @@ class FhirClient:
         else:
             current_app.logger.error(f"Failed to fetch patient diagnostic reports: {response.status_code}")
             return None
+        
+    
 
     '''def get_appointment_data(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}

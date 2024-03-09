@@ -274,7 +274,7 @@ class FhirClient:
                             content_type = content_data.get('contentType', '')
                             encoded_content = content_data.get('data', '')
 
-                            if content_type in ['text/rtf', 'application/xml']:
+                            if content_type in ['text/html', 'text/rtf', 'application/xml']:
                                 decoded_content = base64.b64decode(encoded_content).decode('utf-8')
                                 if content_type == 'application/xml':
                                     # Parse the XML content
@@ -292,9 +292,10 @@ class FhirClient:
                                     except Exception as e:
                                         current_app.logger.error(f"Error processing RTF content: {e}")
                                         decoded_content = "Error processing RTF content."
-                                clinical_notes_contents.append(decoded_content)
                             else:
-                                current_app.logger.debug(f"Skipped content of type: {content_type}")
+                                decoded_content = "Unsupported content type."
+
+                            clinical_notes_contents.append(decoded_content)
 
             next_link = root.find(".//fhir:link[@relation='next']", ns)
             return next_link.get('url') if next_link is not None else None
@@ -390,74 +391,21 @@ class FhirClient:
         response = requests.get(procedure_url, headers=headers)
         if response.status_code == 200:
             current_app.logger.debug("Successfully fetched patient procedures.")
-            try:
-                root = ET.fromstring(response.content)
-                ns = {'fhir': 'http://hl7.org/fhir'}
-                procedures = []
-
-                for entry in root.findall('.//fhir:entry', ns):
-                    procedure = entry.find('.//fhir:Procedure', ns)
-                    if procedure is not None:
-                        procedure_data = {
-                            'id': procedure.find('.//fhir:id', ns).attrib['value'] if procedure.find('.//fhir:id', ns) is not None else 'No ID',
-                            'status': procedure.find('.//fhir:status', ns).attrib['value'] if procedure.find('.//fhir:status', ns) is not None else 'No status',
-                            'category': procedure.find('.//fhir:category/fhir:coding/fhir:display', ns).attrib['value'] if procedure.find('.//fhir:category/fhir:coding/fhir:display', ns) is not None else 'No category',
-                            'code_display': procedure.find('.//fhir:code/fhir:coding/fhir:display', ns).attrib['value'] if procedure.find('.//fhir:code/fhir:coding/fhir:display', ns) is not None else 'No code display',
-                            'subject': procedure.find('.//fhir:subject/fhir:display', ns).attrib['value'] if procedure.find('.//fhir:subject/fhir:display', ns) is not None else 'No subject',
-                            'encounter': procedure.find('.//fhir:encounter/fhir:display', ns).attrib['value'] if procedure.find('.//fhir:encounter/fhir:display', ns) is not None else 'No encounter',
-                            'performedDateTime': procedure.find('.//fhir:performedDateTime', ns).attrib['value'] if procedure.find('.//fhir:performedDateTime', ns) is not None else 'No performed date',
-                            'performers': [performer.find('.//fhir:actor/fhir:display', ns).attrib['value'] for performer in procedure.findall('.//fhir:performer', ns) if performer.find('.//fhir:actor/fhir:display', ns) is not None],
-                            'reason_code': procedure.find('.//fhir:reasonCode/fhir:coding/fhir:display', ns).attrib['value'] if procedure.find('.//fhir:reasonCode/fhir:coding/fhir:display', ns) is not None else 'No reason code',
-                        }
-                        procedures.append(procedure_data)
-
-                return procedures
-            except ET.ParseError as e:
-                current_app.logger.error(f"XML parsing error: {e}")
-                return {"error": f"XML parsing error: {e}"}
+            return response.text  # Return the raw XML response
         else:
             current_app.logger.error(f"Failed to fetch patient procedures: {response.status_code}")
             return None
         
+        
     def fetch_patient_appointments(self, fhir_id):
         headers = {'Authorization': f'Bearer {self.token}'}
         appointment_url = f"{self.base_url}/Appointment?patient={fhir_id}"
-
+        
         current_app.logger.debug("About to fetch patient appointments")
         response = requests.get(appointment_url, headers=headers)
         if response.status_code == 200:
             current_app.logger.debug("Successfully fetched patient appointments.")
-            try:
-                root = ET.fromstring(response.content)
-                ns = {'fhir': 'http://hl7.org/fhir'}
-                appointments = []
-
-                for entry in root.findall('.//fhir:entry', ns):
-                    appointment = entry.find('.//fhir:Appointment', ns)
-                    if appointment is not None:
-                        participants_details = []
-                        for participant in appointment.findall('.//fhir:participant', ns):
-                            participant_type = participant.find('.//fhir:type/fhir:coding/fhir:display', ns)
-                            participant_actor = participant.find('.//fhir:actor/fhir:display', ns)
-                            participants_details.append({
-                                'type': participant_type.attrib['value'] if participant_type is not None else 'No type',
-                                'status': participant.find('.//fhir:status', ns).attrib['value'] if participant.find('.//fhir:status', ns) is not None else 'No status',
-                                'actor_display': participant_actor.attrib['value'] if participant_actor is not None else 'No actor display',
-                            })
-
-                        appointments.append({
-                            'id': appointment.find('.//fhir:id', ns).attrib['value'] if appointment.find('.//fhir:id', ns) is not None else 'No ID',
-                            'status': appointment.find('.//fhir:status', ns).attrib['value'] if appointment.find('.//fhir:status', ns) is not None else 'No status',
-                            'description': appointment.find('.//fhir:description', ns).attrib['value'] if appointment.find('.//fhir:description', ns) is not None else 'No description',
-                            'start': appointment.find('.//fhir:start', ns).attrib['value'] if appointment.find('.//fhir:start', ns) is not None else 'No start date',
-                            'end': appointment.find('.//fhir:end', ns).attrib['value'] if appointment.find('.//fhir:end', ns) is not None else 'No end date',
-                            'participants': participants_details,
-                        })
-
-                return appointments
-            except ET.ParseError as e:
-                current_app.logger.error(f"XML parsing error: {e}")
-                return {"error": f"XML parsing error: {e}"}
+            return response.text  # Return the raw XML response
         else:
             current_app.logger.error(f"Failed to fetch patient appointments: {response.status_code}")
             return None
@@ -470,54 +418,10 @@ class FhirClient:
         response = requests.get(diagnostic_report_url, headers=headers)
         if response.status_code == 200:
             current_app.logger.debug("Successfully fetched patient diagnostic reports.")
-            try:
-                root = ET.fromstring(response.content)
-                ns = {'fhir': 'http://hl7.org/fhir'}
-                diagnostic_reports = []
-
-                for entry in root.findall('.//fhir:entry', ns):
-                    report = entry.find('.//fhir:DiagnosticReport', ns)
-                    if report is not None:
-                        identifiers = report.findall('.//fhir:identifier/fhir:value', ns)
-                        identifier_values = [identifier.attrib['value'] for identifier in identifiers if identifier is not None]
-
-                        status = report.find('.//fhir:status', ns)
-                        status_value = status.attrib['value'] if status is not None else 'No status'
-
-                        category_coding = report.find('.//fhir:category/fhir:coding', ns)
-                        category_display = category_coding.find('.//fhir:display', ns).attrib['value'] if category_coding is not None and category_coding.find('.//fhir:display', ns) is not None else 'No category'
-
-                        code_coding = report.find('.//fhir:code/fhir:coding', ns)
-                        code_display = code_coding.find('.//fhir:display', ns).attrib['value'] if code_coding is not None and code_coding.find('.//fhir:display', ns) is not None else 'No code display'
-
-                        subject_reference = report.find('.//fhir:subject/fhir:display', ns)
-                        subject_reference_value = subject_reference.attrib['value'] if subject_reference is not None else 'No subject'
-
-                        encounter_reference = report.find('.//fhir:encounter/fhir:display', ns)
-                        encounter_reference_value = encounter_reference.attrib['value'] if encounter_reference is not None else 'No encounter'
-
-                        effectiveDateTime = report.find('.//fhir:effectiveDateTime', ns)
-                        effectiveDateTime_value = effectiveDateTime.attrib['value'] if effectiveDateTime is not None else 'Unknown date'
-
-                        report_data = {
-                            'identifier': ', '.join(identifier_values),
-                            'status': status_value,
-                            'category': category_display,
-                            'code_display': code_display,
-                            'subject_reference': subject_reference_value,
-                            'encounter_reference': encounter_reference_value,
-                            'effectiveDateTime': effectiveDateTime_value,
-                        }
-                        diagnostic_reports.append(report_data)
-
-                return diagnostic_reports
-            except ET.ParseError as e:
-                current_app.logger.error(f"XML parsing error: {e}")
-                return {"error": f"XML parsing error: {e}"}
+            return response.text  # Return the raw XML response
         else:
             current_app.logger.error(f"Failed to fetch patient diagnostic reports: {response.status_code}")
             return None
-
         
     
 

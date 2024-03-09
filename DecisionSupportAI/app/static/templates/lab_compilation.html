@@ -5,34 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lab Compilation - CurnexaHealthAI</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 <body>
   <!-- Sidebar navigation -->
   <div id="sidebar" class="sidebar">
-    <div class="logo-container">
-        <img src="{{ url_for('static', filename='images/Curnexa_logo.png') }}" alt="Curnexa Logo">
-        <h2>Curnexa</h2>
-      </div>
+    <h2>Curnexa</h2>
     <ul>
-      <li>
-        <a href="/">
-          <i class="fas fa-stethoscope"></i>
-          <span>Clinical Decision Support</span>
-        </a>
-      </li>
-      <li>
-        <a class="active" href="/lab-compilation">
-          <i class="fas fa-vials"></i>
-          <span>Research Assistant</span>
-        </a>
-      </li>
-      <li>
-        <a href="/medical-history-summary">
-          <i class="fas fa-book-medical"></i>
-          <span>Medical History Summary</span>
-        </a>
-      </li>
+      <li><a href="/">Clinical Decision Support</a></li>
+      <li><a href="/lab-compilation">Research Assistant</a></li>
+      <li><a href="/medical-history-summary">Medical History Summary</a></li>
     </ul>
   </div>
 
@@ -45,7 +26,6 @@
           <label for="MRN">Enter Patient MRN:</label>
           <input type="text" id="lab-MRN" name="MRN" required />
           <button type="submit">Submit</button>
-          <img id="loading-gif" src="{{ url_for('static', filename='images/DuZY.gif') }}" alt="Loading..." style="display: none; max-width: 200px; margin: 20px auto; width: 50%; height: auto; opacity: 0.7;" />
         </form>
       </div>
       <div class="table-container" id="lab-results" style="margin-top: 20px">

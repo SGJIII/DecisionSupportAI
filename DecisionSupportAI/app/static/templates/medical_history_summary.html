@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medical History Summary - CurnexaHealthAI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <!-- Sidebar navigation -->
+  <div id="sidebar" class="sidebar">
+    <h2>Curnexa</h2>
+    <ul>
+      <li><a href="/">Clinical Decision Support</a></li>
+      <li><a href="/lab-compilation">Research Assistant</a></li>
+      <li><a href="/medical-history-summary">Medical History Summary</a></li>
+    </ul>
+  </div>
+
+  <!-- Main content -->
+  <div id="main-content">
+    <div class="container">
+      <div class="form-container">
+        <h1>Medical History Summary</h1>
+        <form id="history-form">
+          <label for="MRN">Enter Patient MRN:</label>
+          <input type="text" id="history-MRN" name="MRN" required />
+          
+          <label for="symptoms">Enter Symptoms:</label>
+          <textarea id="symptoms" name="symptoms" required></textarea>
+          
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="summary-container" id="history-results" style="margin-top: 20px">
+        <!-- The summary information will be inserted here by JavaScript -->
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('history-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const mrn = document.getElementById('history-MRN').value; // Ensure the ID matches your form input
+      const symptoms = document.getElementById('symptoms').value; // Ensure the ID matches your form input
+  
+      fetch('/handle-fhir-id', { // Updated to use the correct Flask route
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ mrn, symptoms }) // Make sure the keys match those expected by your Flask app
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Assuming 'data.summary' exists based on the conditional logic in Flask
+        if(data.summary) {
+          document.getElementById('history-results').innerHTML = data.summary;
+        } else {
+          // Handle cases where 'summary' might not be part of the response
+          console.log('Summary not available', data);
+          document.getElementById('history-results').innerHTML = 'Summary not available';
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  </script>
+
+  <script src="{{ url_for('static', filename='js/medical_history_summary_script.js') }}"></script>
+</body>
+</html>

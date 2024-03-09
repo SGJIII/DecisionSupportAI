@@ -1,6 +1,7 @@
 /* static/style.css */
 body {
   font-family: Arial, sans-serif;
+  color: #505050;
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
@@ -33,9 +34,18 @@ input[type="text"] {
   border: 1px solid #ddd;
 }
 
+textarea {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
 button {
   padding: 10px 20px;
-  background-color: #007bff;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #50b9c6;
   color: white;
   border: none;
   border-radius: 5px;
@@ -43,7 +53,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #98e1eb;
 }
 
 .decision-support {
@@ -53,7 +63,7 @@ button:hover {
 }
 
 .decision-support h3 {
-  font-size: 1.2em;
+  font-size: 1em;
   margin-bottom: 10px;
 }
 
@@ -73,6 +83,19 @@ button:hover {
   margin-bottom: 10px;
 }
 
+.logo-container {
+  display: flex;
+  align-items: center; /* This vertically centers the image and text */
+  justify-content: center; /* This horizontally centers the content if you want */
+  padding: 10px; /* Adjust as needed */
+}
+
+.logo-container img {
+  height: 32px; /* or any other fixed height */
+  width: auto; /* maintain aspect ratio */
+  margin-right: 10px; /* space between the logo and the text */
+}
+
 .sidebar {
   height: 100%;
   width: 200px;
@@ -80,40 +103,62 @@ button:hover {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #C2EAEF;
+  background-color: #ffffff; /* White background for the sidebar */
   overflow-x: hidden;
   padding-top: 20px;
 }
 
 .sidebar h2 {
-  margin-left: 20px; /* Adjust the left margin as needed */
+  font-size: 32px;
+  text-align: center; /* Center align the 'Curnexa' title */
+  color: #505050; /* Light blue color for the 'Curnexa' title */
+  margin-bottom: 24px; /* Space after the title */
 }
 
 .sidebar ul {
   list-style-type: none; /* Remove bullet points */
-  padding-left: 0; /* Align text to the left */
-  margin-left: 5px; /* Add some left margin to the entire list */
+  padding: 0; /* Align text to the left */
+  margin: 0; /* Remove default margin */
 }
 
-
-
 .sidebar a {
-  text-align: left; /* Ensure text is aligned left */
-  display: block; /* Make the links fill the container for easier clicking */
-  margin-bottom: 10px; /* Add space between links */
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 18px;
-  color: #ffffff;
+  font-family: Helvetica, sans-serif;
+  text-align: left; /* Text aligned to the left */
+  display: flex; /* Use flexbox for horizontal alignment */
+  align-items: baseline; /* Align items at the start (top) of the container */
+  margin-bottom: 10px; /* Space between links */
+  padding: 6px 16px; /* Padding inside each link */
+  text-decoration: none; /* Remove underline from links */
+  font-size: 15px; /* Font size for links */
+  font-weight: 550;
+  color: #a2a2a2; /* Default link color - grey */
+}
+
+.sidebar a.active {
+  color: #505050; /* Active link color - dark grey */
 }
 
 .sidebar a:hover {
-  color: #f1f1f1;
+  color: #333; /* Hover link color - darker grey */
+  background-color: #f1f1f1; /* Background color on hover */
 }
 
+.sidebar a i {
+  color: #98e1eb; /* Icon color - matching the 'Curnexa' title */
+  margin-right: 8px; /* Space between icon and text */
+  min-width: 20px; /* Ensure icons have a consistent width */
+  align-self: center;
+}
+
+.sidebar a span {
+  line-height: 1; /* Adjust line height to ensure proper alignment */
+  display: block; /* Ensure span takes the full width */
+  margin-top: -0px; /* Adjust this value if the alignment is slightly off */
+}
+
+/* Adding padding inside the ul for better alignment with the content */
 #main-content {
-  margin-left: 200px; /* Same as the width of the sidebar */
-  padding: 0px 10px;
+  padding-left: 220px; /* Adjusted to accommodate sidebar width + padding */
 }
 
 @media screen and (max-height: 450px) {
@@ -128,7 +173,7 @@ button:hover {
 
 table {
   width: 100%; /* make table take the full width of its container */
-  margin-top: 20px; /* add some space above the table */
+  margin-top: 10px 0 10px 0; /* add some space above the table */
   border-collapse: collapse;
 }
 

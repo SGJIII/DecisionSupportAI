@@ -5,15 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Medical History Summary - CurnexaHealthAI</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 <body>
   <!-- Sidebar navigation -->
   <div id="sidebar" class="sidebar">
-    <h2>Curnexa</h2>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/Curnexa_logo.png') }}" alt="Curnexa Logo">
+        <h2>Curnexa</h2>
+      </div>
     <ul>
-      <li><a href="/">Clinical Decision Support</a></li>
-      <li><a href="/lab-compilation">Research Assistant</a></li>
-      <li><a href="/medical-history-summary">Medical History Summary</a></li>
+      <li>
+        <a href="/">
+          <i class="fas fa-stethoscope"></i>
+          <span>Clinical Decision Support</span>
+        </a>
+      </li>
+      <li>
+        <a href="/lab-compilation">
+          <i class="fas fa-vials"></i>
+          <span>Research Assistant</span>
+        </a>
+      </li>
+      <li>
+        <a class="active" href="/medical-history-summary">
+          <i class="fas fa-book-medical"></i>
+          <span>Medical History Summary</span>
+        </a>
+      </li>
     </ul>
   </div>
 
@@ -30,6 +49,7 @@
           <textarea id="symptoms" name="symptoms" required></textarea>
           
           <button type="submit">Submit</button>
+          <img id="loading-gif" src="{{ url_for('static', filename='images/DuZY.gif') }}" alt="Loading..." style="display: none; max-width: 200px; margin: 20px auto; width: 33%; height: auto; opacity: 0.7;" />
         </form>
       </div>
       <div class="summary-container" id="history-results" style="margin-top: 20px">
@@ -38,15 +58,27 @@
     </div>
   </div>
   <script>
-    document.getElementById('history-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const mrn = document.getElementById('history-MRN').value; // Ensure the ID matches your form input
-      const symptoms = document.getElementById('symptoms').value; // Ensure the ID matches your form input
+    // Get a reference to the loading GIF and the form elements
+    const loadingGif = document.getElementById('loading-gif');
+    const historyForm = document.getElementById('history-form');
+    const mrnInput = document.getElementById('history-MRN');
+    const symptomsInput = document.getElementById('symptoms');
+    const historyResults = document.getElementById('history-results');
   
-      fetch('/handle-fhir-id', { // Updated to use the correct Flask route
+    historyForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Show the loading GIF
+      loadingGif.style.display = 'block';
+  
+      // Extract the values from the form
+      const mrn = mrnInput.value;
+      const symptoms = symptomsInput.value;
+  
+      fetch('/handle-fhir-id', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ mrn, symptoms }) // Make sure the keys match those expected by your Flask app
+        body: JSON.stringify({ mrn, symptoms, feature: 'Medical History Summary' })
       })
       .then(response => {
         if (!response.ok) {
@@ -55,18 +87,25 @@
         return response.json();
       })
       .then(data => {
-        // Assuming 'data.summary' exists based on the conditional logic in Flask
+        // Hide the loading GIF when the data is ready to be displayed
+        loadingGif.style.display = 'none';
+  
+        // Insert the summary data into the page
         if(data.summary) {
-          document.getElementById('history-results').innerHTML = data.summary;
+          historyResults.innerHTML = data.summary;
         } else {
-          // Handle cases where 'summary' might not be part of the response
-          console.log('Summary not available', data);
-          document.getElementById('history-results').innerHTML = 'Summary not available';
+          historyResults.innerHTML = 'Summary not available';
         }
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => {
+        // Hide the loading GIF if an error occurs
+        loadingGif.style.display = 'none';
+  
+        console.error('Error:', error);
+        historyResults.textContent = 'Error fetching lab data.';
+      });
     });
-  </script>
+  </script>  
 
   <script src="{{ url_for('static', filename='js/medical_history_summary_script.js') }}"></script>
 </body>

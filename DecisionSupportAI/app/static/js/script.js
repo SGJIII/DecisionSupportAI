@@ -2,21 +2,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   const patientForm = document.getElementById("patient-form");
   const resultsContainer = document.getElementById("results"); // Add an element to display results
-  const loadingGif = document.getElementById('loading-gif');
 
   patientForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const mrn = document.getElementById("MRN").value;
-
-    // Show the loading GIF
-    loadingGif.style.display = 'block';
 
     fetch("/handle-fhir-id", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ mrn: mrn, feature: 'Clinical Decision Support' }),
+      body: JSON.stringify({ mrn: mrn }),
     })
       .then((response) => {
         if (response.status === 401) {
@@ -80,11 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => {
         console.error("Error:", error);
         resultsContainer.innerHTML = `<p>Error: ${error.message}</p>`;
-      })
-      
-      .finally(() => {
-        // Hide the loading GIF
-        loadingGif.style.display = 'none';
-    });
+      });
   });
 });

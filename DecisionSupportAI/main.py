@@ -51,7 +51,6 @@ def process_patient_record(patient_data):
 
     # Create prompt for OpenAI
     prompt = create_openai_prompt(patient_data, articles)
-    current_app.logger.debug(f"Clinical Decision Support OpenAI Prompt: {prompt}")
     openai_response = query_openai(prompt)
     generated_text = openai_response.get('choices', [{}])[0].get('message', {}).get('content', '')
     current_app.logger.debug(f"OpenAI Response: {openai_response}")
@@ -119,7 +118,6 @@ def handle_fhir_id():
     symptoms = data.get('symptoms', '')  # This is new, to receive symptoms from the frontend.
     if not mrn:
         return jsonify({'error': 'MRN is missing'}), 400
-    feature = data.get('feature')  # Extract the feature identifier
 
     access_token = session.get('access_token')
     if not access_token:
@@ -158,8 +156,8 @@ def handle_fhir_id():
         current_app.logger.debug("Laboratory Observations Data:")
         current_app.logger.debug(observations_data)
 
-        if feature == "Research Assistant":
-            fhir_client.update_lab_data_csv(observations_data) 
+        # Call the method to update the CSV
+        fhir_client.update_lab_data_csv(observations_data)  
 
         procedures_data = fhir_client.fetch_patient_procedures(fhir_id)
         patient_data['procedures'] = procedures_data  # Add procedures data to patient data
@@ -183,10 +181,6 @@ def handle_fhir_id():
         current_app.logger.debug(diagnostic_reports_data)
 
         if symptoms:
-            # Log the symptoms and the patient_data being sent for summarization
-            current_app.logger.debug(f"Medical History Summary Symptoms: {symptoms}")
-            current_app.logger.debug(f"Medical History Summary Patient Data: {patient_data}")
-            
             # Assume summarize_patient_data is correctly implemented to handle symptoms and patient_data.
             summary = summarize_patient_data(symptoms, patient_data)
             

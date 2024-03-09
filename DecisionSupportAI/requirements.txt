@@ -1,0 +1,9 @@
+Flask
+requests
+torch
+fairscale
+fire
+sentencepiece
+pandas
+python-dotenv
+striprtf

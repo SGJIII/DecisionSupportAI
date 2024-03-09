@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>LLaMa Recommendations</title>
+    <!-- Add any additional CSS or JS links here -->
+  </head>
+  <body>
+    <h1>LLaMa Recommendations</h1>
+    <!-- Display LLaMa recommendations -->
+    {% if recommendations %}
+    <div>
+      <h2>Recommendations for Patient</h2>
+      {% for recommendation in recommendations %}
+      <p>{{ recommendation }}</p>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p>No recommendations available.</p>
+    {% endif %}
+  </body>
+</html>

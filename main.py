@@ -78,15 +78,15 @@ def generate_unique_state():
 def index():
     if not is_authenticated():
         return redirect(url_for('start_auth'))
-    return render_template('index.html')
+    return render_template('medical_history_summary.html')
 
 @app.route('/lab-compilation')
 def lab_compilation():
     return render_template('lab_compilation.html')
 
-@app.route('/medical-history-summary')
+@app.route('/clinical-decision-support')
 def medical_history_summary():
-    return render_template('medical_history_summary.html')
+    return render_template('index.html')
 
 @app.route('/start_auth')
 def start_auth():

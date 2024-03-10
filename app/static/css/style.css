@@ -98,7 +98,7 @@ button:hover {
 
 .sidebar {
   height: 100%;
-  width: 200px;
+  width: 250px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -144,7 +144,7 @@ button:hover {
 }
 
 .sidebar a i {
-  color: #98e1eb; /* Icon color - matching the 'Curnexa' title */
+  color: #50b9c6; /* Icon color - matching the 'Curnexa' title */
   margin-right: 8px; /* Space between icon and text */
   min-width: 20px; /* Ensure icons have a consistent width */
   align-self: center;
@@ -158,7 +158,8 @@ button:hover {
 
 /* Adding padding inside the ul for better alignment with the content */
 #main-content {
-  padding-left: 220px; /* Adjusted to accommodate sidebar width + padding */
+  padding-left: 270px; /* Adjusted to accommodate sidebar width + padding */
+  padding-right: 20px;
 }
 
 @media screen and (max-height: 450px) {

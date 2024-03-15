@@ -61,3 +61,4 @@ venv/
 
 # Env Variables
 .env
+.vercel

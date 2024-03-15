@@ -32,10 +32,10 @@ def summarize_patient_data(symptoms, patient_data):
     }
     patient_data_str = json.dumps(patient_data)  # Convert patient data to a string
     data = {
-        'model': 'gpt-3.5-turbo',  # Updated to use gpt-3.5-turbo model
+        'model': 'gpt-4-1106-preview',  # Updated to use gpt-3.5-turbo model
         'messages': [
             {'role': 'system', 'content': 'Your job is to summarize the given patient data based on the symptoms. Please only return a summary of the data that you have been given. It is important not to add anything that is not in the patient data but also not to leave anything important out. Please never speak in the first person.'},
-            {'role': 'user', 'content': f"Patient data: {patient_data_str}\nSymptoms: {symptoms}\n\Please summarize the parts of the Patient data that is relevant to the symptom(s) provided. Please also summarize additional medical history that may be of importance even if it's not relevant to the symptoms. Please let me know which pieces are specifically relevant to the symptoms and which may not be but might be important. Please be very precise and extremely detailed with your response including any specific lab results etc. that might be relevant to the symptoms provided"}
+            {'role': 'user', 'content': f"Patient data: {patient_data_str}\nSymptoms: {symptoms}\n\Please summarize the parts of the Patient data that are relevant to the symptom(s) provided. Please let me know which pieces are specifically relevant to the symptoms and which may not be but might be important. Please be very precise and extremely detailed with your response including any specific lab results and test dates, and relevant encounter dates etc. that might be relevant to the symptoms provided. It's important to know when relevant labs were taken and encounters happened. Please present this in a concise and structured format for easy reading e.g. bullet points."}
         ]
     }
     response = requests.post('https://api.openai.com/v1/chat/completions', json=data, headers=headers)  # Updated endpoint

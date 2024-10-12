@@ -6,6 +6,7 @@
   <title>Medical History Summary - CurnexaHealthAI</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <!-- Sidebar navigation -->
@@ -42,7 +43,7 @@
       <div class="form-container">
         <h1>Medical History Summary</h1>
         <form id="history-form">
-          <label for="MRN">Enter Patient MRN:</label>
+          <label for="MRN">Patient MRN:</label>
           <input type="text" id="history-MRN" name="MRN" required />
           
           <label for="symptoms">Enter Symptoms:</label>
@@ -92,7 +93,9 @@
   
         // Insert the summary data into the page
         if(data.summary) {
-          historyResults.innerHTML = data.summary;
+          // Convert markdown to HTML
+          const htmlContent = marked.parse(data.summary);
+          historyResults.innerHTML = htmlContent;
         } else {
           historyResults.innerHTML = 'Summary not available';
         }

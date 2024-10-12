@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lab Compilation - CurnexaHealthAI</title>
+  <title>Medical Research Assistant - CurnexaHealthAI</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
@@ -40,9 +40,9 @@
   <div id="main-content">
     <div class="container">
       <div class="form-container">
-        <h1>Lab Compilation</h1>
+        <h1>Research Assistant</h1>
         <form id="lab-form">
-          <label for="MRN">Enter Patient MRN:</label>
+          <label for="MRN">Patient MRN:</label>
           <input type="text" id="lab-MRN" name="MRN" required />
           <button type="submit">Submit</button>
           <img id="loading-gif" src="{{ url_for('static', filename='images/DuZY.gif') }}" alt="Loading..." style="display: none; max-width: 200px; margin: 20px auto; width: 50%; height: auto; opacity: 0.7;" />

@@ -61,10 +61,12 @@ def fetch_article_details(article_ids):
                 root = ET.fromstring(response.content)
                 articles = []
                 for article in root.findall('.//PubmedArticle'):
+                    pmid = article.find('.//PMID').text
                     title = article.find('.//ArticleTitle').text
                     abstract_element = article.find('.//Abstract/AbstractText')
                     abstract = abstract_element.text if abstract_element is not None else "No abstract available"
-                    articles.append({'title': title, 'abstract': abstract})
+                    url = f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
+                    articles.append({'title': title, 'abstract': abstract, 'url': url})
                 return articles
             except ET.ParseError as e:
                 print("Error parsing XML:", e)

@@ -75,18 +75,24 @@ def generate_unique_state():
     return str(uuid.uuid4())
 
 @app.route('/')
-def index():
+def landing_page():
+    return render_template('landing_page.html')
+
+@app.route('/clinical-decision-support')
+def clinical_decision_support():
     if not is_authenticated():
         return redirect(url_for('start_auth'))
-    return render_template('medical_history_summary.html')
+    return render_template('index.html')
 
 @app.route('/lab-compilation')
 def lab_compilation():
     return render_template('lab_compilation.html')
 
-@app.route('/clinical-decision-support')
+@app.route('/medical-history-summary')
 def medical_history_summary():
-    return render_template('index.html')
+    if not is_authenticated():
+        return redirect(url_for('start_auth'))
+    return render_template('medical_history_summary.html')
 
 @app.route('/start_auth')
 def start_auth():
@@ -107,7 +113,7 @@ def callback():
     code_verifier = session.get('code_verifier')  # Retrieve code_verifier from session
     token_info = exchange_code_for_token(code, code_verifier)
     session['access_token'] = token_info['access_token']  # Store access token in session
-    return redirect(url_for('index'))
+    return redirect(url_for('medical_history_summary'))  # Change this line
 
 @app.route('/handle-fhir-id', methods=['POST'])
 def handle_fhir_id():
@@ -222,6 +228,7 @@ def get_all_lab_data():
 @app.route('/download-lab-data')
 def download_lab_data():
     return send_from_directory('data/Labs', 'lab_data.csv', as_attachment=True)
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

@@ -1,0 +1,37 @@
+   <!-- app/static/templates/landing_page.html -->
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Clinical Decision Support System</title>
+       <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   </head>
+   <body>
+       <header>
+           <h1>Welcome to Our Clinical Decision Support System</h1>
+           <p>Enhance your clinical decision-making with AI-powered insights.</p>
+       </header>
+       <section id="features">
+           <h2>Features</h2>
+           <ul>
+               <li>Integration with Epic's FHIR API</li>
+               <li>AI-generated clinical insights</li>
+               <li>Comprehensive patient data analysis</li>
+               <li>Access to relevant medical literature</li>
+           </ul>
+       </section>
+       <section id="benefits">
+           <h2>Benefits</h2>
+           <ul>
+               <li>Improved decision-making accuracy</li>
+               <li>Time-saving data retrieval and analysis</li>
+               <li>Seamless integration with existing systems</li>
+           </ul>
+       </section>
+       <footer>
+           <a href="{{ url_for('start_auth') }}" class="button">Log In</a>
+           <a href="{{ url_for('start_auth') }}" class="button">Sign Up</a>
+       </footer>
+   </body>
+   </html>

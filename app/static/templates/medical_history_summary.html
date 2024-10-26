@@ -17,19 +17,19 @@
     </div>
     <ul>
       <li>
-        <a class="active" href="/">
+        <a href="{{ url_for('medical_history_summary') }}">
           <i class="fas fa-book-medical"></i>
           <span>Medical History Summary</span>
         </a>
       </li>
       <li>
-        <a href="/lab-compilation">
+        <a href="{{ url_for('lab_compilation') }}">
           <i class="fas fa-vials"></i>
           <span>Research Assistant</span>
         </a>
       </li>
       <li>
-        <a href="/clinical-decision-support">
+        <a href="{{ url_for('clinical_decision_support') }}">
           <i class="fas fa-stethoscope"></i>
           <span>Clinical Decision Support</span>
         </a>

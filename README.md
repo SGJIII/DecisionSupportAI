@@ -86,6 +86,11 @@ APIs
 - AllergyIntolerance.Search (R4)
 - Condition.Search (Medical History) (R4)
 - Observation.Search (Social History) (R4)
+- Admissions (R4)
+- Discharge (R4)
+- Encounter.search (R4)
+- Encounter.read patient chart (R4)
+- Notes (R4)
 
 ##### Deploy to production
 

@@ -67,7 +67,7 @@ def create_openai_prompt(patient_data, articles):
     for article in articles:
         article_context += f"Title: {article['title']}\nAbstract: {article['abstract']}\n"
 
-    prompt = f"{medical_info}{article_context}\nBased on this information, please provide clinical decision support on how I might treat this patient. Note: I understand you're not a doctor."
+    prompt = f"{medical_info}{article_context}\nBased on this information, please provide clinical decision support on how I might treat this patient. Only provide standard procedures if there are no articles. If there are only provide support and suggestions that use the latest science. Note: I understand you're not a doctor."
 
     return prompt
 

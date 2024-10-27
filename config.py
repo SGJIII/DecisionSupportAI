@@ -27,4 +27,8 @@ REDIRECT_URI_PROD = "https://cds.curnexa.org/callback"
 
 
 # Add the Epic FHIR API base URL
-EPIC_FHIR_BASE_URL = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4/"  # Replace with the actual base URL
+# Default EPIC FHIR Base URL
+DEFAULT_EPIC_FHIR_BASE_URL = 'https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4/'
+
+# Update the Epic FHIR API base URL
+EPIC_FHIR_BASE_URL = DEFAULT_EPIC_FHIR_BASE_URL  # This will be overridden per user session

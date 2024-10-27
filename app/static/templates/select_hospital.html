@@ -1,0 +1,34 @@
+<!-- app/static/templates/select_hospital.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Your Hospital</title>
+</head>
+<body>
+    <h2>Select Your Hospital</h2>
+    <form action="{{ url_for('set_hospital_endpoint') }}" method="post">
+        <select name="hospital_endpoint" required>
+            {% for hospital in hospitals %}
+            <option value="{{ hospital.endpoint }}" data-name="{{ hospital.name }}">{{ hospital.name }}</option>
+            {% endfor %}
+        </select>
+        <!-- Hidden input to store the selected hospital name -->
+        <input type="hidden" name="hospital_name" id="hospital_name">
+        <button type="submit">Continue</button>
+    </form>
+    <script>
+        // Update hidden input when hospital is selected
+        const selectElement = document.querySelector('select[name="hospital_endpoint"]');
+        const hospitalNameInput = document.getElementById('hospital_name');
+
+        selectElement.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            hospitalNameInput.value = selectedOption.getAttribute('data-name');
+        });
+
+        // Trigger change event on page load to set initial value
+        selectElement.dispatchEvent(new Event('change'));
+    </script>
+</body>
+</html>

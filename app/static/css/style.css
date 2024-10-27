@@ -200,3 +200,22 @@ button.download-csv {
     overflow-x: scroll;
   }
 }
+
+.auth-buttons {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.auth-buttons .button {
+  display: inline-block;
+  padding: 15px 25px;
+  margin: 10px;
+  background-color: #0078D7;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.auth-buttons .button:hover {
+  background-color: #005A9E;
+}

@@ -15,7 +15,7 @@ import os
 
 class FhirClient:
     def __init__(self):
-        self.base_url = current_app.config['EPIC_FHIR_BASE_URL']
+        self.base_url = session.get('hospital_endpoint', current_app.config['DEFAULT_EPIC_FHIR_BASE_URL'])
         self.token = None
 
     def get_fhir_id(self, mrn):
@@ -554,3 +554,4 @@ class FhirClient:
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"Request error in get_appointment_data: {e}")
             raise'''
+

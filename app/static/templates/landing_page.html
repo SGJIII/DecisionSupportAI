@@ -31,7 +31,11 @@
        </section>
        <footer>
            <a href="{{ url_for('start_auth') }}" class="button">Log In</a>
-           <a href="{{ url_for('start_auth') }}" class="button">Sign Up</a>
+           <a href="{{ url_for('sign_up') }}" class="button">Sign Up</a>
        </footer>
+       <div class="auth-buttons">
+           <a href="{{ url_for('sign_up') }}" class="button">Sign Up</a>
+           <a href="{{ url_for('login') }}" class="button">Login</a>
+       </div>
    </body>
    </html>

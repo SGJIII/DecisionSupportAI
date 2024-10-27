@@ -1,0 +1,486 @@
+Organization Name,Production FHIR Base URL - R4
+Access Community Health Network,https://eprescribing.accesscommunityhealth.net/FHIR/api/FHIR/R4/
+"Adult & Pediatric Ear, Nose & Throat – Kalamazoo",https://hygieia.bronsonhg.org/FHIRProxy/api/FHIR/R4/
+AdvantageCare Physicians,https://epwebapps.acpny.com/FHIRproxy/api/FHIR/R4/
+AdventHealth,https://mobile.adventhealth.com/oauth2-PRD/api/FHIR/R4/
+Akron Children's Hospital,https://haiku-canto-prod.chmca.org/ARR-FHIR-PRD/api/FHIR/R4/
+Alameda Health System,https://epicproxy.et1075.epichosted.com/FHIRProxy/api/FHIR/R4/
+Albany Med Health System,https://epicproxy.et1299.epichosted.com/FHIRProxy/api/FHIR/R4/
+Allegheny Health Network,https://epicprisfd.ahn.org/PRD-FHIR/api/FHIR/R4/
+Allina Health System,https://webproxy.allina.com/FHIR/api/FHIR/R4/
+Altais,https://epicproxy.et1138.epichosted.com/FHIRProxy/api/FHIR/R4/
+AltaMed,https://epicproxy.et1123.epichosted.com/FHIRProxy/api/FHIR/R4/
+Altru Health System,https://epicsoap.altru.org/fhir/api/FHIR/R4/
+AnMed Health,https://epicproxy.et0971.epichosted.com/FHIRProxy/api/FHIR/R4/
+Ann & Robert H. Lurie Children's Hospital of Chicago,https://epicmobile.luriechildrens.org/Interconnect-FHIRPRD/api/FHIR/R4/
+Ardent,https://epicproxy.ardenthealth.com/fhir/api/FHIR/R4/
+Arizona Community Physicians,https://interconnect.azacp.com/interconnect-oauth2-prd/api/FHIR/R4/
+Arkansas Children's,https://fhir.archildrens.org/fhir/api/FHIR/R4/
+Arrowhead Regional Medical Center,https://epicproxy.et1152.epichosted.com/fhirproxy/api/FHIR/R4/
+Asante Health Systems,https://epicmobile.asante.org/FHIR-PRD/api/FHIR/R4/
+Ascension Illinois,https://epicmobile.presencehealth.org/fhirPRD/api/FHIR/R4/
+Ascension Providence,https://stofo.providence-waco.org/FHIRProxy/api/FHIR/R4/
+Ascension Wisconsin,https://eprescribe.wfhc.org/FHIRproxy/api/FHIR/R4/
+Aspen Valley Hospital,https://epicproxy.et1254.epichosted.com/FHIRProxy/api/FHIR/R4/
+Aspirus,https://erx.aspirus.org/FHIR/api/FHIR/R4/
+Atlantic Health,https://soapproxy.atlantichealth.org/FHIRPrd/api/FHIR/R4/
+Atrium – Morehouse Healthcare,https://epicproxy.et0905.epichosted.com/FHIRproxy/MHC/api/FHIR/R4/
+Atrium Health,https://epicproxy.et0905.epichosted.com/FHIRProxy/api/FHIR/R4/
+Atrium Health Wake Forest Baptist,https://w1soap.wakehealth.edu/fhirproxy/api/FHIR/R4/
+Atrius Health,https://iatrius.atriushealth.org/FHIR/api/FHIR/R4/
+Aurora Health Care - LiveWell,https://EpicFHIR.aurora.org/fhirproxy/LiveWell/api/FHIR/R4/
+Austin Regional Clinic,https://mobileprod.arcmd.com/FHIR/api/FHIR/R4/
+Ballad Health,https://soap.wellmont.org/FHIRPRD/api/FHIR/R4/
+Baptist Health – KY & IN,https://epicproxy.bhsi.com/PRD-FHIR/api/FHIR/R4/
+Baptist Health - Northeast Florida,https://epicproxy.et1206.epichosted.com/FHIRProxy/api/FHIR/R4/
+Baptist Health (Arkansas),https://api.baptist-health.org/Interconnect-FHIR/api/FHIR/R4/
+Baptist Memorial Health Care,https://rxedi.bmhcc.org/prd-fhir/api/FHIR/R4/
+Bassett Healthcare,https://soap.bassett.org/FHIR/api/FHIR/R4/
+Baton Rouge General,https://interconnect.brgeneral.org/oauth/api/FHIR/R4
+BayCare Clinic - myBayCare,https://EpicFHIR.aurora.org/fhirproxy/MYBAYCARE/api/FHIR/R4/
+Bayhealth Medical Center,https://epproxy.bayhealth.org/FHIR/api/FHIR/R4/
+Baylor College of Medicine,https://fhir.clinical.bcm.edu/stage1fhir/api/FHIR/R4/
+Baylor Scott & White,https://epicproxy.bswhealth.org/FHIR-PRD/BSW/api/FHIR/R4/
+Beaumont Health,https://moc.beaumont.org/FHIR/api/FHIR/R4/
+Bellin Health,https://arr.thedacare.org/FHIR/BLN/api/FHIR/R4/
+Benefis Health System,https://epicproxy.et1334.epichosted.com/FHIRProxy/api/FHIR/R4/
+Beth Israel Lahey Health,https://fhir.laheyhealth.org/proxy-prd-fhir/api/FHIR/R4/
+BJC & Washington University,https://epicproxy.et0965.epichosted.com/FHIRProxy/api/FHIR/R4/
+Bon Secours Health System,https://haiku.bshsi.org/fhir/BSHSI_OAUTH/api/FHIR/R4/
+Bon Secours Mercy Health,https://chperx.health-partners.org/Proxy-FHIR/api/FHIR/R4/
+Boston Children's Hospital (Enterprise),https://epicproxy.et1351.epichosted.com/APIProxyPRD/api/FHIR/R4/
+Boston Medical Center,https://emerge-soap1.bmc.org/FHIR-PRD/api/FHIR/R4/
+Boulder Community Health,https://prevprox.bch.org/FHIRproxyPRD/api/FHIR/R4/
+Bozeman Health,https://revproxy.bh.bozemanhealth.org/Interconnect-Oauth2-PRD/api/FHIR/R4/
+Bronson Healthcare Group,https://hygieia.bronsonhg.org/FHIRProxy/api/FHIR/R4/
+Brookwood Baptist Health,https://epicproxy.bhsala.com/FHIRProxy/api/FHIR/R4/
+Bryan Health,https://epicproxy.et1031.epichosted.com/FHIRProxy/api/FHIR/R4/
+Buffalo Medical Group,https://fhir.buffalomedicalgroup.com/fhir-arr/api/FHIR/R4/
+Caldera Family Medicine,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Cambridge Health Alliance,https://epicmobile.challiance.org/Interconnect-oauth2/api/FHIR/R4/
+Cape Cod Healthcare,https://epicproxy.et1149.epichosted.com/FHIRProxy/api/FHIR/R4/
+Cape Fear Valley Health,https://epicproxy.et1094.epichosted.com/FHIRProxy/api/FHIR/R4/
+Care New England,https://cnesp001.carene.org/FHIR/api/FHIR/R4/
+Carilion Clinic,https://fhir.carilionclinic.org/fhir/api/FHIR/R4/
+Carle Foundation Hospital & Physician Group,https://epicproxy.et0316.epichosted.com/FHIRProxy/api/FHIR/R4/
+Caromont Health,https://spp.caromonthealth.org/FhirProxy/api/FHIR/R4/
+Cascade Internal Medicine,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Catholic Health (Long Island NY),https://epx1.chsli.org/FHIR/api/FHIR/R4/
+Catholic Health System (Buffalo),https://epicproxy.et1144.epichosted.com/FHIRProxy/api/FHIR/R4/
+Cedars-Sinai Health System,https://cslinkmobile.csmc.edu/fhirproxy/api/FHIR/R4/
+CentraCare Health and Affiliates,https://epicmobile.centracare.com/fhir/api/FHIR/R4/
+Central Ohio Primary Care Physicians,https://rp-prd.copcp.com/FHIRProxy/api/FHIR/R4/
+Centura Health,https://epic-p-mobile.centura.org/prd-fhir/api/FHIR/R4/
+Charlotte Eye Ear Nose & Throat Associates,https://epicproxy.et1001.epichosted.com/FHIRProxyPRD/api/FHIR/R4/
+Chesapeake Regional Medical Center,https://haiku.bshsi.org/fhir/CRMC_OAUTH/api/FHIR/R4/
+Cheyenne Regional Medical Center,https://soap.crmcwy.org/fhirproxy/api/FHIR/R4/
+CHI Health,https://rp.chihealth.com/fhir/api/FHIR/R4/
+CHI Memorial,https://rpsouth.catholichealth.net/fhir/FHIRMCT/api/FHIR/R4/
+CHI Saint Joseph Health,https://rpsouth.catholichealth.net/fhir/FHIRKY/api/FHIR/R4/
+CHI St. Alexius Health,https://rp.chihealth.com/fhir/FHIRSTA/api/FHIR/R4
+CHI St. Luke's Health,https://rpsouth.catholichealth.net/fhir/api/FHIR/R4/
+CHI St. Vincent,https://epic-fhir.mercy.net/PRDFHIRSGF/CHI/api/FHIR/R4/
+Children's Health System of Texas,https://fhir.childrens.com/prd/api/FHIR/R4/
+"Children's Hospital and Medical Center, Omaha Nebraska",https://EPROXY1.chsomaha.org/FHIRPROXY/api/FHIR/R4/
+Children's Hospital Colorado,https://fhir.childrenscolorado.org/fhirprd/api/FHIR/R4/
+Children's Hospital of Philadelphia,https://epicnsproxy.chop.edu/fhir/api/FHIR/R4/
+Children's of Alabama,https://epicproxy.et1246.epichosted.com/FHIRProxy/api/FHIR/R4/
+Children's Wisconsin,https://epicproxy.et0815.epichosted.com/FHIRProxy/api/FHIR/R4/
+Childrens's Healthcare of Atlanta,https://wpprod.choa.org/FHIR_PRD/api/FHIR/R4/
+CHRISTUS Health,https://proxy.christushealth.org/FHIRPRD/api/FHIR/R4/
+Cigna Medical Group,https://epicarr.healthcare.cigna.com/FHIR-PRD/api/FHIR/R4/
+Cincinnati Children's Hospital Medical Center,https://boomer.cchmc.org/fhir/api/fhir/R4/
+City of Hope,https://epic-rproxyprod.coh.org/Interconnect-FHIR-PRD/api/FHIR/R4/
+Cleveland Clinic,https://api.ccf.org/mu/api/FHIR/R4/
+Coastal Carolina Health Care,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+COIPA,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Columbia Physicians,https://epicproxy-pub.et1089.epichosted.com/FHIRProxy/api/FHIR/R4/
+Columbus Regional Health,https://epicprdproxy.crh.org/FHIRPRD/api/FHIR/R4/
+Community Health Network,https://esp.ecommunity.com/FHIRProxy/api/FHIR/R4/
+Community Medical Centers,https://epicsoapprd.communitymedical.org/arr_fhir/api/FHIR/R4/
+Community Technology Cooperative,https://epicproxy.et1290.epichosted.com/FHIRProxy/api/FHIR/R4/
+CommUnityCare Health Centers,https://epicproxy.et1164.epichosted.com/FHIRproxy/api/FHIR/R4/
+Cone Health,https://epsoap.conehealth.com/FHIRProxy/api/FHIR/R4/
+Conemaugh Health System,https://fhir.conemaugh.org/arr-fhir-prd/api/FHIR/R4/
+Confluence Health,https://epicproxy.et0764.epichosted.com/FHIRProxy/api/FHIR/R4/
+Connecticut Children's Medical Center,https://epicproxy.connecticutchildrens.org/FHIR/api/FHIR/R4/
+Contra Costa,https://icproxy.mycclink.org/proxy-FHIR/api/FHIR/R4/
+Cook Children’s Health Care System,https://cookicfg.cookchildrens.org/CookFHIR/api/FHIR/R4/
+Cooper University Health Care,https://epicproxy.et0578.epichosted.com/FHIRProxy/api/FHIR/R4/
+Cottage Health,https://eparp.sbch.org/FHIR/api/FHIR/R4/
+Covenant Health,https://haiku.bshsi.org/fhir/COV_OAUTH/api/FHIR/R4/
+Covenant HealthCare,https://epichaiku.chs-mi.com/FHIRPROXY/api/FHIR/R4/
+CVS Health & Minute Clinic,https://retailepicfhir.cvshealth.com/FhirProxy/api/fhir/R4/
+Dartmouth-Hitchcock,https://edhwebportal.hitchcock.org/FHIRProxy/api/FHIR/R4/
+DaVita Physician Solutions,https://epicproxy.et1087.epichosted.com/FHIRProxy/api/FHIR/R4/
+Dayton Children's Hospital,https://appprd.childrensdayton.org/interconnect-prd-fhir/api/FHIR/R4/
+Deaconess Health System,https://eprp.deaconess.com/FHIR/api/FHIR/R4/
+Denver Health,https://webservices.dhha.org/PRD-FHIR/api/FHIR/R4/
+Dickson Medical Associates,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+"Dr. Bruce W Moskowitz, MD",https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Dr. Burket's Office,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Drexel Medicine,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Driscoll Children's Hospital,https://fhir.dchstx.org/FHIR-External/api/FHIR/R4/
+Duke Health,https://health-apis.duke.edu/FHIR/api/FHIR/R4/
+Duly Health and Care,https://epicproxy.et1296.epichosted.com/APIProxyPRD/api/FHIR/R4/
+East Cascades Women's Group,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Edward-Elmhurst Healthcare,https://fhirprd.edward.org/fhirprd/EEHOAUTH/api/FHIR/R4/
+Eisenhower Medical Center,https://epicarr.emc.org/EMC_FHIR_PRD/api/FHIR/R4/
+El Camino Hospital,https://rwebproxy.elcaminohospital.org/FHIR/api/FHIR/R4/
+El Rio Health,https://epicproxy.et1240.epichosted.com/FHIRProxy/api/FHIR/R4/
+Emory Healthcare,https://epicrp-prd.eushc.org/OAUTH2-PRD/api/FHIR/R4/
+Englewood Hospital and Medical Center,https://epicproxy.et1073.epichosted.com/FHIRProxy/api/FHIR/R4/
+Enloe Health,https://epicproxy.et1034.epichosted.com/FHIRProxy/api/FHIR/R4/
+EPIC Management (Beaver Medical Group),https://epicproxy.et1038.epichosted.com/FHIRProxy/api/FHIR/R4/
+Erlanger Health System,https://epicproxy.et0967.epichosted.com/FHIRProxy/api/FHIR/R4/
+Eskenazi Health,https://proxy.eskenazihealth.edu/FHIR-Proxy/api/FHIR/R4/
+Essentia Health,https://m.essentiahealth.org/FHIR/api/FHIR/R4/
+EvergreenHealth,https://epicproxy.et1270.epichosted.com/apiproxyprd/api/FHIR/R4
+Evernorth,https://epicarr.healthcare.cigna.com/FHIR-PRD/api/FHIR/R4/
+Exact Sciences,https://epicproxy.et1126.epichosted.com/FHIRProxy/api/FHIR/R4/
+Fairview Health Services,https://sfd.fairview.org/FHIR/api/FHIR/R4/
+Fall Creek Internal Medicine,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Family Care Network,https://epicproxy.fcn.net/Fhir/api/FHIR/R4/
+Family Health Center (Michigan),https://hygieia.bronsonhg.org/FHIRProxy/api/FHIR/R4/
+FastMed,https://external.fastmed.com/FHIRproxy/api/FHIR/R4/
+FirstHealth of the Carolinas,https://epicrp.firsthealth.org/FHIR-PRD/api/FHIR/R4/
+Florida Health Care Plans,https://epicproxy.et1359.epichosted.com/FHIRProxyPRD/api/FHIR/R4/
+Foothill Family Clinic,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Franciscan Alliance,https://ema.franciscanalliance.org/FHIR_PROXY/api/FHIR/R4/
+Franciscan Missionaries of Our Lady Health System,https://epicproxy.et0830.epichosted.com/FHIRProxy/api/FHIR/R4/
+Fresenius Medical Care North America,https://epicproxy.et1041.epichosted.com/FHIRProxy/api/FHIR/R4/
+Froedtert Health,https://epicserviceGW.froedtert.com/FHIRProxyPRD/api/FHIR/R4/
+Garnet Health,https://epic.garnethealth.org/FHIR/api/FHIR/R4/
+Geisinger,https://geisapi.geisinger.edu/FHIR_PROD/api/FHIR/R4/
+Genesis Healthcare System,https://fhir.genesishcs.org/api/FHIR/R4/
+George Washington University Medical Faculty Associates,https://epicproxy.et1222.epichosted.com/FHIRProxy/api/FHIR/R4/
+Golden Valley Health Centers,https://ep-rps.gvhc.org/FHIR-PRD/api/FHIR/R4/
+Grady Health System,https://surescripts.gmh.edu/OAuth2PRD/api/FHIR/R4/
+Greater Baltimore Medical Center,https://eportal.gbmc.org/fhir/api/FHIR/R4/
+Group Health Cooperative - South Central Wisconsin,https://linkpoint.ghcscw.com/Interconnect-prd-fhir/api/FHIR/R4/
+Gundersen Health System,https://scproxy.gundersenhealth.org/FHIRARR/api/FHIR/R4/
+Hackensack Meridian Health,https://mepic.hmhn.org/fhir/api/FHIR/R4/
+Hamilton Health Care System,https://epicproxy.et1336.epichosted.com/FHIRProxy/api/FHIR/R4/
+Harris Health System,https://fhir.harrishealth.org/fhir/api/FHIR/R4/
+Hartford HealthCare,https://epicproxy.hhchealth.org/FHIR/api/FHIR/R4/
+Hattiesburg Clinic and Forrest General Hospital,https://soapprod.hattiesburgclinic.com/FHIR/api/FHIR/R4/
+Hawaii Pacific Health,https://webservices.hawaiipacifichealth.org/fhir/api/FHIR/R4/
+HCA Central and West Texas,https://stdavidsfhirprd.app.medcity.net/fhir-proxy/api/FHIR/R4/
+HCA Mountain,https://mountainstarhealthfhirprd.app.medcity.net/fhir-proxy/api/FHIR/R4/
+HCA South Atlantic,https://memorialhealthfhirprd.app.medcity.net/fhir-proxy/api/FHIR/R4/
+Health Choice Network,https://epicproxy.et1256.epichosted.com/FHIRProxy/api/FHIR/R4/
+HealthPartners,https://proxy.healthpartners.com/FHIRProxy/api/FHIR/R4/
+HealthPoint,https://epicproxy.et1395.epichosted.com/APIProxyPRD/api/FHIR/R4/
+Hendricks Regional Health,https://sehproxy.stelizabeth.com/arr-fhir/HRH/api/FHIR/R4/
+Hennepin Healthcare,https://hie.hcmed.org/FHIR/api/FHIR/R4/
+Henry Ford Health System,https://fhir.hfhs.org/FHIRProxy/api/FHIR/R4/
+Highland District Hospital,https://epicscripts.trihealth.com/fhirproxy/api/FHIR/R4/
+Hill Physicians,https://epicproxy.et1013.epichosted.com/FHIRProxy/api/FHIR/R4/
+Hoag Memorial Hospital Presbyterian,https://epicproxy.et1197.epichosted.com/FHIRProxy/api/FHIR/R4/
+HonorHealth,https://interconnect.honorhealth.com/Interconnect-FHIR-PRD/api/FHIR/R4/
+Hospital for Special Surgery,https://epicproxy.et0927.epichosted.com/FHIRProxy/api/FHIR/R4/
+Hospital Sisters Health System (HSHS),https://scripts.prevea.com/FHIR-ARR-PRD/api/FHIR/R4/
+Houston Methodist,https://epicproxy.et0922.epichosted.com/FHIRProxy/api/FHIR/R4/
+Hurley Medical Center,https://fhir.hurleymc.com/fhir/api/FHIR/R4/
+Illinois Bone & Joint Institute,https://epicproxy.et1195.epichosted.com/fhirproxy/api/FHIR/R4/
+Infirmary Health,https://ssproxyprod.infirmaryhealth.org/epicFHIR/api/FHIR/R4/
+Innovage,https://rp.innovage.com/OAUTH2-PRD/api/FHIR/R4/
+Innovista Medical Center,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Inova Health System,https://epicrpprd.inova.org/fhirrp/api/FHIR/R4/
+Institute for Family Health,https://epicproxy.institute.org/fhir/api/FHIR/R4/
+INTEGRIS Health,https://FHIR.Integrisok.com/Interconnect-FHIR/api/FHIR/R4/
+Intermountain Healthcare,https://ihcarr.sclhs.net/OAuth2-PRD/api/FHIR/R4/
+Jefferson Health,https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/
+John Muir Health,https://fhir.johnmuirhealth.com/fhir-prd/api/FHIR/R4/
+Johns Hopkins Medicine,https://epicproxy.et0842.epichosted.com/FHIRProxyPRD/api/FHIR/R4/
+JPS Health Network,https://oauth2.revprxprd.jpshealth.org/epoauth2/api/FHIR/R4/
+Kaiser Permanente - California - Northern,https://FHIR.KP.ORG/service/ptnt_care/EpicEdiFhirRoutingSvc/v2014/esb-envlbl/312/api/FHIR/R4/
+Kaiser Permanente - California - Southern,https://fhir.kp.org/service/ptnt_care/EpicEdiFhirRoutingSvc/v2014/esb-envlbl/212/api/FHIR/R4/
+Kaiser Permanente - Colorado,https://fhir.kp.org/service/ptnt_care/EpicEdiFhirRoutingSvc/v2014/esb-envlbl/140/api/FHIR/R4/
+Kaiser Permanente – Georgia,https://fhir.kp.org/service/ptnt_care/EpicEdiFhirRoutingSvc/v2014/esb-envlbl/200/api/FHIR/R4/
+Kaiser Permanente - Maryland/Virginia/Washington D.C.,https://fhir.kp.org/service/ptnt_care/EpicEdiFhirRoutingSvc/v2014/esb-envlbl/170/api/FHIR/R4/
+Kaiser Permanente – Oregon – SW Washington,https://FHIR.KP.ORG/service/ptnt_care/EpicEdiFhirRoutingSvc/v2014/esb-envlbl/190/api/FHIR/R4/
+Kaiser Permanente - Washington,https://fhir.kp.org/Interconnect-FHIR-PRD/api/FHIR/R4/
+Kaiser Permanente Hawaii / Maui Health System,https://fhir.kp.org/service/ptnt_care/EpicEdiFhirRoutingSvc/v2014/esb-envlbl/130/api/FHIR/R4/
+Kalamazoo College Student Health Center,https://hygieia.bronsonhg.org/FHIRProxy/api/FHIR/R4/
+Kalamazoo Foot Surgery,https://hygieia.bronsonhg.org/FHIRProxy/api/FHIR/R4/
+Kelsey-Seybold Clinic,https://ssrx.ksnet.com/FhirProxy/api/FHIR/R4/
+Kennedy Krieger Institute,https://epicproxy.et1095.epichosted.com/FHIRProxy/api/FHIR/R4/
+Kettering Health Network,https://khnarr.ketthealth.com/FHIR-PROD/api/FHIR/R4/
+KeyCare,https://epicproxy.et1284.epichosted.com/FHIRProxy/api/FHIR/R4/
+King's Daughters Medical Center,https://arrprd.kdmc.net/fhir/api/FHIR/R4/
+Kootenai Health,https://soapprod.multicare.org/FHIRProxy/KH/api/FHIR/R4/
+"Lacy C Kessler, MD, PA",https://epicproxy.bswhealth.org/FHIR-PRD/CONNECT/api/FHIR/R4/
+Lakeland Regional Health (FL),https://epicapp.mylrh.org/OAuth2/api/FHIR/R4/
+Lancaster General Health,https://epicproxy.lghealth.org/FHIRProxy/api/FHIR/R4/
+LCMC Health,https://interconnect.lcmchealth.org/FHIR/api/FHIR/R4/
+Lee Health,https://epicedi.leememorial.org/FHIR-prd/api/FHIR/R4/
+Legacy Health,https://lhspdxfhirprd.lhs.org/FHIR/api/FHIR/R4/
+Lehigh Valley Health Network,https://proxy.lvh.com/FHIR/api/FHIR/R4/
+Leon Medical Centers,https://prodinterconnect.leonmedicalcenters.com/FHIR-PRD/api/FHIR/R4/
+Lexington Medical Center,https://lmcrcs.lexmed.com/FHIR/api/FHIR/R4/
+Licking Memorial Health Systems,https://epicproxy.et1168.epichosted.com/FHIRProxy/api/FHIR/R4/
+Lifespan,https://lsepprdsoap.lifespan.org/fhirproxy/api/FHIR/R4/
+Loma Linda University Health and CareConnect Partners,https://prd.lluh.org/fhir/api/FHIR/R4/
+Loyola Medicine,https://rxhub.luhs.org/fhir/api/FHIR/R4/
+Luminis Health,https://epicarr.aahs.org/FHIR/api/FHIR/R4/
+Main Line Health,https://epicproxy.et1007.epichosted.com/FHIRProxy/api/FHIR/R4/
+MaineHealth,https://fhir.mainehealth.org/FHIRPRD/api/FHIR/R4/
+Mary Greeley Medical Center (Iowa),https://emrproxy.mcfarlandclinic.com/FHIRProxy/api/FHIR/R4/
+Mary Washington Healthcare,https://epicproxy.et1055.epichosted.com/FHIRProxy/api/FHIR/R4/
+Mass General Brigham,https://ws-interconnect-fhir.partners.org/Interconnect-FHIR-MU-PRD/api/FHIR/R4/
+Mayo Clinic,https://mcc.api.mayo.edu/epic-fhir/api/FHIR/R4/
+McFarland Clinic (Iowa),https://emrproxy.mcfarlandclinic.com/FHIRProxy/api/FHIR/R4/
+McLeod Health,https://epicproxy.et1267.epichosted.com/FHIRProxy/api/FHIR/R4/
+Medical University of South Carolina,https://fhirprod.musc.edu/fhirprod/api/FHIR/R4/
+MediSys Health Network,https://eprescribe-p.medisys.org/fhir-prd/api/FHIR/R4/
+Memorial Healthcare System,https://mhssp.mhs.net/fhir/api/FHIR/R4/
+Memorial Hermann,https://epicproxy.et1326.epichosted.com/FHIRProxy/api/FHIR/R4/
+Memorial Hospital and Health Care Center,https://arrprd.mhhcc.org/OAuth2/api/FHIR/R4/
+MemorialCare,https://fhir.memorialcare.org/fhir/api/FHIR/R4/
+"Mercy Health - OH, KY",https://chperx.health-partners.org/Proxy-FHIR/api/FHIR/R4/
+"Mercy Health (Arkansas, Louisiana, Mississippi and Texas)",https://epic-fhir.mercy.net/prdfhirstl/api/FHIR/R4/
+Mercy Health Services (MD),https://surescripts.mdmercy.com/fhir-prd/api/FHIR/R4/
+Mercy Health System - WI,https://epicproxy.mhsjvl.org/FHIRproxy/api/FHIR/R4/
+Mercy Medical Center,https://eproxy.mercycare.org/oauth2/api/FHIR/R4/
+Meritus,https://epicproxy.et1062.epichosted.com/FHIRProxyPRD/api/FHIR/R4/
+Methodist Health System,https://epcapp.mhd.com/arr-prd-fhir/api/FHIR/R4/
+Methodist Hospitals,https://mychart.methodisthospitals.org/FHIR-ARR/api/FHIR/R4/
+Metro Health - Michigan,https://arrprd.metrohealth.net/fhir/api/FHIR/R4/
+MetroHealth - OH,https://fhir.metrohealth.org/fhir_prd/api/FHIR/R4/
+Michigan Medicine,https://mcproxyprd.med.umich.edu/FHIR-PRD/api/FHIR/R4/
+Middlesex Hospital,https://epicproxy.et1124.epichosted.com/FHIRProxy/api/FHIR/R4/
+Midwestern University,https://epicproxy.et1329.epichosted.com/APIProxyPRD/api/FHIR/R4/
+Mohawk Valley Health System,https://fhir.mvhealthsystem.org/FHIRproxy/api/FHIR/R4/
+Molina Care Connections,https://epicproxy.et1057.epichosted.com/FHIRProxy/api/FHIR/R4/
+Montage Health,https://epicproxy.et1058.epichosted.com/FHIRProxy/api/FHIR/R4/
+Montefiore Medical Center,https://soapepic.montefiore.org/FhirProxyPrd/api/FHIR/R4/
+Monument Health,https://ehrmobile.monument.health/interconnect-prd-fhir/api/FHIR/R4/
+Mosaic Life Care,https://epicproxy.et1274.epichosted.com/FHIRProxy/api/FHIR/R4/
+Mount Auburn Hospital,https://fhir.mah.org/prd-fhir/api/FHIR/R4/
+Mount Sinai Health System,https://epicsoapproxyprd.mountsinai.org/FHIR-PRD/api/FHIR/R4/
+Mount Sinai Medical Center,https://epicfhir.msmc.com/proxysite-prd/api/FHIR/R4/
+MultiCare Health System,https://soapprod.multicare.org/FHIRProxy/api/FHIR/R4/
+Muscogee - Creek Nation Department of Health,https://epicproxy.et1221.epichosted.com/FHIRProxy/api/FHIR/R4/
+MY DR NOW,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+MyMichigan Health,https://arrprod.midmichigan.net/ProdFHIR/api/FHIR/R4/
+Nationwide Children's Hospital,https://hkc.nationwidechildrens.org/FHIR/api/FHIR/R4/
+NCH Healthcare System,https://epicproxy.et1233.epichosted.com/FHIRProxy/api/FHIR/R4/
+Nebraska Medicine,https://ocsoapprd.nebraskamed.com/FHIR-PRD/api/FHIR/R4/
+NeighborHealth,https://ebmobile14.ebnhc.org/FHIR/api/FHIR/R4/
+Nemours,https://iconnect.nemours.org/fhir/api/FHIR/R4/
+Nephrology Center - Southwest Michigan,https://hygieia.bronsonhg.org/FHIRProxy/api/FHIR/R4/
+New Hanover Regional Medical Center,https://epicmobile.nhrmc.org/OAuth2-PRD/api/FHIR/R4/
+New Jersey Urology,https://epicproxy.et1153.epichosted.com/FHIRProxy/api/FHIR/R4/
+New York-Presbyterian,https://epicproxy-pub.et1089.epichosted.com/FHIRProxy/api/FHIR/R4/
+NOMS Healthcare,https://prdproxy.nomshealthcare.com/PRD-OAuth2/api/FHIR/R4/
+North East Medical Services,https://epicproxy.et1332.epichosted.com/FHIRProxy/api/FHIR/R4/
+North Memorial Health,https://minerva.northmemorial.com/fhir/api/FHIR/R4/
+North Mississippi Health Services,https://eiclbext.nmhs.net/interconnect-fhir-prd/api/FHIR/R4/
+North Oaks,https://soapproxyprd.northoaks.org/nohsfhir/api/FHIR/R4/
+Northeast Georgia Health System,https://wpprod.nghs.com/fhir/api/FHIR/R4/
+NorthShore University Health System,https://haiku.northshore.org/Interconnect-FHIR/api/FHIR/R4/
+Northwest Community Hospital,https://epicprdproxy.nch.org/prd-fhir/api/FHIR/R4/
+Northwestern Medicine,https://nmepicproxy.nm.org/FHIR-PRD/api/FHIR/R4/
+Norton Healthcare,https://epicproxy.et0819.epichosted.com/APIPROXYPRD/api/FHIR/R4/
+Novant Health,https://epicproxy.et0798.epichosted.com/APIProxyPRD/api/FHIR/R4/
+NYC Health + Hospitals,https://epicproxypda.nychhc.org/FHIRProxy/api/FHIR/R4/
+NYU Langone Medical Center,https://epicfhir.nyumc.org/FHIRPRD/api/FHIR/R4/
+"OB/GYN Associates of Waco - Dr. Rister, Dr. Koeritz",https://epicproxy.bswhealth.org/FHIR-PRD/CONNECT/api/FHIR/R4/
+OCHIN,https://webprd.ochin.org/prd-fhir/api/FHIR/R4/
+Ochsner Health System,https://myc.ochsner.org/FHIR/api/FHIR/R4/
+OhioHealth,https://ccpintconfg.ohiohealth.com/Interconnect-PRD-MUAPI/api/FHIR/R4/
+Oklahoma Heart Hospital,https://epicrp.okheart.com/Oauth2Proxy/api/FHIR/R4/
+Olmsted Medical Center,https://epicproxy.et1077.epichosted.com/APIPROXYPRD/api/FHIR/R4/
+One Brooklyn Health System,https://epicproxy.et0883.epichosted.com/FHIRProxy/api/FHIR/R4/
+Optum Care Washington,https://fhir.myeverettclinic.com/fhir/api/FHIR/R4/
+OptumCare East,https://epicarr.optum.com/FHIR/api/FHIR/R4/
+OptumCare West,https://epicpnwarr.optum.com/FHIR/api/FHIR/R4/
+Oregon Health & Science University,https://epicmobile.ohsu.edu/FHIRPRD/api/FHIR/R4/
+Orlando Health,https://epicproxy.et1131.epichosted.com/FHIRProxy/api/FHIR/R4/
+OrthoCarolina,https://epwebapps.orthocarolina.com/fhir-prd/api/FHIR/R4/
+OrthoVirginia,https://epicproxy.et1015.epichosted.com/FHIRProxy/api/FHIR/R4/
+OSF HealthCare,https://ssproxy.osfhealthcare.org/fhir-proxy/api/FHIR/R4/
+OU Health,https://epicproxy.et1181.epichosted.com/FHIRProxy/api/FHIR/R4/
+Overlake Hospital Medical Center,https://sfd.overlakehospital.org/FHIRproxy/api/FHIR/R4/
+Owensboro Health,https://fhir.omhs.org/rp-prd-fhir/api/FHIR/R4/
+Pacific Dental Services,https://epicproxy.et1079.epichosted.com/FHIRProxy/api/FHIR/R4/
+Parkland,https://pmh-vmhaiku-01.pmh.org/FHIR/api/FHIR/R4/
+Parkview Health,https://epicprod-mobile.parkview.com/FHIR/api/FHIR/R4/
+PeaceHealth,https://soapproxy.peacehealth.org/FHIRProxy/api/FHIR/R4/
+Pediatric Physicians Organization at Children's,https://fhir.chppoc.org/Fhir-External/api/FHIR/R4/
+Penn Medicine,https://ssproxy.pennhealth.com/PRD-FHIR/api/FHIR/R4/
+Phelps Health,https://epicproxy.et1134.epichosted.com/FHIRProxy/api/FHIR/R4/
+Piedmont Healthcare,https://webproxy.piedmont.org/ARR-FHIR/api/FHIR/R4/
+Pikeville Medical Center,https://epicproxy.et1225.epichosted.com/FHIRProxy/api/FHIR/R4/
+Pine Rest Christian Mental Health Services,https://wecare.pinerest.org/fhirproxy/api/FHIR/R4/
+Pine Springs Health Internal Medicine,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+Planned Parenthood,https://epicproxy.et1154.epichosted.com/FHIRProxy/api/FHIR/R4/
+Powers Health,https://webproxy.comhs.org/FHIR/api/FHIR/R4/
+Premier Health,https://rx.premierhealthpartners.org/fhir/api/FHIR/R4/
+Premise Health,https://epicproxy.et1052.epichosted.com/FHIRProxy/api/FHIR/R4/
+Presbyterian Healthcare Services,https://epicFHIR.phs.org/FHIR/api/FHIR/R4/
+Prime Healthcare,https://phsfhir.primehealthcare.com/PHS-PRD-FHIR/api/FHIR/R4/
+Prisma Health,https://epicproxy.et0915.epichosted.com/FHIRProxy/api/FHIR/R4/
+ProHealth Care,https://soap.phci.org/Interconnect-FHIR/api/FHIR/R4/
+ProMedica Health System,https://fhir.promedica.org/FHIR/api/FHIR/R4/
+Providence Health & Services - Alaska,https://haikuak.providence.org/fhirproxy/api/FHIR/R4/
+Providence Health & Services - Oregon/California,https://haikuor.providence.org/fhirproxy/api/FHIR/R4/
+Providence Health & Services - Washington/Montana,https://haikuwa.providence.org/fhirproxy/api/FHIR/R4/
+QuadMed,https://epicicfore.quadmedical.com/fhirprd/api/FHIR/R4/
+Rady Children's,https://epcppxl1.rchsd.org/fhirprd/api/FHIR/R4/
+Reid Health,https://epicproxy.et1220.epichosted.com/FHIRProxy/api/FHIR/R4/
+Reliant Medical Group,https://fhirprd.reliantmedicalgroup.org/FHIRPRD/api/FHIR/R4/
+"Renown, Barton, CVMC",https://fhir.renown.org/FHIRProxy/api/FHIR/R4/
+Ritual Medical,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+"Riverside Health System (Newport News, VA)",https://ep-rpfg.rivhs.com/Interconnect-FHIR-PRD/api/FHIR/R4/
+Riverside Medical Center,https://rpprod.riversidehealthcare.net/FHIRPRD/api/FHIR/R4/
+Riverside Medical Clinic,https://sf1.rmcps.com/FHIRProxy/api/FHIR/R4/
+Riverview Health,https://epic-fhir.mercy.net/PRDFHIRSTL/RVH/api/FHIR/R4/
+Rochester Regional Health,https://epicarr.rochesterregional.org/FHIR/api/FHIR/R4/
+Rush University Medical Center,https://epicproxy.rush.edu/fhir-prd/api/FHIR/R4/
+RWJBarnabas Health,https://epicproxy.et1157.epichosted.com/FHIRProxy/api/FHIR/R4/
+Saint Francis Health System,https://eprdsoap000.saintfrancis.com/FHIRProxy/api/FHIR/R4/
+Saint Francis Healthcare System (Manual),https://reverseproxy.sfmc.net/fhirproxyprd/api/FHIR/R4/
+Saint Luke's Health System,https://epicmobile.corp.saint-lukes.org/FHIRPROXY/api/FHIR/R4/
+Salem Health,https://prd.salemhealth.org/fhir/api/FHIR/R4/
+Salinas Valley Memorial Healthcare Systems,https://epicproxy.et1146.epichosted.com/FHIRProxy/api/FHIR/R4/
+Samaritan Health Services,https://fhir.samhealth.org/fhir-arr/api/FHIR/R4/
+San Francisco Department of Public Health,https://epicproxy.et1082.epichosted.com/FHIRProxy/api/FHIR/R4/
+San Ysidro Health,https://epicproxy.et1327.epichosted.com/FHIRProxy/api/FHIR/R4/
+Sanford Health,https://eprescribe.sanfordhealth.org/FHIR/api/FHIR/R4/
+Sansum Clinic,https://wavesurescripts.sansumclinic.org/FHIR/api/FHIR/R4/
+Santa Clara Valley Medical Center Hospitals and Clinics,https://scvhhsfhir.sccgov.org/interconnect-fhir/api/FHIR/R4/
+SBH Health System,https://sbhepicrevprox.barnabas.network/FHIRProxy/api/FHIR/R4/
+Scotland Health Care System,https://epicproxy.et0905.epichosted.com/FHIRproxy/SCOTMYCHART/api/FHIR/R4/
+Scottish Rite for Children,https://epicproxy.et0970.epichosted.com/FHIRProxy/api/FHIR/R4/
+Scripps Health,https://haiku.scrippshealth.org/ARR-PRD-FHIR/api/FHIR/R4/
+Seattle Children's Hospital,https://fhir.seattlechildrens.org/fhir/api/FHIR/R4/
+Select Medical,https://epicproxy.et0948.epichosted.com/FhirProxy/api/FHIR/R4/
+Self Regional Healthcare,https://epicproxy.et1235.epichosted.com/FHIRProxy/api/FHIR/R4/
+Sentara Healthcare,https://epicfhir.sentara.com/ARR-FHIR-PRD/api/FHIR/R4/
+Shannon Health,https://epicrpx.shannonhealth.org/FHIR_ARR/api/FHIR/R4/
+Sharp HealthCare,https://epicproxy.et1275.epichosted.com/fhirproxy/api/FHIR/R4/
+Shriners Children’s,https://epicproxy.et1283.epichosted.com/FHIRProxy/api/FHIR/R4/
+Singing River Health System,https://arr.mysrhs.com/FHIR/api/FHIR/R4/
+Skagit Regional Health,https://epicproxy.et1005.epichosted.com/FHIRProxy/api/FHIR/R4/
+SolutionHealth,https://epicproxyprd.solutionhealth.org/FHIR_PROD/api/FHIR/R4/
+South Georgia Medical Center,https://epicproxy.et1024.epichosted.com/APIPROXYPRD/api/FHIR/R4/
+South Shore Health System,https://SSHIC.southshorehealth.org/FHIR/api/FHIR/R4/
+Southcoast Health,https://epicpproxy.southcoast.org/FHIR/api/FHIR/R4/
+Southeast Health,https://arrprd.southeasthealth.org/FHIR/api/FHIR/R4/
+Southern Illinois Healthcare,https://epicproxy.et0986.epichosted.com/FHIRProxy/api/FHIR/R4/
+Sparrow Health System,https://haiku.sparrow.org/fhir-prd/api/FHIR/R4/
+Spartanburg Regional Health Systems,https://epicproxy.et0939.epichosted.com/FHIRProxy/api/FHIR/R4/
+Spectrum Health,https://epicarr02.spectrumhealth.org/EpicFHIR/api/FHIR/R4/
+Spectrum Health Lakeland,https://fhir.lakelandregional.org/fhirproxy/api/FHIR/R4/
+SSM Health,https://fhir.ssmhc.com/Fhir/api/FHIR/R4/
+St. Charles Health System,https://epicproxy.et1030.epichosted.com/FHIRProxy/api/FHIR/R4/
+St. Elizabeth Healthcare,https://sehproxy.stelizabeth.com/arr-fhir/SEH/api/FHIR/R4/
+St. Joseph Hospital Health Center,https://mobileproxy.sjhsyr.org/FHIR/api/FHIR/R4/
+St. Jude Children's Research Hospital,https://rp.stjude.org/oauth2-prd/api/FHIR/R4/
+St. Luke’s Health System (Idaho & Eastern Oregon),https://epmobile.slhs.org/Interconnect-FHIR/api/FHIR/R4/
+St. Luke's Hospital (North Carolina),https://epicproxy.et0905.epichosted.com/FHIRproxy/STLUMYCHART/api/FHIR/R4/
+St. Luke's University Health Network,https://fhir.slhn.org/fhir/api/FHIR/R4/
+Stanford Children's Health,https://epicproxy.et0857.epichosted.com/FHIRProxy/api/FHIR/R4/
+Stanford Health Care,https://sfd.stanfordmed.org/FHIR/api/FHIR/R4/
+Stormont Vail Health,https://epicsoap.stormontvail.org/FHIRproxy/api/FHIR/R4/
+Summa Health,https://epicproxy.et1289.epichosted.com/FHIRProxy/api/FHIR/R4/
+Summit Health,https://epicsoap.bmctotalcare.com/fhir/api/FHIR/R4/
+SUNY Upstate Medical University,https://epicedge.upstate.edu/fhir/api/FHIR/R4/
+Sutter Health,https://apiservices.sutterhealth.org/ifs/api/FHIR/R4/
+Tahoe Forest Health System,https://epic-fhir.mercy.net/PRDFHIRAOK2/TAO/api/FHIR/R4/
+Tampa General Hospital,https://epicproxy.et0761.epichosted.com/FHIRProxy/api/FHIR/R4/
+Tanner Health System,https://epicproxy.et1098.epichosted.com/FHIRProxy/api/FHIR/R4/
+TempleHealth,https://epicaccess.templehealth.org/FhirProxyPrd/api/FHIR/R4/
+Texas Children's,https://mobileapps.texaschildrens.org/FHIR/api/FHIR/R4/
+Texas Health Resources,https://epproxy.texashealth.org/FHIR/api/FHIR/R4/
+The Brooklyn Hospital Center,https://epicproxy.et1043.epichosted.com/FHIRProxy/api/FHIR/R4/
+The Center,https://epicproxy.et4006.epichosted.com/FHIRProxyPRD/api/FHIR/R4/
+The Christ Hospital,https://soapproxyprod.thechristhospital.com/fhir/api/FHIR/R4/
+The Guthrie Clinic,https://fhir.guthrie.org/FHIR-PRD/api/FHIR/R4/
+The Ohio State University Wexner Medical Center,https://ihismufhir.osumc.edu/fhir-prd/api/FHIR/R4/
+The Portland Clinic,https://tpc-shield.tpcllp.com/FHIR/api/FHIR/R4/
+The Queen's Health Systems,https://mobileapps.queens.org/FHIR/api/FHIR/R4/
+The University of Texas Health Science Center at Houston,https://epicproxy.et1178.epichosted.com/FHIRProxy/api/FHIR/R4/
+The University of Texas MD Anderson Cancer Center,https://fhir.mdanderson.org/FHIR/api/FHIR/R4/
+The University of Vermont Health Network,https://epicproxy.uvmhealth.org/FHIR-ARR/api/FHIR/R4/
+The Vancouver Clinic,https://soapprod.tvc.org/ARR-FHIR/api/FHIR/R4/
+ThedaCare,https://arr.thedacare.org/FHIR/TC/api/FHIR/R4/
+TidalHealth,https://eweb.peninsula.org/FHIRProxy/api/FHIR/R4/
+Tidelands Health,https://fhirprod.musc.edu/fhirprod/TIDELANDS/api/FHIR/R4/
+TMC HealthCare,https://fhir.tmcaz.com/FHIRProxy/api/FHIR/R4/
+Tower Health,https://epicsoap.readinghospital.org/FHIR-PRD/api/FHIR/R4/
+TriHealth,https://epicscripts.trihealth.com/fhirproxy/api/FHIR/R4/
+Trinity Health,https://epic-ext.trinity-health.org/FHIR/api/FHIR/R4/
+Trinity Health of New England,https://epicprdext.stfranciscare.org/FhirProxy/api/FHIR/R4/
+Trinity Health of New England Medical Group Springfield,https://rmgpxy.riverbendmedical.com/fhir_proxy/api/FHIR/R4/
+Tufts Medicine,https://intconfg-p.well-net.org/PRD-OAUTH2/api/FHIR/R4/
+UC Davis,https://emrrp.ucdmc.ucdavis.edu/FHIR/api/FHIR/R4/
+UC Davis - MMC,https://emrrp.ucdmc.ucdavis.edu/FHIR/MMC/api/FHIR/R4/
+UC Health,https://epic-soap.uchealth.com/FHIRProxy/api/FHIR/R4/
+UChicago Medicine,https://interconapps.uchospitals.edu/PRD-FHIR-Proxy/api/FHIR/R4/
+UCLA Medical Center,https://arrprox.mednet.ucla.edu/FHIRPRD/api/FHIR/R4/
+UConn Health,https://epicproxy.et0996.epichosted.com/FHIRProxy/api/FHIR/R4/
+UCSF Benioff Children's Hospital,https://unified-api.ucsf.edu/clinical/apex/api/FHIR/R4/
+UCSF Health,https://unified-api.ucsf.edu/clinical/apex/api/FHIR/R4/
+UF Health,https://epicsoap.shands.ufl.edu/FHIR/api/FHIR/R4/
+UHS San Antonio,https://epicproxy.et1130.epichosted.com/FHIRProxy/api/FHIR/R4/
+UI Health,https://epicproxy.et1085.epichosted.com/FHIRPROXY/api/FHIR/R4/
+UK HealthCare,https://ukepicproxy.mc.uky.edu/Interconnect-PRD-OAuth2/api/FHIR/R4/
+UMass Memorial Health Care,https://epicproxy.et0978.epichosted.com/FHIRProxy/api/FHIR/R4/
+UMC Southern Nevada,https://epicproxy.et1023.epichosted.com/FHIRProxy/api/FHIR/R4/
+UNC Health Care,https://epicfe.unch.unc.edu/FHIR/api/FHIR/R4/
+United Health Services New York (NYUHS),https://epicproxy.et1127.epichosted.com/FHIRproxy/api/FHIR/R4/
+United Regional Health Care System,https://epicproxy.et1096.epichosted.com/FHIRProxy/api/fhir/r4/
+UnityPoint Health,https://epicfhir.unitypoint.org/ProdFHIR/api/FHIR/R4/
+University Health Care System,https://soap.uhcs.org/IC-FHIR/api/FHIR/R4/
+University Hospital (New Jersey),https://epicproxy.et0434.epichosted.com/APIProxyPRD/api/FHIR/R4/
+University Hospitals Cleveland,https://uhhsportal.uhhospitals.org/oauth2-prd/api/FHIR/R4/
+University of Arkansas for Medical Sciences,https://ucsoap.uams.edu/FHIRProxy/api/FHIR/R4/
+University of California Irvine,https://epicproxy.et0502.epichosted.com/FHIRProxy/api/FHIR/R4/
+University of California San Diego,https://epicproxy.et0502.epichosted.com/FHIRProxy/api/FHIR/R4/
+University of Colorado Health,https://ss.uch.edu/FHIRProxy/api/FHIR/R4/
+University of Iowa Health Care,https://myepicapps.uihealthcare.org/FHIRProxy/api/FHIR/R4/
+University of Kansas Health System,https://fhir.kansashealthsystem.com/interconnect-PRD_FHIR/api/FHIR/R4/
+University of Louisville Physicians,https://epicproxy.et1193.epichosted.com/FHIRProxy/api/FHIR/R4/
+University of Maryland Medical System,https://fhir.umm.edu/fhir/api/FHIR/R4/
+University of Miami (UHealth),https://uhealthsoap.med.miami.edu/FHIRProxy/api/FHIR/R4/
+University of Mississippi Medical Center,https://soapproxy.umc.edu/FHIRProxy/api/FHIR/R4/
+University of Pittsburgh Medical Center (UPMC),https://epic-fhir-prd.upmc.com/FHIR-PRD/api/FHIR/R4/
+University of Rochester Medical Center,https://ercd-sproxy.urmc.rochester.edu/MIPS/api/FHIR/R4/
+University of Texas Medical Branch,https://epic-arr.utmb.edu/fhir-prd/api/FHIR/R4/
+University of Texas Southwestern Medical Center,https://EpicIntprxyPRD.swmed.edu/FHIR/api/FHIR/R4/
+University of Toledo,https://icon.utoledo.edu/ic-oa2-prd/api/FHIR/R4/
+University of Utah Healthcare,https://webproxyprd.med.utah.edu/FHIRMyChart/api/FHIR/R4/
+UPMC Central PA,https://Epic-Arr.pinnaclehealth.org/PRD-FHIR-ARR/api/FHIR/R4/
+UT Health San Antonio,https://epicproxy.et0582.epichosted.com/FHIRProxy/api/FHIR/R4/
+UVA Health System,https://hscsesoap.hscs.virginia.edu/FHIRProxy/api/FHIR/R4/
+UW Health And Affiliates - Wisconsin,https://epicproxy.hosp.wisc.edu/FhirProxy/api/FHIR/R4/
+UW Medicine (Washington),https://fhir.epic.medical.washington.edu/FHIR-Proxy/api/FHIR/R4/
+Valley Children's Healthcare,https://ic.valleychildrens.org/fhir/api/FHIR/R4/
+Valley Health System (VA),https://epicproxy.et1320.epichosted.com/FHIRProxy/api/FHIR/R4/
+Valley Health Systems,https://api.valleyhealth.org/fhirproxy/api/FHIR/R4/
+Valley Medical Center,https://FHIR.valleymed.org/FHIR-PRD/api/FHIR/R4/
+Valleywise Health,https://esoap.mihs.org/FHIR/api/FHIR/R4/
+Vanderbilt,https://arr01.service.vumc.org/FHIR-PRD/api/FHIR/R4/
+VCU Health,https://epicproxy.et1200.epichosted.com/OAuth2-PRD/api/FHIR/R4/
+Vidant Health,https://prd-proxy.vidanthealth.com/FHIR/api/FHIR/R4/
+Virginia Hospital Center,https://common.virginiahospitalcenter.com/FHIRPRD/api/FHIR/R4/
+Virginia Mason Franciscan Health,https://rp.catholichealth.net/fhir/api/FHIR/R4/
+Virtua Health,https://epicproxy.et1017.epichosted.com/FHIRProxy/api/FHIR/R4/
+Waco Family Medicine (Heart of Texas Community Health Center),https://haiku.wacofhc.org/FHIR/api/FHIR/R4/
+WakeMed Health and Hospitals,https://epic-soap.wakemed.org/FHIR/api/FHIR/R4/
+Washington Hospital Healthcare System,https://psacesoap.whhs.com/interconnect-fhir-prd/api/FHIR/R4/
+Watson Clinic,https://epic-arr.watsonclinicad.com/FHIRProxy/api/FHIR/R4/
+Weill Cornell Medicine,https://epicproxy-pub.et1089.epichosted.com/FHIRProxy/api/FHIR/R4/
+WellSpan Health,https://interconnect.wellspan.org/interconnect-prd-oauth2/api/FHIR/R4/
+WellStar,https://epicsoap.wellstar.org/fhirproxy/api/FHIR/R4/
+West Bend Family Medicine,https://epicproxy.et4001.epichosted.com/FHIRProxy/api/FHIR/R4/
+West Tennessee Healthcare,https://epicproxy.et1243.epichosted.com/OAuth2-PRD/api/FHIR/R4/
+West Virginia University Medicine,https://apps.mywvuchart.com/fhirproxy/api/FHIR/R4/
+Western Michigan University School of Medicine,https://hygieia.bronsonhg.org/FHIRProxy/api/FHIR/R4/
+Woman's,https://epicproxy.et1339.epichosted.com/FHIRProxy/api/FHIR/R4/
+Yakima Valley Farm Workers Clinic,https://epicproxy.et0943.epichosted.com/FHIRProxy/api/FHIR/R4/
+Yale New Haven Health System,https://patientfhirapis.ynhh.org/pff/api/FHIR/R4/
+Yuma Regional Medical Center,https://yrmccare1.yumaregional.org/FHIR/api/FHIR/R4/

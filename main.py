@@ -13,6 +13,7 @@ from models.openai_chat import query_openai, summarize_patient_data
 import logging_config
 from flask import send_from_directory
 import traceback
+from supabase import create_client, Client
 
 load_dotenv()
 
@@ -31,6 +32,12 @@ app.config.from_object('config')
 
 # Set secret key for session
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
+
+# Supabase configuration
+SUPABASE_URL = os.environ.get('SUPABASE_URL')
+SUPABASE_KEY = os.environ.get('SUPABASE_KEY')
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def is_authenticated():
     """Check if the user is authenticated."""
@@ -229,6 +236,117 @@ def get_all_lab_data():
 def download_lab_data():
     return send_from_directory('data/Labs', 'lab_data.csv', as_attachment=True)
 
+@app.route('/sign_up')
+def sign_up():
+    return render_template('referral_code.html')
+
+@app.route('/validate_referral_code', methods=['POST'])
+def validate_referral_code():
+    referral_code = request.form.get('referral_code')
+    valid_codes = ['BETA123', 'TESTCODE']  # Replace with actual codes or a database query
+
+    if referral_code in valid_codes:
+        session['referral_verified'] = True
+        return redirect(url_for('select_hospital'))
+    else:
+        return render_template('referral_code.html', error='Invalid referral code')
+
+@app.route('/select_hospital')
+def select_hospital():
+    if not session.get('referral_verified'):
+        return redirect(url_for('sign_up'))
+    
+    # Load hospitals and endpoints
+    hospitals = load_hospital_list()
+    return render_template('select_hospital.html', hospitals=hospitals)
+
+def load_hospital_list():
+    hospitals = []
+    with open('hospital_endpoints.csv', mode='r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            hospitals.append({'name': row['Organization Name'], 'endpoint': row['Production FHIR Base URL - R4']})
+    return hospitals
+
+@app.route('/set_hospital_endpoint', methods=['POST'])
+def set_hospital_endpoint():
+    hospital_endpoint = request.form.get('hospital_endpoint')
+    hospital_name = request.form.get('hospital_name')
+    if hospital_endpoint and hospital_name:
+        session['hospital_endpoint'] = hospital_endpoint
+        session['hospital_name'] = hospital_name
+        return redirect(url_for('start_auth'))
+    else:
+        return redirect(url_for('select_hospital'))
+
+@app.route('/login')
+def login():
+    epic_user_id = session.get('epic_user_id')
+    if epic_user_id:
+        # Fetch user from Supabase
+        response = supabase.table('users').select('*').eq('epic_user_id', epic_user_id).execute()
+        if response.data:
+            user = response.data[0]
+            hospital_endpoint = user.get('hospital_endpoint')
+            if hospital_endpoint:
+                session['hospital_endpoint'] = hospital_endpoint
+                return redirect(url_for('start_auth'))
+    # If no user info, redirect to select hospital
+    return redirect(url_for('select_hospital'))
+
+@app.route('/oauth_callback')
+def oauth_callback():
+    code = request.args.get('code')
+    if not code:
+        return 'Authorization code not found', 400
+
+    # Exchange code for token
+    try:
+        token_data = exchange_code_for_token(code)
+        access_token = token_data.get('access_token')
+        epic_user_id = token_data.get('patient')  # Epic user ID
+        if not epic_user_id:
+            return 'Epic user ID not found in token response', 400
+
+        # Fetch or create user in Supabase
+        response = supabase.table('users').select('*').eq('epic_user_id', epic_user_id).execute()
+        if response.data:
+            user = response.data[0]
+            # Update hospital info if necessary
+            hospital_name = session.get('hospital_name', user.get('hospital_name'))
+            hospital_endpoint = session.get('hospital_endpoint', user.get('hospital_endpoint'))
+
+            supabase.table('users').update({
+                'hospital_name': hospital_name,
+                'hospital_endpoint': hospital_endpoint
+            }).eq('epic_user_id', epic_user_id).execute()
+        else:
+            # Get hospital info from session
+            hospital_name = session.get('hospital_name')
+            hospital_endpoint = session.get('hospital_endpoint')
+
+            # Insert new user
+            supabase.table('users').insert({
+                'epic_user_id': epic_user_id,
+                'hospital_name': hospital_name,
+                'hospital_endpoint': hospital_endpoint
+            }).execute()
+
+        # Store user ID in session
+        session['epic_user_id'] = epic_user_id
+        session['access_token'] = access_token
+
+        # Proceed with the rest of your logic
+        return redirect(url_for('index'))
+
+    except Exception as e:
+        app.logger.error(f"OAuth callback error: {e}")
+        return 'Authentication failed', 400
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
